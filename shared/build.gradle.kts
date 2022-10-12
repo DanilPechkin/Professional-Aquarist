@@ -73,6 +73,13 @@ kotlin {
     }
 }
 
+sqldelight {
+    database("AquariumDatabase") {
+        packageName = "com.danilp.professionalaquarist.database"
+        sourceFolders = listOf("sqldelight")
+    }
+}
+
 android {
     namespace = "com.danilp.professionalaquarist"
     compileSdk = 33

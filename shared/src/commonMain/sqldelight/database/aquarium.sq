@@ -1,0 +1,105 @@
+CREATE TABLE aquariumEntitiy(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    imageUrl TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    liters REAL NOT NULL,
+    minIllumination REAL NOT NULL,
+    currentIllumination REAL NOT NULL,
+    currentCO2 REAL NOT NULL,
+    minCO2 REAL NOT NULL,
+    currentTemperature REAL NOT NULL,
+    minTemperature REAL NOT NULL,
+    maxTemperature REAL NOT NULL,
+    currentPh REAL NOT NULL,
+    minPh REAL NOT NULL,
+    maxPh REAL NOT NULL,
+    currentGh REAL NOT NULL,
+    minGh REAL NOT NULL,
+    maxGh REAL NOT NULL,
+    currentKh REAL NOT NULL,
+    minKh REAL NOT NULL,
+    maxKh REAL NOT NULL,
+    currentK REAL NOT NULL,
+    minK REAL NOT NULL,
+    maxK REAL NOT NULL,
+    currentNO3 REAL NOT NULL,
+    minNO3 REAL NOT NULL,
+    maxNO3 REAL NOT NULL,
+    currentFe REAL NOT NULL,
+    minFe REAL NOT NULL,
+    maxFe REAL NOT NULL,
+    currentCa REAL NOT NULL,
+    minCa REAL NOT NULL,
+    maxCa REAL NOT NULL,
+    currentMg REAL NOT NULL,
+    minMg REAL NOT NULL,
+    maxMg REAL NOT NULL,
+    currentPO4 REAL NOT NULL,
+    minPO4 REAL NOT NULL,
+    maxPO4 REAL NOT NULL,
+    currentAmmonia REAL NOT NULL,
+    minAmmonia REAL NOT NULL,
+    maxAmmonia REAL NOT NULL
+);
+
+getAllAquariums:
+SELECT *
+FROM aquariumEntitiy;
+
+getAquariumById:
+SELECT *
+FROM aquariumEntitiy
+WHERE id = ?;
+
+insertAquarium:
+INSERT OR REPLACE
+INTO aquariumEntitiy(
+    id,
+    imageUrl,
+    name,
+    description,
+    liters,
+    minIllumination,
+    currentIllumination,
+    currentCO2,
+    minCO2,
+    currentTemperature,
+    minTemperature,
+    maxTemperature,
+    currentPh,
+    minPh,
+    maxPh,
+    currentGh,
+    minGh,
+    maxGh,
+    currentKh,
+    minKh,
+    maxKh,
+    currentK,
+    minK,
+    maxK,
+    currentNO3,
+    minNO3,
+    maxNO3,
+    currentFe,
+    minFe,
+    maxFe,
+    currentCa,
+    minCa,
+    maxCa,
+    currentMg,
+    minMg,
+    maxMg,
+    currentPO4,
+    minPO4,
+    maxPO4,
+    currentAmmonia,
+    minAmmonia,
+    maxAmmonia
+) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAquariumById:
+DELETE FROM
+aquariumEntitiy
+WHERE id = ?;

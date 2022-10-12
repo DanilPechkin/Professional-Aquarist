@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.danilp.professionalaquarist.Greeting
 import com.danilp.professionalaquarist.android.ui.theme.ProfessinalAquaristTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,14 +19,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(Greeting().greeting())
+                    Text(text = "hi")
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(text: String) {
-    Text(text = text)
 }
