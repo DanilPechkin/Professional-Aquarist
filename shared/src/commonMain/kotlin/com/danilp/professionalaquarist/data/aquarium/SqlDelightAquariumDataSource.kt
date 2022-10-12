@@ -4,7 +4,7 @@ import com.danilp.professionalaquarist.database.AquariumDatabase
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 
-class SqlDelightDataSource(db: AquariumDatabase) : AquariumDataSource {
+class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
 
     private val queries = db.aquariumQueries
 

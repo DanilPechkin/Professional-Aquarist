@@ -1,0 +1,54 @@
+CREATE TABLE plantEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    aquariumId INTEGER NOT NULL,
+    imageUrl TEXT NOT NULL,
+    name TEXT NOT NULL,
+    genus TEXT NOT NULL,
+    description TEXT NOT NULL,
+    minTemperature REAL NOT NULL,
+    maxTemperature REAL NOT NULL,
+    minPh REAL NOT NULL,
+    maxPh REAL NOT NULL,
+    minGh REAL NOT NULL,
+    maxGh REAL NOT NULL,
+    minKh REAL NOT NULL,
+    maxKh REAL NOT NULL,
+    minIllumination REAL NOT NULL,
+    minCO2 REAL NOT NULL
+);
+
+getAllPlantsByAquarium:
+SELECT *
+FROM plantEntity
+WHERE aquariumId = ?;
+
+getPlantById:
+SELECT *
+FROM plantEntity
+WHERE id = ?;
+
+insertPlant:
+INSERT OR REPLACE
+INTO plantEntity(
+    id,
+    aquariumId,
+    imageUrl,
+    name,
+    genus,
+    description,
+    minTemperature,
+    maxTemperature,
+    minPh,
+    maxPh,
+    minGh,
+    maxGh,
+    minKh,
+    maxKh,
+    minIllumination,
+    minCO2
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deletePlantById:
+DELETE FROM
+plantEntity
+WHERE id = ?;
