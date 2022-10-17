@@ -8,19 +8,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import com.danilp.professionalaquarist.android.screens.aquarium.aquariums_screen.AquariumsScreen
 import com.danilp.professionalaquarist.android.ui.theme.ProfessinalAquaristTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ProfessinalAquaristTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Text(text = "hi")
-                }
+                AquariumsScreen()
             }
         }
     }
