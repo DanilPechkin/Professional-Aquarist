@@ -40,8 +40,12 @@ class PlantEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("plantId") ?: return@launch
+            if (id == -1L) state = state.copy(isCreatingPlant = true)
 
-            state = state.copy(plant = plantDataSource.getPlantById(id)!!)
+            state = state.copy(
+                plant = if (state.isCreatingPlant) Plant.createEmpty() else
+                    plantDataSource.getPlantById(id) ?: Plant.createEmpty()
+            )
 
             val sharedPreferences = context.getSharedPreferences(
                 context.getString(R.string.in_aquarium_info_shared_preferences_key),
@@ -67,48 +71,48 @@ class PlantEditViewModel @Inject constructor(
             state = state.copy(
                 name = state.plant.name,
                 genus = state.plant.genus,
-                minTemperature = if (state.plant.minTemperature == 0.0) "" else
-                    convertCelsius.to(
-                        state.temperatureMeasureCode,
-                        state.plant.minTemperature
-                    ).result.toString(),
-                maxTemperature = if (state.plant.maxTemperature == 0.0) "" else
+                minTemperature =
+                convertCelsius.to(
+                    state.temperatureMeasureCode,
+                    state.plant.minTemperature
+                ).result.toString(),
+                maxTemperature = if (state.isCreatingPlant) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
                         state.plant.maxTemperature
                     ).result.toString(),
-                minPh = if (state.plant.minPh == 0.0) "" else
+                minPh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.minPh
                     ).result.toString(),
-                maxPh = if (state.plant.maxPh == 0.0) "" else
+                maxPh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.maxPh
                     ).result.toString(),
-                minGh = if (state.plant.minGh == 0.0) "" else
+                minGh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.minGh
                     ).result.toString(),
-                maxGh = if (state.plant.maxGh == 0.0) "" else
+                maxGh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.maxGh
                     ).result.toString(),
-                minKh = if (state.plant.minKh == 0.0) "" else
+                minKh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.minKh
                     ).result.toString(),
-                maxKh = if (state.plant.maxKh == 0.0) "" else
+                maxKh = if (state.isCreatingPlant) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.plant.maxKh
                     ).result.toString(),
-                minCO2 = if (state.plant.minCO2 == 0.0) "" else state.plant.minCO2.toString(),
-                minIllumination = if (state.plant.minIllumination == 0.0) "" else state.plant.minIllumination.toString(),
+                minCO2 = if (state.isCreatingPlant) "" else state.plant.minCO2.toString(),
+                minIllumination = if (state.isCreatingPlant) "" else state.plant.minIllumination.toString(),
                 description = state.plant.description
             )
         }
@@ -122,7 +126,8 @@ class PlantEditViewModel @Inject constructor(
 
             is PlantEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    delete(state.plant.id)
+                    if (!state.isCreatingPlant)
+                        delete(state.plant.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
             }
@@ -286,35 +291,35 @@ class PlantEditViewModel @Inject constructor(
                     genus = state.genus,
                     minTemperature = convertCelsius.from(
                         state.temperatureMeasureCode,
-                        state.plant.minTemperature
+                        state.minTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxTemperature = convertCelsius.from(
                         state.temperatureMeasureCode,
-                        state.plant.maxTemperature
+                        state.maxTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
                     minPh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.minPh
+                        state.minPh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxPh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.maxPh
+                        state.maxPh.toDoubleOrNull() ?: 0.0
                     ).result,
                     minGh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.minGh
+                        state.minGh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxGh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.maxGh
+                        state.maxGh.toDoubleOrNull() ?: 0.0
                     ).result,
                     minKh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.minKh
+                        state.minKh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxKh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.plant.maxKh
+                        state.maxKh.toDoubleOrNull() ?: 0.0
                     ).result,
                     minIllumination = state.minIllumination.toDoubleOrNull() ?: 0.0,
                     minCO2 = state.minCO2.toDoubleOrNull() ?: 0.0,

@@ -2,9 +2,18 @@ package com.danilp.professionalaquarist.android.screens.in_aquairum.in_aquarium_
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Calculate
+import androidx.compose.material.icons.rounded.FormatListBulleted
+import androidx.compose.material.icons.rounded.SetMeal
+import androidx.compose.material.icons.rounded.Spa
+import androidx.compose.material.icons.rounded.Water
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.destinations.CalculatorsDestination
+import com.danilp.professionalaquarist.android.screens.destinations.DwellersListDestination
+import com.danilp.professionalaquarist.android.screens.destinations.MainAquariumScreenDestination
+import com.danilp.professionalaquarist.android.screens.destinations.NotesDestination
+import com.danilp.professionalaquarist.android.screens.destinations.PlantsListDestination
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
 //TODO: add nice icons

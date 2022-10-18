@@ -1,7 +1,7 @@
 package com.danilp.professionalaquarist.domain.plant
 
 data class Plant(
-    val id: Long,
+    val id: Long?,
     val aquariumId: Long,
     val imageUrl: String,
     val name: String,
@@ -20,7 +20,7 @@ data class Plant(
 ) {
     companion object {
         fun createEmpty(): Plant = Plant(
-            0,
+            null,
             0,
             "",
             "",

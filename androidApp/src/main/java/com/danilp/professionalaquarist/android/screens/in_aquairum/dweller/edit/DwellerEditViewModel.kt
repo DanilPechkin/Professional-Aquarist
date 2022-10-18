@@ -43,8 +43,12 @@ class DwellerEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("dwellerId") ?: return@launch
+            if (id == -1L) state = state.copy(isCreatingDweller = true)
 
-            state = state.copy(dweller = dwellerDataSource.getDwellerById(id)!!)
+            state = state.copy(
+                dweller = if (state.isCreatingDweller) Dweller.createEmpty() else
+                    dwellerDataSource.getDwellerById(id) ?: Dweller.createEmpty()
+            )
 
             val sharedPreferences = context.getSharedPreferences(
                 context.getString(R.string.in_aquarium_info_shared_preferences_key),
@@ -75,48 +79,49 @@ class DwellerEditViewModel @Inject constructor(
             state = state.copy(
                 name = state.dweller.name,
                 genus = state.dweller.genus,
-                amount = if (state.dweller.amount == 0L) "" else state.dweller.amount.toString(),
-                minTemperature = if (state.dweller.minTemperature == 0.0) "" else
+                amount = if (state.isCreatingDweller) "" else
+                    state.dweller.amount.toString(),
+                minTemperature = if (state.isCreatingDweller) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
                         state.dweller.minTemperature
                     ).result.toString(),
-                maxTemperature = if (state.dweller.maxTemperature == 0.0) "" else
+                maxTemperature = if (state.isCreatingDweller) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
                         state.dweller.maxTemperature
                     ).result.toString(),
-                liters = if (state.dweller.liters == 0.0) "" else
+                liters = if (state.isCreatingDweller) "" else
                     convertLiters.to(
                         state.capacityMeasureCode,
                         state.dweller.liters
                     ).result.toString(),
-                minPh = if (state.dweller.minPh == 0.0) "" else
+                minPh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.minPh
                     ).result.toString(),
-                maxPh = if (state.dweller.maxPh == 0.0) "" else
+                maxPh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.maxPh
                     ).result.toString(),
-                minGh = if (state.dweller.minGh == 0.0) "" else
+                minGh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.minGh
                     ).result.toString(),
-                maxGh = if (state.dweller.maxGh == 0.0) "" else
+                maxGh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.maxGh
                     ).result.toString(),
-                minKh = if (state.dweller.minKh == 0.0) "" else
+                minKh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.minKh
                     ).result.toString(),
-                maxKh = if (state.dweller.maxKh == 0.0) "" else
+                maxKh = if (state.isCreatingDweller) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
                         state.dweller.maxKh
@@ -134,7 +139,8 @@ class DwellerEditViewModel @Inject constructor(
 
             is DwellerEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    delete(state.dweller.id)
+                    if (!state.isCreatingDweller)
+                        delete(state.dweller.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
             }
@@ -299,39 +305,39 @@ class DwellerEditViewModel @Inject constructor(
                     amount = state.amount.toLong(),
                     minTemperature = convertCelsius.from(
                         state.temperatureMeasureCode,
-                        state.dweller.minTemperature
+                        state.minTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxTemperature = convertCelsius.from(
                         state.temperatureMeasureCode,
-                        state.dweller.maxTemperature
+                        state.maxTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
                     liters = convertLiters.from(
                         state.capacityMeasureCode,
-                        state.dweller.liters
+                        state.liters.toDoubleOrNull() ?: 0.0
                     ).result,
                     minPh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.minPh
+                        state.minPh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxPh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxPh
+                        state.maxPh.toDoubleOrNull() ?: 0.0
                     ).result,
                     minGh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.minGh
+                        state.minGh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxGh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxGh
+                        state.maxGh.toDoubleOrNull() ?: 0.0
                     ).result,
                     minKh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.minKh
+                        state.minKh.toDoubleOrNull() ?: 0.0
                     ).result,
                     maxKh = convertDKH.from(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxKh
+                        state.maxKh.toDoubleOrNull() ?: 0.0
                     ).result,
                     description = state.description
                 )

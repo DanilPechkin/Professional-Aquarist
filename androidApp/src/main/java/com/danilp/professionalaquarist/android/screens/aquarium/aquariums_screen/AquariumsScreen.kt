@@ -6,8 +6,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.danilp.professionalaquarist.android.screens.NavGraphs
+import com.danilp.professionalaquarist.android.screens.appCurrentDestinationAsState
+import com.danilp.professionalaquarist.android.screens.destinations.Destination
 import com.danilp.professionalaquarist.android.screens.in_aquairum.in_aquarium_bottom_bar.AquariumBottomBar
 import com.danilp.professionalaquarist.android.screens.in_aquairum.in_aquarium_bottom_bar.AquariumBottomBarDestination
+import com.danilp.professionalaquarist.android.screens.startAppDestination
 import com.ramcosta.composedestinations.DestinationsNavHost
 
 @OptIn(ExperimentalMaterial3Api::class)

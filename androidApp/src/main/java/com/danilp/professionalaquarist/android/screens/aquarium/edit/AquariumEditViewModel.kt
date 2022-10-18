@@ -37,8 +37,11 @@ class AquariumEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("aquariumId") ?: return@launch
-
-            state = state.copy(aquarium = aquariumDataSource.getAquariumById(id)!!)
+            if (id == -1L) state = state.copy(isCreatingAquarium = true)
+            state = state.copy(
+                aquarium = if (state.isCreatingAquarium) Aquarium.createEmpty() else
+                    aquariumDataSource.getAquariumById(id) ?: Aquarium.createEmpty()
+            )
 
             val sharedPreferences = context.getSharedPreferences(
                 context.getString(R.string.in_aquarium_info_shared_preferences_key),
@@ -54,7 +57,7 @@ class AquariumEditViewModel @Inject constructor(
 
             state = state.copy(
                 name = state.aquarium.name,
-                liters = if (state.aquarium.liters == 0.0) "" else
+                liters = if (state.isCreatingAquarium) "" else
                     convertLiters.to(
                         state.capacityMeasureCode,
                         state.aquarium.liters
@@ -73,7 +76,7 @@ class AquariumEditViewModel @Inject constructor(
 
             is AquariumEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    delete(state.aquarium.id)
+                    if (!state.isCreatingAquarium) delete(state.aquarium.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
             }

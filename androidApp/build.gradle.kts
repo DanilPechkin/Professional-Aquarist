@@ -18,6 +18,13 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
     buildFeatures {
         compose = true
     }

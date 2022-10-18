@@ -10,6 +10,7 @@ data class DwellerEditState(
     val temperatureMeasureCode: Int = TemperatureMeasure.Celsius.code,
     val alkalinityMeasureCode: Int = AlkalinityMeasure.DKH.code,
     val capacityMeasureCode: Int = CapacityMeasure.Liters.code,
+    val isCreatingDweller: Boolean = false,
     //Stats
     val name: String = "",
     val genus: String = "",

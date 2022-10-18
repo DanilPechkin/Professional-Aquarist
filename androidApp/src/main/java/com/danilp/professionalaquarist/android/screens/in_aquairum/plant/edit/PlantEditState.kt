@@ -8,6 +8,7 @@ data class PlantEditState(
     val plant: Plant = Plant.createEmpty(),
     val temperatureMeasureCode: Int = TemperatureMeasure.Celsius.code,
     val alkalinityMeasureCode: Int = AlkalinityMeasure.DKH.code,
+    val isCreatingPlant: Boolean = false,
     // Stats
     val name: String = "",
     val genus: String = "",

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import com.danilp.professionalaquarist.android.screens.destinations.Destination
 import com.ramcosta.composedestinations.navigation.navigate
 
 @Composable
