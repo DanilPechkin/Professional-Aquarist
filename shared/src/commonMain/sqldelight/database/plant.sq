@@ -1,20 +1,20 @@
 CREATE TABLE plantEntity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     aquariumId INTEGER NOT NULL,
-    imageUrl TEXT NOT NULL,
-    name TEXT NOT NULL,
-    genus TEXT NOT NULL,
-    description TEXT NOT NULL,
-    minTemperature REAL NOT NULL,
-    maxTemperature REAL NOT NULL,
-    minPh REAL NOT NULL,
-    maxPh REAL NOT NULL,
-    minGh REAL NOT NULL,
-    maxGh REAL NOT NULL,
-    minKh REAL NOT NULL,
-    maxKh REAL NOT NULL,
-    minIllumination REAL NOT NULL,
-    minCO2 REAL NOT NULL
+    imageUrl TEXT,
+    name TEXT,
+    genus TEXT,
+    description TEXT,
+    minTemperature REAL,
+    maxTemperature REAL,
+    minPh REAL,
+    maxPh REAL,
+    minGh REAL,
+    maxGh REAL,
+    minKh REAL,
+    maxKh REAL,
+    minIllumination REAL,
+    minCO2 REAL
 );
 
 getAllPlantsByAquarium:

@@ -37,9 +37,8 @@ class AquariumEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("aquariumId") ?: return@launch
-            if (id == -1L) state = state.copy(isCreatingAquarium = true)
             state = state.copy(
-                aquarium = if (state.isCreatingAquarium) Aquarium.createEmpty() else
+                aquarium = if (id == -1L) Aquarium.createEmpty() else
                     aquariumDataSource.getAquariumById(id) ?: Aquarium.createEmpty()
             )
 
@@ -56,13 +55,13 @@ class AquariumEditViewModel @Inject constructor(
             )
 
             state = state.copy(
-                name = state.aquarium.name,
-                liters = if (state.isCreatingAquarium) "" else
+                name = state.aquarium.name ?: "",
+                liters = if (state.aquarium.liters == null) "" else
                     convertLiters.to(
                         state.capacityMeasureCode,
-                        state.aquarium.liters
+                        state.aquarium.liters!!
                     ).result.toString(),
-                description = state.aquarium.description
+                description = state.aquarium.description ?: ""
             )
         }
 
@@ -76,7 +75,7 @@ class AquariumEditViewModel @Inject constructor(
 
             is AquariumEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    if (!state.isCreatingAquarium) delete(state.aquarium.id!!)
+                    if (state.aquarium.id != null) delete(state.aquarium.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
             }
@@ -133,7 +132,7 @@ class AquariumEditViewModel @Inject constructor(
                     state.capacityMeasureCode,
                     state.liters.toDouble()
                 ).result,
-                description = state.description
+                description = state.description.ifBlank { null }
             )
         )
 

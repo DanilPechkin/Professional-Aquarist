@@ -6,6 +6,6 @@ class SearchPlants {
             plants
         else
             plants.filter {
-                it.name.trim().lowercase().contains(query.lowercase())
+                it.name!!.trim().lowercase().contains(query.lowercase())
             }
 }

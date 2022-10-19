@@ -43,10 +43,9 @@ class DwellerEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("dwellerId") ?: return@launch
-            if (id == -1L) state = state.copy(isCreatingDweller = true)
 
             state = state.copy(
-                dweller = if (state.isCreatingDweller) Dweller.createEmpty() else
+                dweller = if (id == -1L) Dweller.createEmpty() else
                     dwellerDataSource.getDwellerById(id) ?: Dweller.createEmpty()
             )
 
@@ -77,56 +76,55 @@ class DwellerEditViewModel @Inject constructor(
             )
 
             state = state.copy(
-                name = state.dweller.name,
-                genus = state.dweller.genus,
-                amount = if (state.isCreatingDweller) "" else
-                    state.dweller.amount.toString(),
-                minTemperature = if (state.isCreatingDweller) "" else
+                name = state.dweller.name ?: "",
+                genus = state.dweller.genus ?: "",
+                amount = (state.dweller.amount ?: "").toString(),
+                minTemperature = if (state.dweller.minTemperature == null) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
-                        state.dweller.minTemperature
+                        state.dweller.minTemperature!!
                     ).result.toString(),
-                maxTemperature = if (state.isCreatingDweller) "" else
+                maxTemperature = if (state.dweller.maxTemperature == null) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
-                        state.dweller.maxTemperature
+                        state.dweller.maxTemperature!!
                     ).result.toString(),
-                liters = if (state.isCreatingDweller) "" else
+                liters = if (state.dweller.liters == null) "" else
                     convertLiters.to(
                         state.capacityMeasureCode,
-                        state.dweller.liters
+                        state.dweller.liters!!
                     ).result.toString(),
-                minPh = if (state.isCreatingDweller) "" else
+                minPh = if (state.dweller.minPh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.minPh
+                        state.dweller.minPh!!
                     ).result.toString(),
-                maxPh = if (state.isCreatingDweller) "" else
+                maxPh = if (state.dweller.maxPh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxPh
+                        state.dweller.maxPh!!
                     ).result.toString(),
-                minGh = if (state.isCreatingDweller) "" else
+                minGh = if (state.dweller.minGh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.minGh
+                        state.dweller.minGh!!
                     ).result.toString(),
-                maxGh = if (state.isCreatingDweller) "" else
+                maxGh = if (state.dweller.maxGh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxGh
+                        state.dweller.maxGh!!
                     ).result.toString(),
-                minKh = if (state.isCreatingDweller) "" else
+                minKh = if (state.dweller.minKh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.minKh
+                        state.dweller.minKh!!
                     ).result.toString(),
-                maxKh = if (state.isCreatingDweller) "" else
+                maxKh = if (state.dweller.maxKh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.dweller.maxKh
+                        state.dweller.maxKh!!
                     ).result.toString(),
-                description = state.dweller.description
+                description = state.dweller.description ?: ""
             )
         }
     }
@@ -139,7 +137,7 @@ class DwellerEditViewModel @Inject constructor(
 
             is DwellerEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    if (!state.isCreatingDweller)
+                    if (state.dweller.id != null)
                         delete(state.dweller.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
@@ -301,45 +299,54 @@ class DwellerEditViewModel @Inject constructor(
             state = state.copy(
                 dweller = state.dweller.copy(
                     name = state.name,
-                    genus = state.genus,
-                    amount = state.amount.toLong(),
-                    minTemperature = convertCelsius.from(
+                    genus = state.genus.ifBlank { null },
+                    amount = state.amount.ifBlank { null }?.toLong(),
+                    minTemperature = if (state.minTemperature.isBlank()) null
+                    else convertCelsius.from(
                         state.temperatureMeasureCode,
                         state.minTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxTemperature = convertCelsius.from(
+                    maxTemperature = if (state.maxTemperature.isBlank()) null
+                    else convertCelsius.from(
                         state.temperatureMeasureCode,
                         state.maxTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
-                    liters = convertLiters.from(
+                    liters = if (state.liters.isBlank()) null
+                    else convertLiters.from(
                         state.capacityMeasureCode,
                         state.liters.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minPh = convertDKH.from(
+                    minPh = if (state.minPh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minPh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxPh = convertDKH.from(
+                    maxPh = if (state.maxPh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxPh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minGh = convertDKH.from(
+                    minGh = if (state.minGh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minGh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxGh = convertDKH.from(
+                    maxGh = if (state.maxGh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxGh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minKh = convertDKH.from(
+                    minKh = if (state.minKh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minKh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxKh = convertDKH.from(
+                    maxKh = if (state.maxKh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxKh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    description = state.description
+                    description = state.description.ifBlank { null }
                 )
             )
 

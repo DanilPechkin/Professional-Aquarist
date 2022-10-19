@@ -6,6 +6,6 @@ class SearchAquariums {
             aquariums
         else
             aquariums.filter {
-                it.name.trim().lowercase().contains(query.lowercase())
+                it.name!!.trim().lowercase().contains(query.lowercase())
             }
 }

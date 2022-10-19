@@ -6,7 +6,6 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.ca
 data class AquariumEditState(
     val aquarium: Aquarium = Aquarium.createEmpty(),
     val capacityMeasureCode: Int = CapacityMeasure.Liters.code,
-    val isCreatingAquarium: Boolean = false,
     val nameErrorCode: Int? = null,
     val litersErrorCode: Int? = null,
     val name: String = "",

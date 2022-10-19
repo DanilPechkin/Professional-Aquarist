@@ -5,8 +5,6 @@ import com.danilp.professionalaquarist.data.plant.toPlant
 import com.danilp.professionalaquarist.database.AquariumDatabase
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
-import kotlin.math.max
-import kotlin.math.min
 
 class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
 
@@ -84,41 +82,40 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
         getAquariumById(id)?.let { aquarium ->
             insertAquarium(
                 aquarium.copy(
-                    minTemperature = max(
-                        dwellers.maxOfOrNull { it.minTemperature } ?: aquarium.minTemperature,
-                        plants.maxOfOrNull { it.minTemperature } ?: aquarium.minTemperature
-                    ),
-                    maxTemperature = min(
-                        dwellers.minOfOrNull { it.maxTemperature } ?: aquarium.maxTemperature,
-                        plants.minOfOrNull { it.maxTemperature } ?: aquarium.maxTemperature
-                    ),
-                    minPh = max(
-                        dwellers.maxOfOrNull { it.minPh } ?: aquarium.minPh,
-                        plants.maxOfOrNull { it.minPh } ?: aquarium.minPh
-                    ),
-                    maxPh = min(
-                        dwellers.minOfOrNull { it.maxPh } ?: aquarium.maxPh,
-                        plants.minOfOrNull { it.maxPh } ?: aquarium.maxPh
-                    ),
-                    minGh = max(
-                        dwellers.maxOfOrNull { it.minGh } ?: aquarium.minGh,
-                        plants.maxOfOrNull { it.minGh } ?: aquarium.minGh
-                    ),
-                    maxGh = min(
-                        dwellers.minOfOrNull { it.maxGh } ?: aquarium.maxGh,
-                        plants.minOfOrNull { it.maxGh } ?: aquarium.maxGh
-                    ),
-                    minKh = max(
-                        dwellers.maxOfOrNull { it.minKh } ?: aquarium.minKh,
-                        plants.maxOfOrNull { it.minKh } ?: aquarium.minKh
-                    ),
-                    maxKh = min(
-                        dwellers.minOfOrNull { it.maxKh } ?: aquarium.maxKh,
-                        plants.minOfOrNull { it.maxKh } ?: aquarium.maxKh
-                    ),
-                    minIllumination = plants.maxOfOrNull { it.minIllumination }
-                        ?: aquarium.minIllumination,
-                    minCO2 = plants.maxOfOrNull { it.minCO2 } ?: aquarium.minCO2
+                    minTemperature = listOf(
+                        dwellers.mapNotNull { it.minTemperature }.maxOrNull(),
+                        plants.mapNotNull { it.minTemperature }.maxOrNull()
+                    ).mapNotNull { it }.maxOrNull(),
+                    maxTemperature = listOf(
+                        dwellers.mapNotNull { it.maxTemperature }.minOrNull(),
+                        plants.mapNotNull { it.maxTemperature }.minOrNull()
+                    ).mapNotNull { it }.minOrNull(),
+                    minPh = listOf(
+                        dwellers.mapNotNull { it.minPh }.maxOrNull(),
+                        plants.mapNotNull { it.minPh }.maxOrNull()
+                    ).mapNotNull { it }.maxOrNull(),
+                    maxPh = listOf(
+                        dwellers.mapNotNull { it.maxPh }.minOrNull(),
+                        plants.mapNotNull { it.maxPh }.minOrNull()
+                    ).mapNotNull { it }.minOrNull(),
+                    minGh = listOf(
+                        dwellers.mapNotNull { it.minGh }.maxOrNull(),
+                        plants.mapNotNull { it.minGh }.maxOrNull()
+                    ).mapNotNull { it }.maxOrNull(),
+                    maxGh = listOf(
+                        dwellers.mapNotNull { it.maxGh }.minOrNull(),
+                        plants.mapNotNull { it.maxGh }.minOrNull()
+                    ).mapNotNull { it }.minOrNull(),
+                    minKh = listOf(
+                        dwellers.mapNotNull { it.minKh }.maxOrNull(),
+                        plants.mapNotNull { it.minKh }.maxOrNull()
+                    ).mapNotNull { it }.maxOrNull(),
+                    maxKh = listOf(
+                        dwellers.mapNotNull { it.maxKh }.minOrNull(),
+                        plants.mapNotNull { it.maxKh }.minOrNull()
+                    ).mapNotNull { it }.minOrNull(),
+                    minIllumination = plants.mapNotNull { it.minIllumination }.maxOrNull(),
+                    minCO2 = plants.mapNotNull { it.minCO2 }.maxOrNull()
                 )
             )
         }

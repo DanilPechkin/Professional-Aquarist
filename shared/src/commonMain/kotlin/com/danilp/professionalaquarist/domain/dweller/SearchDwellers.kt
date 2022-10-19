@@ -6,6 +6,6 @@ class SearchDwellers {
             dwellers
         else
             dwellers.filter {
-                it.name.trim().lowercase().contains(query.lowercase())
+                it.name!!.trim().lowercase().contains(query.lowercase())
             }
 }

@@ -40,10 +40,9 @@ class PlantEditViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val id = savedStateHandle.get<Long>("plantId") ?: return@launch
-            if (id == -1L) state = state.copy(isCreatingPlant = true)
 
             state = state.copy(
-                plant = if (state.isCreatingPlant) Plant.createEmpty() else
+                plant = if (id == -1L) Plant.createEmpty() else
                     plantDataSource.getPlantById(id) ?: Plant.createEmpty()
             )
 
@@ -69,51 +68,52 @@ class PlantEditViewModel @Inject constructor(
             )
 
             state = state.copy(
-                name = state.plant.name,
-                genus = state.plant.genus,
-                minTemperature =
-                convertCelsius.to(
-                    state.temperatureMeasureCode,
-                    state.plant.minTemperature
-                ).result.toString(),
-                maxTemperature = if (state.isCreatingPlant) "" else
+                name = state.plant.name ?: "",
+                genus = state.plant.genus ?: "",
+                minTemperature = if (state.plant.minTemperature == null) "" else
                     convertCelsius.to(
                         state.temperatureMeasureCode,
-                        state.plant.maxTemperature
+                        state.plant.minTemperature!!
                     ).result.toString(),
-                minPh = if (state.isCreatingPlant) "" else
+                maxTemperature = if (state.plant.maxTemperature == null) "" else
+                    convertCelsius.to(
+                        state.temperatureMeasureCode,
+                        state.plant.maxTemperature!!
+                    ).result.toString(),
+                minPh = if (state.plant.minPh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.minPh
+                        state.plant.minPh!!
                     ).result.toString(),
-                maxPh = if (state.isCreatingPlant) "" else
+                maxPh = if (state.plant.maxPh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.maxPh
+                        state.plant.maxPh!!
                     ).result.toString(),
-                minGh = if (state.isCreatingPlant) "" else
+                minGh = if (state.plant.minGh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.minGh
+                        state.plant.minGh!!
                     ).result.toString(),
-                maxGh = if (state.isCreatingPlant) "" else
+                maxGh = if (state.plant.maxGh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.maxGh
+                        state.plant.maxGh!!
                     ).result.toString(),
-                minKh = if (state.isCreatingPlant) "" else
+                minKh = if (state.plant.minKh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.minKh
+                        state.plant.minKh!!
                     ).result.toString(),
-                maxKh = if (state.isCreatingPlant) "" else
+                maxKh = if (state.plant.maxKh == null) "" else
                     convertDKH.to(
                         state.alkalinityMeasureCode,
-                        state.plant.maxKh
+                        state.plant.maxKh!!
                     ).result.toString(),
-                minCO2 = if (state.isCreatingPlant) "" else state.plant.minCO2.toString(),
-                minIllumination = if (state.isCreatingPlant) "" else state.plant.minIllumination.toString(),
-                description = state.plant.description
+                minCO2 = if (state.plant.minCO2 == null) "" else state.plant.minCO2.toString(),
+                minIllumination = if (state.plant.minIllumination == null) "" else
+                    state.plant.minIllumination.toString(),
+                description = state.plant.description ?: ""
             )
         }
     }
@@ -126,7 +126,7 @@ class PlantEditViewModel @Inject constructor(
 
             is PlantEditEvent.DeleteButtonPressed -> {
                 viewModelScope.launch {
-                    if (!state.isCreatingPlant)
+                    if (state.plant.id != null)
                         delete(state.plant.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
                 }
@@ -287,43 +287,51 @@ class PlantEditViewModel @Inject constructor(
 
             state = state.copy(
                 plant = state.plant.copy(
-                    name = state.name,
-                    genus = state.genus,
-                    minTemperature = convertCelsius.from(
+                    name = state.name.ifBlank { null },
+                    genus = state.genus.ifBlank { null },
+                    minTemperature = if (state.minTemperature.isBlank()) null
+                    else convertCelsius.from(
                         state.temperatureMeasureCode,
                         state.minTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxTemperature = convertCelsius.from(
+                    maxTemperature = if (state.maxTemperature.isBlank()) null
+                    else convertCelsius.from(
                         state.temperatureMeasureCode,
                         state.maxTemperature.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minPh = convertDKH.from(
+                    minPh = if (state.minPh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minPh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxPh = convertDKH.from(
+                    maxPh = if (state.maxPh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxPh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minGh = convertDKH.from(
+                    minGh = if (state.minGh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minGh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxGh = convertDKH.from(
+                    maxGh = if (state.maxGh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxGh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minKh = convertDKH.from(
+                    minKh = if (state.minKh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.minKh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    maxKh = convertDKH.from(
+                    maxKh = if (state.maxKh.isBlank()) null
+                    else convertDKH.from(
                         state.alkalinityMeasureCode,
                         state.maxKh.toDoubleOrNull() ?: 0.0
                     ).result,
-                    minIllumination = state.minIllumination.toDoubleOrNull() ?: 0.0,
-                    minCO2 = state.minCO2.toDoubleOrNull() ?: 0.0,
-                    description = state.description
+                    minIllumination = state.minIllumination.ifBlank { null }?.toDoubleOrNull(),
+                    minCO2 = state.minCO2.ifBlank { null }?.toDoubleOrNull(),
+                    description = state.description.ifBlank { null }
                 )
             )
 

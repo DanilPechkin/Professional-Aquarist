@@ -304,10 +304,10 @@ fun AquariumTopBarWithSearch(
 
 @Composable
 fun GridItem(
-    name: String,
+    name: String?,
     message: String,
     cardColors: CardColors,
-    imageUri: String,
+    imageUri: String?,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -316,8 +316,8 @@ fun GridItem(
         modifier = modifier
     ) {
         GlideImage(
-            imageModel = imageUri.ifBlank { (R.drawable.aquairum_pic) },
-            contentDescription = name,
+            imageModel = imageUri ?: R.drawable.aquairum_pic,
+            contentDescription = name ?: "",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
@@ -327,7 +327,7 @@ fun GridItem(
         Column(
             modifier = Modifier.padding(top = 6.dp, start = 10.dp, bottom = 10.dp, end = 10.dp)
         ) {
-            Text(text = name, style = MaterialTheme.typography.titleMedium, maxLines = 1)
+            Text(text = name ?: "", style = MaterialTheme.typography.titleMedium, maxLines = 1)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = message, style = MaterialTheme.typography.labelMedium)
         }
@@ -336,7 +336,7 @@ fun GridItem(
 
 @Composable
 fun ImagePicker(
-    imageUri: String,
+    imageUri: String?,
     onSelection: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -347,7 +347,7 @@ fun ImagePicker(
     }
 
     GlideImage(
-        imageModel = imageUri.ifBlank { (R.drawable.aquairum_pic) },
+        imageModel = imageUri ?: R.drawable.aquairum_pic,
         contentDescription = stringResource(R.string.imagepicker_content_descr),
         contentScale = ContentScale.Crop,
         // TODO: placeholder,
