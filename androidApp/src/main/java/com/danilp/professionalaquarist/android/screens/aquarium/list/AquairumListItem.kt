@@ -10,12 +10,13 @@ import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 @Composable
 fun AquariumListItem(
     aquarium: Aquarium,
+    message: String,
     modifier: Modifier = Modifier
 ) {
     GridItem(
         name = aquarium.name,
         //TODO: make message
-        message = "2 Уведомления",
+        message = message,
         imageUri = aquarium.imageUrl,
         cardColors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer

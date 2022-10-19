@@ -1,5 +1,6 @@
 package com.danilp.professionalaquarist.android.screens.aquarium.list
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -40,7 +41,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @RootNavGraph(start = true)
 @Destination
 @Composable
@@ -110,10 +111,15 @@ fun AquariumList(
                     contentPadding = PaddingValues(horizontal = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(state.aquariums) { aquarium ->
+                    items(
+                        items = state.aquariums,
+                        key = { it.id!! }
+                    ) { aquarium ->
                         AquariumListItem(
                             aquarium = aquarium,
+                            message = aquarium.minTemperature.toString() + " " + aquarium.maxTemperature.toString(),
                             modifier = Modifier
+                                .animateItemPlacement()
                                 .clickable {
                                     viewModel.onEvent(
                                         AquariumListEvent.OnAquariumClicked(aquarium.id!!)

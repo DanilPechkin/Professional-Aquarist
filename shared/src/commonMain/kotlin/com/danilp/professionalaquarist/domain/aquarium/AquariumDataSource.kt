@@ -5,4 +5,5 @@ interface AquariumDataSource {
     suspend fun getAquariumById(id: Long): Aquarium?
     suspend fun getAllAquariums(): List<Aquarium>
     suspend fun deleteAquariumById(id: Long)
+    suspend fun refreshAquariumById(id: Long)
 }
