@@ -2,7 +2,7 @@ package com.danilp.buildsrc
 
 private object Versions {
     const val sqlDelight = "1.5.4"
-    const val destinations = "1.7.21-beta"
+    const val destinations = "1.7.22-beta"
     const val coroutines = "1.6.4"
     const val compose = "1.3.0-rc01"
     const val hilt = "2.44"

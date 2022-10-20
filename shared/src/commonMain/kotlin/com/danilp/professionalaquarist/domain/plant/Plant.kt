@@ -22,7 +22,7 @@ data class Plant(
         fun createEmpty(): Plant = Plant(
             null,
             0,
-            "",
+            null,
             null,
             null,
             null,

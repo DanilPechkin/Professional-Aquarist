@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
+import com.danilp.professionalaquarist.domain.aquarium.ConvertAquariumMeasures
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
-import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -25,8 +27,8 @@ class AquariumEditViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val savedStateHandle: SavedStateHandle,
     private val validate: Validate,
-    private val convertLiters: ConvertLiters,
-    private val aquariumDataSource: AquariumDataSource
+    private val aquariumDataSource: AquariumDataSource,
+    private val convertAquariumMeasures: ConvertAquariumMeasures
 ) : ViewModel() {
 
     var state by mutableStateOf(AquariumEditState())
@@ -55,12 +57,17 @@ class AquariumEditViewModel @Inject constructor(
             )
 
             state = state.copy(
+                aquarium = convertAquariumMeasures.to(
+                    state.aquarium,
+                    AlkalinityMeasure.DKH.code,
+                    state.capacityMeasureCode,
+                    TemperatureMeasure.Celsius.code
+                )
+            )
+
+            state = state.copy(
                 name = state.aquarium.name ?: "",
-                liters = if (state.aquarium.liters == null) "" else
-                    convertLiters.to(
-                        state.capacityMeasureCode,
-                        state.aquarium.liters!!
-                    ).result.toString(),
+                liters = (state.aquarium.liters ?: "").toString(),
                 description = state.aquarium.description ?: ""
             )
         }
@@ -128,11 +135,17 @@ class AquariumEditViewModel @Inject constructor(
         state = state.copy(
             aquarium = state.aquarium.copy(
                 name = state.name,
-                liters = convertLiters.from(
-                    state.capacityMeasureCode,
-                    state.liters.toDouble()
-                ).result,
+                liters = state.liters.toDouble(),
                 description = state.description.ifBlank { null }
+            )
+        )
+
+        state = state.copy(
+            aquarium = convertAquariumMeasures.from(
+                state.aquarium,
+                AlkalinityMeasure.DKH.code,
+                state.capacityMeasureCode,
+                TemperatureMeasure.Celsius.code
             )
         )
 

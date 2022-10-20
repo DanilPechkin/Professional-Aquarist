@@ -20,10 +20,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AquariumListViewModel @Inject constructor(
     @ApplicationContext context: Context,
-    private val aquariumDataSource: AquariumDataSource
+    private val aquariumDataSource: AquariumDataSource,
+    private val searchAquariums: SearchAquariums
 ) : ViewModel() {
-
-    private val searchAquariums = SearchAquariums()
 
     var state by mutableStateOf(AquariumListState())
 

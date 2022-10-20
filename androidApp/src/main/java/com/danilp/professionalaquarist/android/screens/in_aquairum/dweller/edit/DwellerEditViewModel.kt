@@ -8,13 +8,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.domain.dweller.ConvertDwellerMeasures
 import com.danilp.professionalaquarist.domain.dweller.Dweller
 import com.danilp.professionalaquarist.domain.dweller.DwellerDataSource
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
-import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.ConvertDKH
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
-import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
-import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.ConvertCelsius
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,9 +27,7 @@ class DwellerEditViewModel @Inject constructor(
     @ApplicationContext context: Context,
     private val savedStateHandle: SavedStateHandle,
     private val validate: Validate,
-    private val convertCelsius: ConvertCelsius,
-    private val convertLiters: ConvertLiters,
-    private val convertDKH: ConvertDKH,
+    private val convertDwellerMeasures: ConvertDwellerMeasures,
     private val dwellerDataSource: DwellerDataSource
 ) : ViewModel() {
 
@@ -76,54 +72,27 @@ class DwellerEditViewModel @Inject constructor(
             )
 
             state = state.copy(
+                dweller = convertDwellerMeasures.to(
+                    state.dweller,
+                    state.alkalinityMeasureCode,
+                    state.capacityMeasureCode,
+                    state.temperatureMeasureCode
+                )
+            )
+
+            state = state.copy(
                 name = state.dweller.name ?: "",
                 genus = state.dweller.genus ?: "",
                 amount = (state.dweller.amount ?: "").toString(),
-                minTemperature = if (state.dweller.minTemperature == null) "" else
-                    convertCelsius.to(
-                        state.temperatureMeasureCode,
-                        state.dweller.minTemperature!!
-                    ).result.toString(),
-                maxTemperature = if (state.dweller.maxTemperature == null) "" else
-                    convertCelsius.to(
-                        state.temperatureMeasureCode,
-                        state.dweller.maxTemperature!!
-                    ).result.toString(),
-                liters = if (state.dweller.liters == null) "" else
-                    convertLiters.to(
-                        state.capacityMeasureCode,
-                        state.dweller.liters!!
-                    ).result.toString(),
-                minPh = if (state.dweller.minPh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.minPh!!
-                    ).result.toString(),
-                maxPh = if (state.dweller.maxPh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.maxPh!!
-                    ).result.toString(),
-                minGh = if (state.dweller.minGh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.minGh!!
-                    ).result.toString(),
-                maxGh = if (state.dweller.maxGh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.maxGh!!
-                    ).result.toString(),
-                minKh = if (state.dweller.minKh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.minKh!!
-                    ).result.toString(),
-                maxKh = if (state.dweller.maxKh == null) "" else
-                    convertDKH.to(
-                        state.alkalinityMeasureCode,
-                        state.dweller.maxKh!!
-                    ).result.toString(),
+                minTemperature = (state.dweller.minTemperature ?: "").toString(),
+                maxTemperature = (state.dweller.maxTemperature ?: "").toString(),
+                liters = (state.dweller.liters ?: "").toString(),
+                minPh = (state.dweller.minPh ?: "").toString(),
+                maxPh = (state.dweller.maxPh ?: "").toString(),
+                minGh = (state.dweller.minGh ?: "").toString(),
+                maxGh = (state.dweller.maxGh ?: "").toString(),
+                minKh = (state.dweller.minKh ?: "").toString(),
+                maxKh = (state.dweller.maxKh ?: "").toString(),
                 description = state.dweller.description ?: ""
             )
         }
@@ -301,52 +270,25 @@ class DwellerEditViewModel @Inject constructor(
                     name = state.name,
                     genus = state.genus.ifBlank { null },
                     amount = state.amount.ifBlank { null }?.toLong(),
-                    minTemperature = if (state.minTemperature.isBlank()) null
-                    else convertCelsius.from(
-                        state.temperatureMeasureCode,
-                        state.minTemperature.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    maxTemperature = if (state.maxTemperature.isBlank()) null
-                    else convertCelsius.from(
-                        state.temperatureMeasureCode,
-                        state.maxTemperature.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    liters = if (state.liters.isBlank()) null
-                    else convertLiters.from(
-                        state.capacityMeasureCode,
-                        state.liters.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    minPh = if (state.minPh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.minPh.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    maxPh = if (state.maxPh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.maxPh.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    minGh = if (state.minGh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.minGh.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    maxGh = if (state.maxGh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.maxGh.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    minKh = if (state.minKh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.minKh.toDoubleOrNull() ?: 0.0
-                    ).result,
-                    maxKh = if (state.maxKh.isBlank()) null
-                    else convertDKH.from(
-                        state.alkalinityMeasureCode,
-                        state.maxKh.toDoubleOrNull() ?: 0.0
-                    ).result,
+                    minTemperature = state.minTemperature.ifBlank { null }?.toDouble(),
+                    maxTemperature = state.maxTemperature.ifBlank { null }?.toDouble(),
+                    liters = state.liters.ifBlank { null }?.toDouble(),
+                    minPh = state.minPh.ifBlank { null }?.toDouble(),
+                    maxPh = state.maxPh.ifBlank { null }?.toDouble(),
+                    minGh = state.minGh.ifBlank { null }?.toDouble(),
+                    maxGh = state.maxGh.ifBlank { null }?.toDouble(),
+                    minKh = state.minKh.ifBlank { null }?.toDouble(),
+                    maxKh = state.maxKh.ifBlank { null }?.toDouble(),
                     description = state.description.ifBlank { null }
+                )
+            )
+
+            state = state.copy(
+                dweller = convertDwellerMeasures.from(
+                    state.dweller,
+                    state.alkalinityMeasureCode,
+                    state.capacityMeasureCode,
+                    state.temperatureMeasureCode
                 )
             )
 

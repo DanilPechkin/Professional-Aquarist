@@ -1,5 +1,11 @@
 package com.danilp.professionalaquarist.android.di
 
+import com.danilp.professionalaquarist.domain.aquarium.ConvertAquariumMeasures
+import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
+import com.danilp.professionalaquarist.domain.dweller.ConvertDwellerMeasures
+import com.danilp.professionalaquarist.domain.dweller.SearchDwellers
+import com.danilp.professionalaquarist.domain.plant.ConvertPlantMeasures
+import com.danilp.professionalaquarist.domain.plant.SearchPlants
 import com.danilp.professionalaquarist.domain.use_case.calculation.aquairum.capacity.CalculateCapacity
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.ConvertDKH
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
@@ -17,6 +23,23 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
 
+    // ----------Search----------
+
+    //Aquarium
+    @Provides
+    @Singleton
+    fun provideSearchAquariums(): SearchAquariums = SearchAquariums()
+
+    //Dweller
+    @Provides
+    @Singleton
+    fun provideSearchDwellers(): SearchDwellers = SearchDwellers()
+
+    //Plant
+    @Provides
+    @Singleton
+    fun provideSearchPlants(): SearchPlants = SearchPlants()
+
     // ----------Validation----------
     @Provides
     @Singleton
@@ -25,6 +48,21 @@ object UseCaseModule {
 
 
     // ----------Conversion----------
+
+    //Aquarium
+    @Provides
+    @Singleton
+    fun provideConvertAquariumMeasures(): ConvertAquariumMeasures = ConvertAquariumMeasures()
+
+    //Dweller
+    @Provides
+    @Singleton
+    fun provideConvertDwellerMeasures(): ConvertDwellerMeasures = ConvertDwellerMeasures()
+
+    //Plant
+    @Provides
+    @Singleton
+    fun provideConvertPlantMeasures(): ConvertPlantMeasures = ConvertPlantMeasures()
 
     //Capacity
     @Provides
