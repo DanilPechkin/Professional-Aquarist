@@ -52,7 +52,6 @@ fun DwellersList(
     val searchFieldFocusRequester = remember { FocusRequester() }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
 
-
     Scaffold(
         topBar = {
             AquariumTopBarWithSearch(

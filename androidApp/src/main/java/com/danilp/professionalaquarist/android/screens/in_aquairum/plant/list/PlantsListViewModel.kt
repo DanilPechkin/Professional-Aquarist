@@ -11,10 +11,10 @@ import com.danilp.professionalaquarist.domain.plant.PlantDataSource
 import com.danilp.professionalaquarist.domain.plant.SearchPlants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class PlantsListViewModel @Inject constructor(

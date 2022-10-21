@@ -5,6 +5,6 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 @RootNavGraph
 @NavGraph
-annotation class InAquariumNavGraph (
+annotation class InAquariumNavGraph(
     val start: Boolean = false
 )

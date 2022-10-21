@@ -16,7 +16,7 @@ import com.danilp.professionalaquarist.android.screens.destinations.NotesDestina
 import com.danilp.professionalaquarist.android.screens.destinations.PlantsListDestination
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
-//TODO: add nice icons
+// TODO: add nice icons
 
 enum class AquariumBottomBarDestination(
     val direction: DirectionDestinationSpec,

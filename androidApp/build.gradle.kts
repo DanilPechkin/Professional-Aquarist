@@ -6,6 +6,7 @@ plugins {
     id("com.google.devtools.ksp") version "1.7.20-1.0.6"
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 android {
@@ -43,6 +44,17 @@ android {
     }
 }
 
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+    disabledRules.set(mutableListOf("no-wildcard-imports"))
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
+    }
+}
+
 dependencies {
     implementation(project(":shared"))
 
@@ -65,6 +77,7 @@ dependencies {
         debugImplementation(debugTest)
         debugImplementation(debugTooling)
     }
+    implementation("com.github.skydoves:landscapist-glide:1.6.1")
 
     with(Deps.Destinations) {
         implementation(core)
@@ -82,6 +95,4 @@ dependencies {
         implementation(composeNavigation)
         kapt(composeCompiler)
     }
-
-    implementation("com.github.skydoves:landscapist-glide:1.6.1")
 }

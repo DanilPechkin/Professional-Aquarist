@@ -15,7 +15,7 @@ fun AquariumListItem(
 ) {
     GridItem(
         name = aquarium.name,
-        //TODO: make message
+        // TODO: make message
         message = message,
         imageUri = aquarium.imageUrl,
         cardColors = CardDefaults.cardColors(

@@ -16,10 +16,10 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class PlantEditViewModel @Inject constructor(
@@ -219,12 +219,30 @@ class PlantEditViewModel @Inject constructor(
 
         viewModelScope.launch {
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
-            val isPhCorrect = (((state.minPh.toDoubleOrNull()
-                ?: 0.0) < (state.maxPh.toDoubleOrNull() ?: 0.0)))
-            val isGhCorrect = (((state.minGh.toDoubleOrNull()
-                ?: 0.0) < (state.maxGh.toDoubleOrNull() ?: 0.0)))
-            val isKhCorrect = (((state.minKh.toDoubleOrNull()
-                ?: 0.0) < (state.maxKh.toDoubleOrNull() ?: 0.0)))
+            val isPhCorrect = (
+                (
+                    (
+                        state.minPh.toDoubleOrNull()
+                            ?: 0.0
+                        ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
+                    )
+                )
+            val isGhCorrect = (
+                (
+                    (
+                        state.minGh.toDoubleOrNull()
+                            ?: 0.0
+                        ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
+                    )
+                )
+            val isKhCorrect = (
+                (
+                    (
+                        state.minKh.toDoubleOrNull()
+                            ?: 0.0
+                        ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
+                    )
+                )
 
             if (!isTempCorrect) {
                 kotlin.run {
@@ -287,7 +305,6 @@ class PlantEditViewModel @Inject constructor(
             insert(state.plant)
             validationEventChannel.send(ValidationEvent.Success)
         }
-
     }
 
     sealed class ValidationEvent {

@@ -12,10 +12,10 @@ import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class AquariumListViewModel @Inject constructor(
@@ -83,5 +83,4 @@ class AquariumListViewModel @Inject constructor(
             commit()
         }
     }
-
 }

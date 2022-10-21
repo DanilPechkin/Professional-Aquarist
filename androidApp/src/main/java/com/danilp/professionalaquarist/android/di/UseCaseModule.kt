@@ -25,17 +25,17 @@ object UseCaseModule {
 
     // ----------Search----------
 
-    //Aquarium
+    // Aquarium
     @Provides
     @Singleton
     fun provideSearchAquariums(): SearchAquariums = SearchAquariums()
 
-    //Dweller
+    // Dweller
     @Provides
     @Singleton
     fun provideSearchDwellers(): SearchDwellers = SearchDwellers()
 
-    //Plant
+    // Plant
     @Provides
     @Singleton
     fun provideSearchPlants(): SearchPlants = SearchPlants()
@@ -46,48 +46,46 @@ object UseCaseModule {
     fun provideValidate(): Validate =
         Validate()
 
-
     // ----------Conversion----------
 
-    //Aquarium
+    // Aquarium
     @Provides
     @Singleton
     fun provideConvertAquariumMeasures(): ConvertAquariumMeasures = ConvertAquariumMeasures()
 
-    //Dweller
+    // Dweller
     @Provides
     @Singleton
     fun provideConvertDwellerMeasures(): ConvertDwellerMeasures = ConvertDwellerMeasures()
 
-    //Plant
+    // Plant
     @Provides
     @Singleton
     fun provideConvertPlantMeasures(): ConvertPlantMeasures = ConvertPlantMeasures()
 
-    //Capacity
+    // Capacity
     @Provides
     @Singleton
     fun provideConvertLiters(): ConvertLiters = ConvertLiters()
 
-    //Temperature
+    // Temperature
     @Provides
     @Singleton
     fun provideConvertCelsius(): ConvertCelsius = ConvertCelsius()
 
-    //Alkalinity
+    // Alkalinity
     @Provides
     @Singleton
     fun provideConvertDKH(): ConvertDKH = ConvertDKH()
 
-    //Metric
+    // Metric
     @Provides
     @Singleton
     fun provideConvertMeters(): ConvertMeters = ConvertMeters()
 
-
     // ----------Calculation----------
 
-    //---Fresh water---
+    // ---Fresh water---
 
     @Provides
     @Singleton
@@ -95,12 +93,10 @@ object UseCaseModule {
 
     // ---Aquarium---
 
-    //Capacity
+    // Capacity
 
     @Provides
     @Singleton
     fun provideCalculateCapacity(): CalculateCapacity =
         CalculateCapacity()
-
-
 }

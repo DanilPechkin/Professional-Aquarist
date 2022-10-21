@@ -14,7 +14,7 @@ fun PlantsListItem(
 ) {
     GridItem(
         name = plant.name,
-        //TODO: make message
+        // TODO: make message
         message = "Здоровый",
         imageUri = plant.imageUrl,
         cardColors = CardDefaults.cardColors(

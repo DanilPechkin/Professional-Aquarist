@@ -14,10 +14,10 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.me
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -94,8 +94,6 @@ class SettingsViewModel @Inject constructor(
                     context.getString(R.string.metric_measure_inches)
                 )
             )
-
-
         }
     }
 
@@ -144,5 +142,4 @@ class SettingsViewModel @Inject constructor(
     sealed class SavingEvent {
         object Success : SavingEvent()
     }
-
 }

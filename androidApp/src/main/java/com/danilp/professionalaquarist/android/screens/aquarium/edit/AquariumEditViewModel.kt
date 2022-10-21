@@ -17,10 +17,10 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class AquariumEditViewModel @Inject constructor(
@@ -71,7 +71,6 @@ class AquariumEditViewModel @Inject constructor(
                 description = state.aquarium.description ?: ""
             )
         }
-
     }
 
     fun onEvent(event: AquariumEditEvent) {

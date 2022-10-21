@@ -17,6 +17,4 @@ sealed class DwellerEditEvent {
     data class MaxKhChanged(val kh: String) : DwellerEditEvent()
     data class DescriptionChanged(val description: String) : DwellerEditEvent()
     data class ImagePicked(val imageUrl: String) : DwellerEditEvent()
-
 }
-

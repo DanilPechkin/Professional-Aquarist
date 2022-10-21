@@ -117,7 +117,8 @@ fun AquariumList(
                     ) { aquarium ->
                         AquariumListItem(
                             aquarium = aquarium,
-                            message = aquarium.minTemperature.toString() + " " + aquarium.maxTemperature.toString(),
+                            message = aquarium.minTemperature.toString() + " " +
+                                aquarium.maxTemperature.toString(),
                             modifier = Modifier
                                 .animateItemPlacement()
                                 .clickable {

@@ -27,9 +27,10 @@ fun MainAquariumScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(text = stringResource(R.string.aquarium_title))
-            },
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.aquarium_title))
+                },
                 navigationIcon = {
                     IconButton(onClick = { navigator.navigate(AquariumListDestination()) }) {
                         Icon(

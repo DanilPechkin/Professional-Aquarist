@@ -60,7 +60,7 @@ fun AquariumEdit(
                 hideMenu = { isTopMenuExpanded = false },
                 navigateBack = { navigator.navigateUp() },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
-                navigateToAccount = {  }
+                navigateToAccount = { }
             )
         }
     ) { paddingValues ->

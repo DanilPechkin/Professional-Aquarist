@@ -17,5 +17,4 @@ sealed class PlantEditEvent {
     data class MinIlluminationChanged(val illumination: String) : PlantEditEvent()
     data class DescriptionChanged(val description: String) : PlantEditEvent()
     data class ImagePicked(val imageUrl: String) : PlantEditEvent()
-
 }
