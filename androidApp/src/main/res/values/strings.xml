@@ -99,4 +99,6 @@
     <string name="forgot_password_button">Forgot password?</string>
     <string name="alkalinity_measure_mgl">mg/l</string>
     <string name="capacity_measure_cubic_centimeters">cubic centimeters</string>
+    <string name="show_advanced_button">Show Advanced</string>
+    <string name="genus_label">Genus</string>
 </resources>

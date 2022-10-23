@@ -1,5 +1,8 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.plant.edit
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,17 +18,23 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,6 +68,7 @@ fun PlantEdit(
 ) {
     val state = viewModel.state
 
+    var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = LocalContext.current) {
@@ -126,100 +136,15 @@ fun PlantEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            FromToInfoFields(
-                label = stringResource(R.string.temperature_label),
-                valueFrom = state.minTemperature,
-                valueTo = state.maxTemperature,
-                onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinTemperatureChanged(it)) },
-                onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxTemperatureChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minTemperatureErrorCode,
-                errorCodeTo = state.maxTemperatureErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.ph_label),
-                valueFrom = state.minPh,
-                valueTo = state.maxPh,
-                onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinPhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxPhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minPhErrorCode,
-                errorCodeTo = state.maxPhErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.gh_label),
-                valueFrom = state.minGh,
-                valueTo = state.maxGh,
-                onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinGhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxGhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minGhErrorCode,
-                errorCodeTo = state.maxGhErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.kh_label),
-                valueFrom = state.minKh,
-                valueTo = state.maxKh,
-                onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinKhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxKhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minKhErrorCode,
-                errorCodeTo = state.maxKhErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            InfoFieldWithError(
-                value = state.minCO2,
-                onValueChange = { viewModel.onEvent(PlantEditEvent.MinCO2Changed(it)) },
-                label = stringResource(R.string.min_co2_label),
+            OutlinedTextField(
+                value = state.genus,
+                onValueChange = { viewModel.onEvent(PlantEditEvent.GenusChanged(it)) },
+                label = {
+                    Text(text = stringResource(R.string.genus_label))
+                },
+                modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
+                    keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
                 keyboardActions = KeyboardActions(
@@ -227,31 +152,8 @@ fun PlantEdit(
                         focusManager.moveFocus(FocusDirection.Next)
                     }
                 ),
-                errorCode = state.minCO2ErrorCode,
                 maxLines = 1,
-                singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            InfoFieldWithError(
-                value = state.minIllumination,
-                onValueChange = { viewModel.onEvent(PlantEditEvent.MinIlluminationChanged(it)) },
-                label = stringResource(R.string.illumination_label),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Next
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCode = state.minIlluminationErrorCode,
-                maxLines = 1,
-                singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -273,6 +175,173 @@ fun PlantEdit(
                     }
                 )
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextButton(
+                onClick = { isAdvancedExpanded = !isAdvancedExpanded }
+            ) {
+                Text(text = stringResource(R.string.show_advanced_button))
+                Icon(
+                    imageVector =
+                    if (isAdvancedExpanded)
+                        Icons.Default.ExpandLess
+                    else
+                        Icons.Default.ExpandMore,
+                    contentDescription = stringResource(R.string.show_advanced_button)
+                )
+            }
+
+            AnimatedVisibility(
+                visible = isAdvancedExpanded,
+                enter = expandVertically(),
+                exit = shrinkVertically()
+            ) {
+                Column {
+                    FromToInfoFields(
+                        label = stringResource(R.string.temperature_label),
+                        valueFrom = state.minTemperature,
+                        valueTo = state.maxTemperature,
+                        onValueFromChange = {
+                            viewModel.onEvent(
+                                PlantEditEvent.MinTemperatureChanged(
+                                    it
+                                )
+                            )
+                        },
+                        onValueToChange = {
+                            viewModel.onEvent(
+                                PlantEditEvent.MaxTemperatureChanged(
+                                    it
+                                )
+                            )
+                        },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minTemperatureErrorCode,
+                        errorCodeTo = state.maxTemperatureErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.ph_label),
+                        valueFrom = state.minPh,
+                        valueTo = state.maxPh,
+                        onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinPhChanged(it)) },
+                        onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxPhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minPhErrorCode,
+                        errorCodeTo = state.maxPhErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.gh_label),
+                        valueFrom = state.minGh,
+                        valueTo = state.maxGh,
+                        onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinGhChanged(it)) },
+                        onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxGhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minGhErrorCode,
+                        errorCodeTo = state.maxGhErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.kh_label),
+                        valueFrom = state.minKh,
+                        valueTo = state.maxKh,
+                        onValueFromChange = { viewModel.onEvent(PlantEditEvent.MinKhChanged(it)) },
+                        onValueToChange = { viewModel.onEvent(PlantEditEvent.MaxKhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minKhErrorCode,
+                        errorCodeTo = state.maxKhErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    InfoFieldWithError(
+                        value = state.minCO2,
+                        onValueChange = { viewModel.onEvent(PlantEditEvent.MinCO2Changed(it)) },
+                        label = stringResource(R.string.min_co2_label),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCode = state.minCO2ErrorCode,
+                        maxLines = 1,
+                        singleLine = true,
+                        textFieldModifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    InfoFieldWithError(
+                        value = state.minIllumination,
+                        onValueChange = {
+                            viewModel.onEvent(PlantEditEvent.MinIlluminationChanged(it))
+                        },
+                        label = stringResource(R.string.illumination_label),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCode = state.minIlluminationErrorCode,
+                        maxLines = 1,
+                        singleLine = true,
+                        textFieldModifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+
             Row(
                 modifier = Modifier
                     .padding(16.dp)

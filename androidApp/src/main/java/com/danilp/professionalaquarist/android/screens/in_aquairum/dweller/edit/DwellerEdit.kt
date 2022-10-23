@@ -1,5 +1,8 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.dweller.edit
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,17 +18,23 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,6 +68,7 @@ fun DwellerEdit(
 ) {
     val state = viewModel.state
 
+    var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = LocalContext.current) {
@@ -105,31 +115,31 @@ fun DwellerEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
-                value = state.name,
-                onValueChange = { viewModel.onEvent(DwellerEditEvent.NameChanged(it)) },
-                label = stringResource(R.string.name_label),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCode = state.nameErrorCode,
-                maxLines = 1,
-                singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                InfoFieldWithError(
+                    value = state.name,
+                    onValueChange = { viewModel.onEvent(DwellerEditEvent.NameChanged(it)) },
+                    label = stringResource(R.string.name_label),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = {
+                            focusManager.moveFocus(FocusDirection.Next)
+                        }
+                    ),
+                    errorCode = state.nameErrorCode,
+                    maxLines = 1,
+                    singleLine = true,
+                    modifier = Modifier.weight(3f),
+                    textFieldModifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 16.dp)
+                )
                 InfoFieldWithError(
                     value = state.amount,
                     onValueChange = { viewModel.onEvent(DwellerEditEvent.AmountChanged(it)) },
@@ -149,115 +159,29 @@ fun DwellerEdit(
                     textFieldModifier = Modifier.fillMaxWidth(),
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = 16.dp)
-                )
-                InfoFieldWithError(
-                    value = state.liters,
-                    onValueChange = { viewModel.onEvent(DwellerEditEvent.LitersChanged(it)) },
-                    label = stringResource(R.string.capacity_label),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Next
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = {
-                            focusManager.moveFocus(FocusDirection.Next)
-                        }
-                    ),
-                    errorCode = state.litersErrorCode,
-                    maxLines = 1,
-                    singleLine = true,
-                    textFieldModifier = Modifier.fillMaxWidth(),
-                    modifier = Modifier.weight(1f)
                 )
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            FromToInfoFields(
-                label = stringResource(R.string.temperature_label),
-                valueFrom = state.minTemperature,
-                valueTo = state.maxTemperature,
-                onValueFromChange = { viewModel.onEvent(DwellerEditEvent.MinTemperatureChanged(it)) },
-                onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxTemperatureChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
+            OutlinedTextField(
+                value = state.genus,
+                onValueChange = { viewModel.onEvent(DwellerEditEvent.GenusChanged(it)) },
+                label = {
+                    Text(text = stringResource(R.string.genus_label))
+                },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
                     onNext = {
                         focusManager.moveFocus(FocusDirection.Next)
                     }
                 ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minTemperatureErrorCode,
-                errorCodeTo = state.maxTemperatureErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.ph_label),
-                valueFrom = state.minPh,
-                valueTo = state.maxPh,
-                onValueFromChange = { viewModel.onEvent(DwellerEditEvent.MinPhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxPhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minPhErrorCode,
-                errorCodeTo = state.maxPhErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.gh_label),
-                valueFrom = state.minGh,
-                valueTo = state.maxGh,
-                onValueFromChange = { viewModel.onEvent(DwellerEditEvent.MinGhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxGhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minGhErrorCode,
-                errorCodeTo = state.maxGhErrorCode
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FromToInfoFields(
-                label = stringResource(R.string.kh_label),
-                valueFrom = state.minKh,
-                valueTo = state.maxKh,
-                onValueFromChange = { viewModel.onEvent(DwellerEditEvent.MinKhChanged(it)) },
-                onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxKhChanged(it)) },
-                keyboardActionsFrom = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                keyboardActionsTo = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Next)
-                    }
-                ),
-                errorCodeFrom = state.minKhErrorCode,
-                errorCodeTo = state.maxKhErrorCode
+                maxLines = 1,
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -279,6 +203,182 @@ fun DwellerEdit(
                     }
                 )
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextButton(
+                onClick = { isAdvancedExpanded = !isAdvancedExpanded }
+            ) {
+                Text(text = stringResource(R.string.show_advanced_button))
+                Icon(
+                    imageVector =
+                    if (isAdvancedExpanded)
+                        Icons.Default.ExpandLess
+                    else
+                        Icons.Default.ExpandMore,
+                    contentDescription = stringResource(R.string.show_advanced_button)
+                )
+            }
+
+            AnimatedVisibility(
+                visible = isAdvancedExpanded,
+                enter = expandVertically(),
+                exit = shrinkVertically()
+            ) {
+                Column {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        InfoFieldWithError(
+                            value = state.amount,
+                            onValueChange = {
+                                viewModel.onEvent(DwellerEditEvent.AmountChanged(it))
+                            },
+                            label = stringResource(R.string.amount_label),
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Next
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onNext = {
+                                    focusManager.moveFocus(FocusDirection.Next)
+                                }
+                            ),
+                            errorCode = state.amountErrorCode,
+                            maxLines = 1,
+                            singleLine = true,
+                            textFieldModifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(end = 16.dp)
+                        )
+                        InfoFieldWithError(
+                            value = state.liters,
+                            onValueChange = {
+                                viewModel.onEvent(DwellerEditEvent.LitersChanged(it))
+                            },
+                            label = stringResource(R.string.capacity_label),
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Next
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onNext = {
+                                    focusManager.moveFocus(FocusDirection.Next)
+                                }
+                            ),
+                            errorCode = state.litersErrorCode,
+                            maxLines = 1,
+                            singleLine = true,
+                            textFieldModifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.temperature_label),
+                        valueFrom = state.minTemperature,
+                        valueTo = state.maxTemperature,
+                        onValueFromChange = {
+                            viewModel.onEvent(DwellerEditEvent.MinTemperatureChanged(it))
+                        },
+                        onValueToChange = {
+                            viewModel.onEvent(
+                                DwellerEditEvent.MaxTemperatureChanged(
+                                    it
+                                )
+                            )
+                        },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minTemperatureErrorCode,
+                        errorCodeTo = state.maxTemperatureErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.ph_label),
+                        valueFrom = state.minPh,
+                        valueTo = state.maxPh,
+                        onValueFromChange = {
+                            viewModel.onEvent(DwellerEditEvent.MinPhChanged(it))
+                        },
+                        onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxPhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minPhErrorCode,
+                        errorCodeTo = state.maxPhErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.gh_label),
+                        valueFrom = state.minGh,
+                        valueTo = state.maxGh,
+                        onValueFromChange = {
+                            viewModel.onEvent(DwellerEditEvent.MinGhChanged(it))
+                        },
+                        onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxGhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minGhErrorCode,
+                        errorCodeTo = state.maxGhErrorCode
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FromToInfoFields(
+                        label = stringResource(R.string.kh_label),
+                        valueFrom = state.minKh,
+                        valueTo = state.maxKh,
+                        onValueFromChange = {
+                            viewModel.onEvent(DwellerEditEvent.MinKhChanged(it))
+                        },
+                        onValueToChange = { viewModel.onEvent(DwellerEditEvent.MaxKhChanged(it)) },
+                        keyboardActionsFrom = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        keyboardActionsTo = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCodeFrom = state.minKhErrorCode,
+                        errorCodeTo = state.maxKhErrorCode
+                    )
+                }
+            }
 
             Row(
                 modifier = Modifier

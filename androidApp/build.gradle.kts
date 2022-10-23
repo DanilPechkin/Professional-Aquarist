@@ -39,7 +39,8 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
 }
@@ -95,4 +96,6 @@ dependencies {
         implementation(composeNavigation)
         kapt(composeCompiler)
     }
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
 }
