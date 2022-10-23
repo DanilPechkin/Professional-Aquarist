@@ -286,11 +286,7 @@ fun DwellerEdit(
                             viewModel.onEvent(DwellerEditEvent.MinTemperatureChanged(it))
                         },
                         onValueToChange = {
-                            viewModel.onEvent(
-                                DwellerEditEvent.MaxTemperatureChanged(
-                                    it
-                                )
-                            )
+                            viewModel.onEvent(DwellerEditEvent.MaxTemperatureChanged(it))
                         },
                         keyboardActionsFrom = KeyboardActions(
                             onNext = {

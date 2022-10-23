@@ -101,4 +101,11 @@
     <string name="capacity_measure_cubic_centimeters">cubic centimeters</string>
     <string name="show_advanced_button">Show Advanced</string>
     <string name="genus_label">Genus</string>
+    <string name="k_label">K</string>
+    <string name="ca_label">Ca</string>
+    <string name="fe_label">Fe</string>
+    <string name="mg_label">Mg</string>
+    <string name="ammonia_label">Ammonia</string>
+    <string name="po4_label">PO4</string>
+    <string name="no3_label">NO3</string>
 </resources>
