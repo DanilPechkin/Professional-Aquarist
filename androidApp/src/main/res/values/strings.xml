@@ -131,4 +131,8 @@
     <string name="output_alkalinity_label">Output alkalinity</string>
     <string name="input_temperature_label">Input temperature</string>
     <string name="output_temperature_title">Output temperature</string>
+    <string name="input_metric_label">Input metric</string>
+    <string name="output_metric_label">Output metric</string>
+    <string name="input_capacity_label">Input capacity</string>
+    <string name="output_capacity_label">Output capacity</string>
 </resources>

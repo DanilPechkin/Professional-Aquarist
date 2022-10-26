@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.destinations.AlkalinityCalculatorDestination
+import com.danilp.professionalaquarist.android.screens.destinations.CapacityCalculatorDestination
+import com.danilp.professionalaquarist.android.screens.destinations.MetricCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.TemperatureCalculatorDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -66,7 +68,7 @@ fun Calculators(
                             .weight(1f)
                             .padding(4.dp)
                             .clickable {
-                                navigator.navigate(TemperatureCalculatorDestination)
+                                navigator.navigate(CapacityCalculatorDestination)
                             }
                     )
                 }
@@ -76,12 +78,18 @@ fun Calculators(
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
+                            .clickable {
+                                navigator.navigate(TemperatureCalculatorDestination)
+                            }
                     )
                     CalculatorsItem(
                         name = "illumination",
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
+                            .clickable {
+                                navigator.navigate(MetricCalculatorDestination)
+                            }
                     )
                 }
             }
