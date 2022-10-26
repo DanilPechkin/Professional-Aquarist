@@ -108,4 +108,27 @@
     <string name="ammonia_label">Ammonia</string>
     <string name="po4_label">PO4</string>
     <string name="no3_label">NO3</string>
+    <string name="temperature_title">Temperature</string>
+    <string name="capacity_title">Capacity</string>
+    <string name="metric_title">Metric</string>
+    <string name="alkalinity_title">Alkalinity</string>
+    <string name="rectangle_title">Rectangle</string>
+    <string name="regularpolygon_title">RegularPolygon</string>
+    <string name="cylinder_title">Cylinder</string>
+    <string name="halfcylinder_title">HalfCylinder</string>
+    <string name="bowfront_title">Bowfront</string>
+    <string name="cornerbowfront_title">CornerBowfront</string>
+    <string name="lshape_title">LShape</string>
+    <string name="anglelshape_title">AngleLShape</string>
+    <string name="ellipticalcylinder_title">EllipticalCylinder</string>
+    <string name="bullnose_title">Bullnose</string>
+    <string name="triangle_title">Triangle</string>
+    <string name="trapezoid_title">Trapezoid</string>
+    <string name="flatbackhex_title">FlatBackHex</string>
+    <string name="measure_label">Measure</string>
+    <string name="convert_button">Convert</string>
+    <string name="input_alkalinity_label">Input alkalinity</string>
+    <string name="output_alkalinity_label">Output alkalinity</string>
+    <string name="input_temperature_label">Input temperature</string>
+    <string name="output_temperature_title">Output temperature</string>
 </resources>

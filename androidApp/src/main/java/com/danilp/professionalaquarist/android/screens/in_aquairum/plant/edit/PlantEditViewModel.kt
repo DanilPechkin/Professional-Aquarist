@@ -8,6 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.plant.ConvertPlantMeasures
 import com.danilp.professionalaquarist.domain.plant.Plant
 import com.danilp.professionalaquarist.domain.plant.PlantDataSource
@@ -27,7 +28,8 @@ class PlantEditViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val validate: Validate,
     private val plantDataSource: PlantDataSource,
-    private val convertPlantMeasures: ConvertPlantMeasures
+    private val convertPlantMeasures: ConvertPlantMeasures,
+    private val aquariumDataSource: AquariumDataSource
 ) : ViewModel() {
 
     var state by mutableStateOf(PlantEditState())
@@ -166,11 +168,17 @@ class PlantEditViewModel @Inject constructor(
     }
 
     private fun insert(plant: Plant) = viewModelScope.launch {
+        refreshAquarium(state.plant.aquariumId)
         plantDataSource.insertPlant(plant)
     }
 
     private fun delete(plantId: Long) = viewModelScope.launch {
+        refreshAquarium(state.plant.aquariumId)
         plantDataSource.deletePlantById(plantId)
+    }
+
+    private fun refreshAquarium(aquariumId: Long) = viewModelScope.launch {
+        aquariumDataSource.refreshAquariumById(aquariumId)
     }
 
     private fun submitData() {

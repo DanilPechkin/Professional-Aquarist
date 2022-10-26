@@ -1,5 +1,6 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators_main_screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -10,7 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
+import com.danilp.professionalaquarist.android.screens.destinations.AlkalinityCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.android.screens.destinations.TemperatureCalculatorDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -53,12 +56,18 @@ fun Calculators(
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
+                            .clickable {
+                                navigator.navigate(AlkalinityCalculatorDestination)
+                            }
                     )
                     CalculatorsItem(
                         name = "capacity",
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
+                            .clickable {
+                                navigator.navigate(TemperatureCalculatorDestination)
+                            }
                     )
                 }
                 Row {

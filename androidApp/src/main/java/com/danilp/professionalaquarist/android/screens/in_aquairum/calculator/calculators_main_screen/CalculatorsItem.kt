@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators_main_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement

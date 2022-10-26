@@ -66,8 +66,8 @@ dependencies {
     with(Deps.Compose) {
         implementation(ui)
         implementation(uiPreview)
-        implementation(material3)
         implementation(viewModel)
+        implementation(material3)
         implementation(animation)
         implementation(foundation)
         implementation(foundationLayout)

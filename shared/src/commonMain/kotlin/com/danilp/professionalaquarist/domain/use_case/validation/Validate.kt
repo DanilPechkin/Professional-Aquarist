@@ -12,11 +12,6 @@ class Validate {
                 successful = false,
                 errorCode = ValidationError.DECIMAL_ERROR.code
             )
-        else if (value.ifEmpty { "0" }.toDouble() < 0.0)
-            ValidationResult(
-                successful = false,
-                errorCode = ValidationError.NEGATIVE_VALUE_ERROR.code
-            )
         else
             ValidationResult(successful = true)
 
