@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.metric
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.conversion.metric
 
 import android.content.Context
 import androidx.compose.runtime.getValue

@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.capacity
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.conversion.capacity
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

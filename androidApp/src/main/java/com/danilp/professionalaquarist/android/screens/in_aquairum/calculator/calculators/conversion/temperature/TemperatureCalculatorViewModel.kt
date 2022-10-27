@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.temperature
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.conversion.temperature
 
 import android.content.Context
 import androidx.compose.runtime.getValue

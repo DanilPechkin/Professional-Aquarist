@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.alkalinity
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.conversion.alkalinity
 
 sealed interface AlkalinityCalculatorEvent {
 

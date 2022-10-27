@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.destinations.AlkalinityCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.CapacityCalculatorDestination
+import com.danilp.professionalaquarist.android.screens.destinations.ConversionCalculatorsListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MetricCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.TemperatureCalculatorDestination
@@ -54,12 +54,12 @@ fun Calculators(
             ) {
                 Row {
                     CalculatorsItem(
-                        name = "conversion",
+                        name = stringResource(R.string.conversion_title),
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
                             .clickable {
-                                navigator.navigate(AlkalinityCalculatorDestination)
+                                navigator.navigate(ConversionCalculatorsListDestination)
                             }
                     )
                     CalculatorsItem(

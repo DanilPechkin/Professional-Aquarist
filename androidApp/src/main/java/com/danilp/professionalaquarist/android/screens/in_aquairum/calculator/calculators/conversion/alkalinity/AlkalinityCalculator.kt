@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.temperature
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.conversion.alkalinity
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,9 +41,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @InAquariumNavGraph
 @Destination
 @Composable
-fun TemperatureCalculator(
+fun AlkalinityCalculator(
     navigator: DestinationsNavigator,
-    viewModel: TemperatureCalculatorViewModel = hiltViewModel()
+    viewModel: AlkalinityCalculatorViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
 
@@ -52,7 +52,7 @@ fun TemperatureCalculator(
     Scaffold(
         topBar = {
             AquariumTopBar(
-                title = stringResource(R.string.temperature_title),
+                title = stringResource(R.string.alkalinity_title),
                 switchMenuVisibility = { isTopMenuExpanded = !isTopMenuExpanded },
                 isMenuExpanded = isTopMenuExpanded,
                 hideMenu = { isTopMenuExpanded = false },
@@ -77,11 +77,11 @@ fun TemperatureCalculator(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 InfoFieldWithError(
-                    value = state.inputTemperature,
+                    value = state.inputAlkalinity,
                     onValueChange = {
-                        viewModel.onEvent(TemperatureCalculatorEvent.InputTemperatureChanged(it))
+                        viewModel.onEvent(AlkalinityCalculatorEvent.InputAlkalinityChanged(it))
                     },
-                    label = stringResource(R.string.input_temperature_label),
+                    label = stringResource(R.string.input_alkalinity_label),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Done
@@ -91,7 +91,7 @@ fun TemperatureCalculator(
                             focusManager.clearFocus()
                         }
                     ),
-                    errorCode = state.inputTemperatureErrorCode,
+                    errorCode = state.inputAlkalinityErrorCode,
                     maxLines = 1,
                     singleLine = true,
                     textFieldModifier = Modifier.fillMaxWidth(),
@@ -101,12 +101,12 @@ fun TemperatureCalculator(
                 )
                 OutlinedDropDownMenuField(
                     label = stringResource(R.string.measure_label),
-                    items = state.temperatureMeasuresList,
-                    selectedItem = state.temperatureMeasuresList[state.inputTemperatureMeasureCode],
+                    items = state.alkalinityMeasuresList,
+                    selectedItem = state.alkalinityMeasuresList[state.inputAlkalinityMeasureCode],
                     changeSelectedItem = {
                         viewModel.onEvent(
-                            TemperatureCalculatorEvent.InputTemperatureMeasureCodeChanged(
-                                state.temperatureMeasuresList.indexOf(it)
+                            AlkalinityCalculatorEvent.InputAlkalinityMeasureCodeChanged(
+                                state.alkalinityMeasuresList.indexOf(it)
                             )
                         )
                     },
@@ -122,9 +122,9 @@ fun TemperatureCalculator(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 OutlinedTextField(
-                    value = state.outputTemperature,
+                    value = state.outputAlkalinity,
                     onValueChange = { },
-                    label = { Text(text = stringResource(R.string.output_temperature_title)) },
+                    label = { Text(text = stringResource(R.string.output_alkalinity_label)) },
                     readOnly = true,
                     modifier = Modifier
                         .padding(end = 16.dp)
@@ -133,14 +133,12 @@ fun TemperatureCalculator(
 
                 OutlinedDropDownMenuField(
                     label = stringResource(R.string.measure_label),
-                    items = state.temperatureMeasuresList,
-                    selectedItem = state.temperatureMeasuresList[
-                        state.outputTemperatureMeasureCode
-                    ],
+                    items = state.alkalinityMeasuresList,
+                    selectedItem = state.alkalinityMeasuresList[state.outputAlkalinityMeasureCode],
                     changeSelectedItem = {
                         viewModel.onEvent(
-                            TemperatureCalculatorEvent.OutputTemperatureMeasureCodeChanged(
-                                state.temperatureMeasuresList.indexOf(it)
+                            AlkalinityCalculatorEvent.OutputAlkalinityMeasureCodeChanged(
+                                state.alkalinityMeasuresList.indexOf(it)
                             )
                         )
                     },
@@ -157,7 +155,7 @@ fun TemperatureCalculator(
             ) {
                 Button(
                     onClick = {
-                        viewModel.onEvent(TemperatureCalculatorEvent.ConvertButtonPressed)
+                        viewModel.onEvent(AlkalinityCalculatorEvent.ConvertButtonPressed)
                     }
                 ) {
                     Text(text = stringResource(R.string.convert_button))
