@@ -84,6 +84,5 @@ fun ConversionCalculatorsList(
                 }
             }
         }
-
     }
 }

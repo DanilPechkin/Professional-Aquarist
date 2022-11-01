@@ -11,9 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.destinations.CapacityCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.ConversionCalculatorsListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MetricCalculatorDestination
+import com.danilp.professionalaquarist.android.screens.destinations.RectangleCalculatorDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.TemperatureCalculatorDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -68,7 +68,7 @@ fun Calculators(
                             .weight(1f)
                             .padding(4.dp)
                             .clickable {
-                                navigator.navigate(CapacityCalculatorDestination)
+                                navigator.navigate(RectangleCalculatorDestination)
                             }
                     )
                 }

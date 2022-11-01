@@ -136,4 +136,8 @@
     <string name="input_capacity_label">Input capacity</string>
     <string name="output_capacity_label">Output capacity</string>
     <string name="conversion_title">Conversion</string>
+    <string name="height_label">Height</string>
+    <string name="width_label">Width</string>
+    <string name="length_label">Length</string>
+    <string name="calculate_button">Calculate</string>
 </resources>

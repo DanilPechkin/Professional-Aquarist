@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.list
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.list.capacity
 //
 // import androidx.annotation.StringRes
 // import androidx.compose.material.icons.Icons
