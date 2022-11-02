@@ -140,4 +140,5 @@
     <string name="width_label">Width</string>
     <string name="length_label">Length</string>
     <string name="calculate_button">Calculate</string>
+    <string name="diameter_label">Diameter</string>
 </resources>
