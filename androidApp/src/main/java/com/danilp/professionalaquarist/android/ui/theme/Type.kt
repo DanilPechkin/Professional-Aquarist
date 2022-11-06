@@ -1,4 +1,4 @@
-package com.danilp.aquariumhelper.presentation.ui.theme
+package com.danilp.professionalaquarist.android.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

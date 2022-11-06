@@ -141,4 +141,12 @@
     <string name="length_label">Length</string>
     <string name="calculate_button">Calculate</string>
     <string name="diameter_label">Diameter</string>
+    <string name="full_width_label">Full Width</string>
+    <string name="full_length_label">Full length</string>
+    <string name="length_between_side_label">Length between</string>
+    <string name="width_between_side_label">Width between</string>
+    <string name="sides_label">Sides</string>
+    <string name="side1_label">Side 1</string>
+    <string name="side2_label">Side 2</string>
+    <string name="side3_label">Side 3</string>
 </resources>

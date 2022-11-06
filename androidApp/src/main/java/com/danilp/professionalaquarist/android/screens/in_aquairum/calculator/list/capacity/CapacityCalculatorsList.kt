@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.list.conversion
+package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.list.capacity
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @InAquariumNavGraph
 @Destination
 @Composable
-fun ConversionCalculatorsList(
+fun CapacityCalculatorsList(
     navigator: DestinationsNavigator
 ) {
     var isTopMenuExpanded by remember { mutableStateOf(false) }
@@ -30,7 +30,7 @@ fun ConversionCalculatorsList(
     Scaffold(
         topBar = {
             AquariumTopBar(
-                title = stringResource(R.string.conversion_title),
+                title = stringResource(R.string.capacity_title),
                 switchMenuVisibility = { isTopMenuExpanded = !isTopMenuExpanded },
                 isMenuExpanded = isTopMenuExpanded,
                 hideMenu = { isTopMenuExpanded = false },
@@ -40,7 +40,6 @@ fun ConversionCalculatorsList(
             )
         }
     ) { paddingValues ->
-
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp),
             modifier = Modifier
@@ -48,7 +47,7 @@ fun ConversionCalculatorsList(
                 .fillMaxSize()
         ) {
             items(
-                items = ConversionCalculatorsDestinations.values()
+                items = CapacityCalculatorsDestinations.values()
             ) { calculator ->
                 AquaristListItem(
                     onClick = { navigator.navigate(calculator.direction) },
