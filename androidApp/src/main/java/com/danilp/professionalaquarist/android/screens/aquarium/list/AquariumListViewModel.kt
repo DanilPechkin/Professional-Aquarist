@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,17 +27,15 @@ class AquariumListViewModel @Inject constructor(
     var state by mutableStateOf(AquariumListState())
 
     private var sharedPreferences: SharedPreferences? = null
-    private var aquariumIdKey: String = ""
 
     private var searchJob: Job? = null
 
     init {
         viewModelScope.launch {
             sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.in_aquarium_info_shared_preferences_key),
+                SharedPrefs.InAquariumInfo.key,
                 Context.MODE_PRIVATE
             )
-            aquariumIdKey = context.getString(R.string.saved_aquarium_id_key)
         }
     }
 
@@ -79,7 +77,7 @@ class AquariumListViewModel @Inject constructor(
 
     private fun saveAquariumId(id: Long) {
         with(sharedPreferences?.edit()) {
-            this?.putLong(aquariumIdKey, id) ?: return
+            this?.putLong(SharedPrefs.CurrentAquarium.key, id) ?: return
             commit()
         }
     }

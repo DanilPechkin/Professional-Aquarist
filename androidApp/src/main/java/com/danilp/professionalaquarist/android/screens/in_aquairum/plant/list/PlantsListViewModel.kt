@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.plant.PlantDataSource
 import com.danilp.professionalaquarist.domain.plant.SearchPlants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,12 +31,12 @@ class PlantsListViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.in_aquarium_info_shared_preferences_key),
+                SharedPrefs.InAquariumInfo.key,
                 Context.MODE_PRIVATE
             )
             state = state.copy(
                 aquariumId = sharedPreferences.getLong(
-                    context.getString(R.string.saved_aquarium_id_key),
+                    SharedPrefs.CurrentAquarium.key,
                     0
                 )
             )

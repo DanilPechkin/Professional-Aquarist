@@ -7,7 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.plant.ConvertPlantMeasures
 import com.danilp.professionalaquarist.domain.plant.Plant
@@ -47,22 +47,22 @@ class PlantEditViewModel @Inject constructor(
             )
 
             val sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.in_aquarium_info_shared_preferences_key),
+                SharedPrefs.InAquariumInfo.key,
                 Context.MODE_PRIVATE
             )
             state = state.copy(
                 plant = state.plant.copy(
                     aquariumId = sharedPreferences.getLong(
-                        context.getString(R.string.saved_aquarium_id_key),
+                        SharedPrefs.CurrentAquarium.key,
                         0
                     )
                 ),
                 temperatureMeasureCode = sharedPreferences.getInt(
-                    context.getString(R.string.temperature_measure_id_key),
+                    SharedPrefs.TemperatureMeasure.key,
                     TemperatureMeasure.Celsius.code
                 ),
                 alkalinityMeasureCode = sharedPreferences.getInt(
-                    context.getString(R.string.alkalinity_measure_id_key),
+                    SharedPrefs.AlkalinityMeasure.key,
                     AlkalinityMeasure.DKH.code
                 )
             )

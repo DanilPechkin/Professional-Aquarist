@@ -31,35 +31,28 @@ class SettingsViewModel @Inject constructor(
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    private val alkalinityMeasurePref: String =
-        context.getString(R.string.alkalinity_measure_id_key)
-    private val capacityMeasurePref: String = context.getString(R.string.capacity_measure_id_key)
-    private val metricMeasurePref: String = context.getString(R.string.metric_measure_id_key)
-    private val temperatureMeasurePref: String =
-        context.getString(R.string.temperature_measure_id_key)
-
     init {
         viewModelScope.launch {
             sharedPreferences = context.getSharedPreferences(
-                context.getString(R.string.in_aquarium_info_shared_preferences_key),
+                SharedPrefs.InAquariumInfo.key,
                 Context.MODE_PRIVATE
             )
 
             state = state.copy(
                 alkalinityMeasureCode = sharedPreferences.getInt(
-                    alkalinityMeasurePref,
+                    SharedPrefs.AlkalinityMeasure.key,
                     AlkalinityMeasure.DKH.code
                 ),
                 capacityMeasureCode = sharedPreferences.getInt(
-                    capacityMeasurePref,
+                    SharedPrefs.CapacityMeasure.key,
                     CapacityMeasure.Liters.code
                 ),
                 metricMeasureCode = sharedPreferences.getInt(
-                    metricMeasurePref,
+                    SharedPrefs.MetricMeasure.key,
                     MetricMeasure.Meters.code
                 ),
                 temperatureMeasureCode = sharedPreferences.getInt(
-                    temperatureMeasurePref,
+                    SharedPrefs.TemperatureMeasure.key,
                     TemperatureMeasure.Celsius.code
                 ),
                 capacityList = listOf(
@@ -102,10 +95,13 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.SaveButtonPressed -> {
                 viewModelScope.launch {
                     with(sharedPreferences.edit()) {
-                        this.putInt(alkalinityMeasurePref, state.alkalinityMeasureCode)
-                        this.putInt(capacityMeasurePref, state.capacityMeasureCode)
-                        this.putInt(metricMeasurePref, state.metricMeasureCode)
-                        this.putInt(temperatureMeasurePref, state.temperatureMeasureCode)
+                        this.putInt(SharedPrefs.AlkalinityMeasure.key, state.alkalinityMeasureCode)
+                        this.putInt(SharedPrefs.CapacityMeasure.key, state.capacityMeasureCode)
+                        this.putInt(SharedPrefs.MetricMeasure.key, state.metricMeasureCode)
+                        this.putInt(
+                            SharedPrefs.TemperatureMeasure.key,
+                            state.temperatureMeasureCode
+                        )
                         this.apply()
                     }
                     savingEventChannel.send(SavingEvent.Success)

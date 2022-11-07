@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.use_case.calculation.aquairum.capacity.CalculateCapacity
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
@@ -29,17 +29,17 @@ class RectangleCalculatorViewModel @Inject constructor(
 
     init {
         val sharedPreferences = context.getSharedPreferences(
-            context.getString(R.string.in_aquarium_info_shared_preferences_key),
+            SharedPrefs.InAquariumInfo.key,
             Context.MODE_PRIVATE
         )
 
         state = state.copy(
             capacityMeasureCode = sharedPreferences.getInt(
-                context.getString(R.string.capacity_measure_id_key),
+                SharedPrefs.CapacityMeasure.key,
                 CapacityMeasure.Liters.code
             ),
             metricMeasureCode = sharedPreferences.getInt(
-                context.getString(R.string.metric_measure_id_key),
+                SharedPrefs.MetricMeasure.key,
                 MetricMeasure.Meters.code
             )
         )
