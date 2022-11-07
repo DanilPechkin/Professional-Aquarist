@@ -1,13 +1,13 @@
 package com.danilp.buildsrc
 
 private object Versions {
+    const val ktor = "2.1.3"
     const val sqlDelight = "1.5.4"
     const val destinations = "1.7.22-beta"
     const val coroutines = "1.6.4"
     const val compose = "1.4.0-alpha01"
     const val hilt = "2.44"
     const val hiltCompose = "1.0.0"
-    const val ktor = "2.1.3"
 }
 
 object Deps {
