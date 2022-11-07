@@ -7,9 +7,16 @@ private object Versions {
     const val compose = "1.4.0-alpha01"
     const val hilt = "2.44"
     const val hiltCompose = "1.0.0"
+    const val ktor = "2.1.3"
 }
 
 object Deps {
+
+    object Ktor {
+        const val core = "io.ktor:ktor-client-core:${Versions.ktor}"
+        const val okHttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
+        const val darwin = "io.ktor:ktor-client-darwin:${Versions.ktor}"
+    }
 
     object SQLDelight {
         const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
