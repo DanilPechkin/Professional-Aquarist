@@ -90,7 +90,8 @@ fun TriangleCalculator(
                 errorCode = state.heightErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +114,8 @@ fun TriangleCalculator(
                 errorCode = state.side1ErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -136,7 +138,8 @@ fun TriangleCalculator(
                 errorCode = state.side2ErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -159,7 +162,8 @@ fun TriangleCalculator(
                 errorCode = state.side3ErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))

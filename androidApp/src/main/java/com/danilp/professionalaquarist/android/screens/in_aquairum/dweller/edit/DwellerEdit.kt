@@ -272,6 +272,7 @@ fun DwellerEdit(
                             maxLines = 1,
                             singleLine = true,
                             textFieldModifier = Modifier.fillMaxWidth(),
+                            capacityMeasureCode = state.capacityMeasureCode,
                             modifier = Modifier.weight(1f)
                         )
                     }
@@ -299,7 +300,8 @@ fun DwellerEdit(
                             }
                         ),
                         errorCodeFrom = state.minTemperatureErrorCode,
-                        errorCodeTo = state.maxTemperatureErrorCode
+                        errorCodeTo = state.maxTemperatureErrorCode,
+                        temperatureMeasureCode = state.temperatureMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -323,7 +325,8 @@ fun DwellerEdit(
                             }
                         ),
                         errorCodeFrom = state.minPhErrorCode,
-                        errorCodeTo = state.maxPhErrorCode
+                        errorCodeTo = state.maxPhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -347,7 +350,8 @@ fun DwellerEdit(
                             }
                         ),
                         errorCodeFrom = state.minGhErrorCode,
-                        errorCodeTo = state.maxGhErrorCode
+                        errorCodeTo = state.maxGhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -371,7 +375,8 @@ fun DwellerEdit(
                             }
                         ),
                         errorCodeFrom = state.minKhErrorCode,
-                        errorCodeTo = state.maxKhErrorCode
+                        errorCodeTo = state.maxKhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
                 }
             }

@@ -14,10 +14,10 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.me
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -69,9 +69,9 @@ class SettingsViewModel @Inject constructor(
                     context.getString(R.string.capacity_measure_cubic_centimeters)
                 ),
                 temperatureList = listOf(
-                    context.getString(R.string.temp_measure_celsius),
-                    context.getString(R.string.temp_measure_fahrenheit),
-                    context.getString(R.string.temp_measure_kelvin)
+                    context.getString(R.string.temperature_measure_celsius),
+                    context.getString(R.string.temperature_measure_fahrenheit),
+                    context.getString(R.string.temperature_measure_kelvin)
                 ),
                 alkalinityList = listOf(
                     context.getString(R.string.alkalinity_measure_dkh),

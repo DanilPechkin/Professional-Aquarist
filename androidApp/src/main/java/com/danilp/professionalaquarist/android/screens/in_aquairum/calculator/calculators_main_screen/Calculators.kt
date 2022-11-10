@@ -2,6 +2,8 @@ package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.c
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Calculate
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
@@ -53,8 +55,9 @@ fun Calculators(
                 modifier = Modifier.padding(32.dp)
             ) {
                 Row {
-                    CalculatorsItem(
-                        name = stringResource(R.string.conversion_title),
+                    CalculatorsCard(
+                        icon = Icons.Rounded.Calculate,
+                        label = stringResource(R.string.conversion_title),
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
@@ -62,8 +65,9 @@ fun Calculators(
                                 navigator.navigate(ConversionCalculatorsListDestination)
                             }
                     )
-                    CalculatorsItem(
-                        name = "capacity",
+                    CalculatorsCard(
+                        icon = Icons.Rounded.Calculate,
+                        label = "capacity",
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
@@ -73,8 +77,9 @@ fun Calculators(
                     )
                 }
                 Row {
-                    CalculatorsItem(
-                        name = stringResource(R.string.capacity_title),
+                    CalculatorsCard(
+                        icon = Icons.Rounded.Calculate,
+                        label = stringResource(R.string.capacity_title),
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)
@@ -82,8 +87,9 @@ fun Calculators(
                                 navigator.navigate(CapacityCalculatorsListDestination)
                             }
                     )
-                    CalculatorsItem(
-                        name = "illumination",
+                    CalculatorsCard(
+                        icon = Icons.Rounded.Calculate,
+                        label = "illumination",
                         modifier = Modifier
                             .weight(1f)
                             .padding(4.dp)

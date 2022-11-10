@@ -49,7 +49,7 @@
     <string name="settings_menu_item_content_description">Settings</string>
     <string name="settings_title">Settings</string>
     <string name="account_title">Account</string>
-    <string name="temp_measure_celsius">celsius</string>
+    <string name="temperature_measure_celsius">celsius</string>
     <string name="alkalinity_measure_dkh">dkh</string>
     <string name="capacity_measure_liters">liters</string>
     <string name="capacity_measure_cubic_feet">cubic_feet</string>
@@ -61,8 +61,8 @@
     <string name="capacity_measure_gallons">gallons</string>
     <string name="capacity_measure_cubic_meters">cubic_meters</string>
     <string name="capacity_measure_cubic_inches">cubic_inches</string>
-    <string name="temp_measure_kelvin">kelvin</string>
-    <string name="temp_measure_fahrenheit">fahrenheit</string>
+    <string name="temperature_measure_kelvin">kelvin</string>
+    <string name="temperature_measure_fahrenheit">fahrenheit</string>
     <string name="alkalinity_measure_ppm">ppm</string>
     <string name="alkalinity_measure_meql">meql</string>
     <string name="metric_measure_meters">meters</string>
@@ -143,4 +143,9 @@
     <string name="side1_label">Side 1</string>
     <string name="side2_label">Side 2</string>
     <string name="side3_label">Side 3</string>
+    <string name="aquarium_image">Aquarium image</string>
+    <string name="tips_label">Tips</string>
+    <string name="help_label">Help</string>
+    <string name="history_label">History</string>
+    <string name="water_label">Water</string>
 </resources>

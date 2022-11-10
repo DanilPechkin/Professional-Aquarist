@@ -66,6 +66,10 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.metric.MetricMeasure
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import com.danilp.professionalaquarist.domain.use_case.validation.ValidationError
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -414,7 +418,11 @@ fun InfoFieldWithError(
     keyboardActions: KeyboardActions = KeyboardActions(),
     errorCode: Int? = null,
     maxLines: Int = Int.MAX_VALUE,
-    singleLine: Boolean = false
+    singleLine: Boolean = false,
+    alkalinityMeasureCode: Int? = null,
+    temperatureMeasureCode: Int? = null,
+    capacityMeasureCode: Int? = null,
+    metricMeasureCode: Int? = null
 ) {
     Column(modifier = modifier) {
         OutlinedTextField(
@@ -428,7 +436,60 @@ fun InfoFieldWithError(
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             maxLines = maxLines,
-            singleLine = singleLine
+            singleLine = singleLine,
+            trailingIcon = {
+                if (alkalinityMeasureCode != null) {
+                    Text(
+                        text = when (alkalinityMeasureCode) {
+                            AlkalinityMeasure.DKH.code -> stringResource(R.string.alkalinity_measure_dkh)
+                            AlkalinityMeasure.MEQL.code -> stringResource(R.string.alkalinity_measure_meql)
+                            AlkalinityMeasure.MGL.code -> stringResource(R.string.alkalinity_measure_mgl)
+                            AlkalinityMeasure.PPM.code -> stringResource(R.string.alkalinity_measure_ppm)
+                            else -> ""
+                        }
+                    )
+                }
+                if (temperatureMeasureCode != null) {
+                    Text(
+                        text = when (temperatureMeasureCode) {
+                            TemperatureMeasure.Celsius.code -> stringResource(R.string.temperature_measure_celsius)
+                            TemperatureMeasure.Fahrenheit.code -> stringResource(R.string.temperature_measure_fahrenheit)
+                            TemperatureMeasure.Kelvin.code -> stringResource(R.string.temperature_measure_kelvin)
+                            else -> ""
+                        }
+                    )
+                }
+                if (capacityMeasureCode != null) {
+                    Text(
+                        text = when (capacityMeasureCode) {
+                            CapacityMeasure.Liters.code -> stringResource(R.string.capacity_measure_liters)
+                            CapacityMeasure.Gallons.code -> stringResource(R.string.capacity_measure_gallons)
+                            CapacityMeasure.CubicFeet.code -> stringResource(R.string.capacity_measure_cubic_feet)
+                            CapacityMeasure.USCups.code -> stringResource(R.string.capacity_measure_us_cups)
+                            CapacityMeasure.Teaspoons.code -> stringResource(R.string.capacity_measure_teaspoons)
+                            CapacityMeasure.Tablespoons.code -> stringResource(R.string.capacity_measure_tablespoons)
+                            CapacityMeasure.Milliliters.code -> stringResource(R.string.capacity_measure_milliliters)
+                            CapacityMeasure.MetricCups.code -> stringResource(R.string.capacity_measure_metric_cups)
+                            CapacityMeasure.CubicMeters.code -> stringResource(R.string.capacity_measure_cubic_meters)
+                            CapacityMeasure.CubicInches.code -> stringResource(R.string.capacity_measure_cubic_inches)
+                            CapacityMeasure.CubicCentimeters.code -> stringResource(R.string.capacity_measure_cubic_centimeters)
+                            else -> ""
+                        }
+                    )
+                }
+                if (metricMeasureCode != null) {
+                    Text(
+                        text = when (metricMeasureCode) {
+                            MetricMeasure.Millimeters.code -> stringResource(R.string.metric_measure_millimeters)
+                            MetricMeasure.Centimeters.code -> stringResource(R.string.metric_measure_centimeters)
+                            MetricMeasure.Meters.code -> stringResource(R.string.metric_measure_meters)
+                            MetricMeasure.Inches.code -> stringResource(R.string.metric_measure_inches)
+                            MetricMeasure.Feet.code -> stringResource(R.string.metric_measure_feet)
+                            else -> ""
+                        }
+                    )
+                }
+            }
         )
 
         if (errorCode != null) {
@@ -475,7 +536,11 @@ fun FromToInfoFields(
     keyboardActionsFrom: KeyboardActions = KeyboardActions(),
     keyboardActionsTo: KeyboardActions = KeyboardActions(),
     errorCodeFrom: Int? = null,
-    errorCodeTo: Int? = null
+    errorCodeTo: Int? = null,
+    alkalinityMeasureCode: Int? = null,
+    temperatureMeasureCode: Int? = null,
+    capacityMeasureCode: Int? = null,
+    metricMeasureCode: Int? = null
 ) {
     Column(modifier = modifier) {
         Text(
@@ -498,7 +563,11 @@ fun FromToInfoFields(
                 keyboardActions = keyboardActionsFrom,
                 errorCode = errorCodeFrom,
                 maxLines = 1,
-                singleLine = true
+                singleLine = true,
+                alkalinityMeasureCode = alkalinityMeasureCode,
+                temperatureMeasureCode = temperatureMeasureCode,
+                capacityMeasureCode = capacityMeasureCode,
+                metricMeasureCode = metricMeasureCode
             )
             InfoFieldWithError(
                 value = valueTo,
@@ -509,7 +578,11 @@ fun FromToInfoFields(
                 keyboardActions = keyboardActionsTo,
                 errorCode = errorCodeTo,
                 maxLines = 1,
-                singleLine = true
+                singleLine = true,
+                alkalinityMeasureCode = alkalinityMeasureCode,
+                temperatureMeasureCode = temperatureMeasureCode,
+                capacityMeasureCode = capacityMeasureCode,
+                metricMeasureCode = metricMeasureCode
             )
         }
     }

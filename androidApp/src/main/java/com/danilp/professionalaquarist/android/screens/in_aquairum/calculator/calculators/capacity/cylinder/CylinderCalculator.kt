@@ -90,7 +90,8 @@ fun CylinderCalculator(
                 errorCode = state.heightErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +114,8 @@ fun CylinderCalculator(
                 errorCode = state.diameterErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))

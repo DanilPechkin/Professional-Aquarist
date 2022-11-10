@@ -227,7 +227,8 @@ fun PlantEdit(
                             }
                         ),
                         errorCodeFrom = state.minTemperatureErrorCode,
-                        errorCodeTo = state.maxTemperatureErrorCode
+                        errorCodeTo = state.maxTemperatureErrorCode,
+                        temperatureMeasureCode = state.temperatureMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -249,7 +250,8 @@ fun PlantEdit(
                             }
                         ),
                         errorCodeFrom = state.minPhErrorCode,
-                        errorCodeTo = state.maxPhErrorCode
+                        errorCodeTo = state.maxPhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -271,7 +273,8 @@ fun PlantEdit(
                             }
                         ),
                         errorCodeFrom = state.minGhErrorCode,
-                        errorCodeTo = state.maxGhErrorCode
+                        errorCodeTo = state.maxGhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -293,7 +296,8 @@ fun PlantEdit(
                             }
                         ),
                         errorCodeFrom = state.minKhErrorCode,
-                        errorCodeTo = state.maxKhErrorCode
+                        errorCodeTo = state.maxKhErrorCode,
+                        alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))

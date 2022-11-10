@@ -27,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.OutlinedDropDownMenuField
+import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -57,7 +58,8 @@ fun SettingsScreen(
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    navigator.navigateUp()
+                    navigator.clearBackStack(AquariumListDestination)
+                    navigator.navigate(AquariumListDestination)
                 }
             }
         }

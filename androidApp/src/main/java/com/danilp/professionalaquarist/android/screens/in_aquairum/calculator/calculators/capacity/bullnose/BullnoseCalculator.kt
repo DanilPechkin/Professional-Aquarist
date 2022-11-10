@@ -90,7 +90,8 @@ fun BullnoseCalculator(
                 errorCode = state.heightErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +114,8 @@ fun BullnoseCalculator(
                 errorCode = state.widthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -136,7 +138,8 @@ fun BullnoseCalculator(
                 errorCode = state.lengthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))

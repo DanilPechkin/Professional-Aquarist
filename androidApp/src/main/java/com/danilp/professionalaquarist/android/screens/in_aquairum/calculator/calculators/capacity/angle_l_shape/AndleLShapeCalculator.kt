@@ -90,7 +90,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.heightErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +114,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.widthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -136,7 +138,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.fullWidthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -159,7 +162,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.lengthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -182,7 +186,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.fullLengthErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -205,7 +210,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.lengthBetweenSideErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -228,7 +234,8 @@ fun AngleLShapeCalculator(
                 errorCode = state.widthBetweenSideErrorCode,
                 maxLines = 1,
                 singleLine = true,
-                textFieldModifier = Modifier.fillMaxWidth()
+                textFieldModifier = Modifier.fillMaxWidth(),
+                metricMeasureCode = state.metricMeasureCode
             )
 
             Spacer(modifier = Modifier.height(16.dp))
