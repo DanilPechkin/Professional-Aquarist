@@ -143,4 +143,9 @@
     <string name="side1_label">Side 1</string>
     <string name="side2_label">Side 2</string>
     <string name="side3_label">Side 3</string>
+    <string name="aquarium_image">Aquarium image</string>
+    <string name="tips_label">Tips</string>
+    <string name="help_label">Help</string>
+    <string name="history_label">History</string>
+    <string name="water_label">Water</string>
 </resources>
