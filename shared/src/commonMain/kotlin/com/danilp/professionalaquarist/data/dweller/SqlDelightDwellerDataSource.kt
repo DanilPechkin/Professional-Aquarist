@@ -17,6 +17,7 @@ class SqlDelightDwellerDataSource(db: AquariumDatabase) : DwellerDataSource {
             genus = dweller.genus,
             amount = dweller.amount,
             description = dweller.description,
+            tags = dweller.tags?.joinToString(" "),
             liters = dweller.liters,
             minTemperature = dweller.minTemperature,
             maxTemperature = dweller.maxTemperature,

@@ -1,4 +1,6 @@
-package com.danilp.professionalaquarist.domain.plant
+package com.danilp.professionalaquarist.domain.plant.use_case
+
+import com.danilp.professionalaquarist.domain.plant.Plant
 
 class SearchPlants {
     fun execute(plants: List<Plant>, query: String): List<Plant> =

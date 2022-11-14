@@ -20,5 +20,6 @@ fun PlantEntity.toPlant(): Plant =
         maxKh = maxKh,
         minCO2 = minCO2,
         minIllumination = minIllumination,
-        description = description
+        description = description,
+        tags = tags?.split(" ")
     )

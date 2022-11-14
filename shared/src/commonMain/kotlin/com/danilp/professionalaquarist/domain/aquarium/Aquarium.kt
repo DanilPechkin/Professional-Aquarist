@@ -5,6 +5,8 @@ data class Aquarium(
     val imageUrl: String?,
     val name: String?,
     val description: String?,
+    val currentTags: List<String>?,
+    val requiredTags: List<String>?,
     val liters: Double?,
     val minIllumination: Double?, // ватт/л
     val currentIllumination: Double?, // ватт/л
@@ -46,6 +48,8 @@ data class Aquarium(
 ) {
     companion object {
         fun createEmpty(): Aquarium = Aquarium(
+            null,
+            null,
             null,
             null,
             null,
