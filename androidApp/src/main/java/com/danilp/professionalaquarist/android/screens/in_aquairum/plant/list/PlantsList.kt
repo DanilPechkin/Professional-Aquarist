@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.screens.GridItem
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
@@ -103,8 +104,10 @@ fun PlantsList(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(state.plants) { plant ->
-                        PlantsListItem(
-                            plant = plant,
+                        GridItem(
+                            label = plant.name,
+                            imageUrl = plant.imageUrl,
+                            message = "Healthy",
                             modifier = Modifier.clickable {
                                 navigator.navigate(PlantEditDestination(plant.id!!))
                             }
