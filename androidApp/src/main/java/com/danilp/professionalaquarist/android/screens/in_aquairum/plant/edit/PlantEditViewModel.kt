@@ -228,29 +228,29 @@ class PlantEditViewModel @Inject constructor(
         viewModelScope.launch {
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
             val isPhCorrect = (
-                (
                     (
-                        state.minPh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minPh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
             val isGhCorrect = (
-                (
                     (
-                        state.minGh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minGh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
             val isKhCorrect = (
-                (
                     (
-                        state.minKh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minKh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
 
             if (!isTempCorrect) {
                 kotlin.run {

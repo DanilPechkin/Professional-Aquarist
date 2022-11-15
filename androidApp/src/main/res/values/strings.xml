@@ -154,4 +154,9 @@
     <string name="crayfish_title">Crayfish</string>
     <string name="snail_title">Snail</string>
     <string name="bivalve_title">Bivalve</string>
+    <string name="broadleaf_title">Broadleaf</string>
+    <string name="long_stemmed_title">Long-stemmed</string>
+    <string name="floating_plant_title">Floating</string>
+    <string name="moss_title">Moss</string>
+    <string name="fern_title">Fern</string>
 </resources>
