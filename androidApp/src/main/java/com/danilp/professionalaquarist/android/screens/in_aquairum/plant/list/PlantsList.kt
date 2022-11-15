@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
@@ -29,9 +30,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.screens.GridItem
+import com.danilp.professionalaquarist.android.screens.GridTitle
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.domain.dweller.DwellerTags
+import com.danilp.professionalaquarist.domain.plant.PlantTags
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
@@ -99,16 +104,145 @@ fun PlantsList(
                     columns = GridCells.Adaptive(128.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(state.plants) { plant ->
-                        PlantsListItem(
-                            plant = plant,
-                            modifier = Modifier.clickable {
-                                navigator.navigate(PlantEditDestination(plant.id!!))
+                    if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.broadleaf_title)
+                            )
+                        }
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(DwellerTags.FISH) ?: false
                             }
-                        )
+                        ) { plant ->
+                            GridItem(
+                                label = plant.name,
+                                message = "Healthy",
+                                imageUrl = plant.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(
+                                            PlantEditDestination(
+                                                plant.id!!
+                                            )
+                                        )
+                                    }
+                            )
+                        }
+                    }
+                    if (
+                        state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }
+                    ) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.long_stemmed_title)
+                            )
+                        }
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
+                            }
+                        ) { plant ->
+                            GridItem(
+                                label = plant.name,
+                                message = "Healthy",
+                                imageUrl = plant.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(
+                                            PlantEditDestination(
+                                                plant.id!!
+                                            )
+                                        )
+                                    }
+                            )
+                        }
+                    }
+                    if (state.plants.any { it.tags?.contains(PlantTags.FLOATING_PLANT) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.floating_plant_title)
+                            )
+                        }
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
+                            }
+                        ) { plant ->
+                            GridItem(
+                                label = plant.name,
+                                message = "Healthy",
+                                imageUrl = plant.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(
+                                            PlantEditDestination(
+                                                plant.id!!
+                                            )
+                                        )
+                                    }
+                            )
+                        }
+                    }
+                    if (state.plants.any { it.tags?.contains(PlantTags.MOSS) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.moss_title)
+                            )
+                        }
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.MOSS) ?: false
+                            }
+                        ) { plant ->
+                            GridItem(
+                                label = plant.name,
+                                message = "Healthy",
+                                imageUrl = plant.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(
+                                            PlantEditDestination(
+                                                plant.id!!
+                                            )
+                                        )
+                                    }
+                            )
+                        }
+                    }
+                    if (state.plants.any { it.tags?.contains(PlantTags.FERN) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.fern_title)
+                            )
+                        }
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.FERN) ?: false
+                            }
+                        ) { plant ->
+                            GridItem(
+                                label = plant.name,
+                                message = "Healthy",
+                                imageUrl = plant.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(
+                                            PlantEditDestination(
+                                                plant.id!!
+                                            )
+                                        )
+                                    }
+                            )
+                        }
                     }
                 }
             }

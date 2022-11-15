@@ -9,18 +9,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
-import com.danilp.professionalaquarist.domain.plant.ConvertPlantMeasures
 import com.danilp.professionalaquarist.domain.plant.Plant
 import com.danilp.professionalaquarist.domain.plant.PlantDataSource
+import com.danilp.professionalaquarist.domain.plant.use_case.ConvertPlantMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class PlantEditViewModel @Inject constructor(
@@ -228,29 +228,29 @@ class PlantEditViewModel @Inject constructor(
         viewModelScope.launch {
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
             val isPhCorrect = (
-                (
                     (
-                        state.minPh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minPh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
             val isGhCorrect = (
-                (
                     (
-                        state.minGh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minGh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
             val isKhCorrect = (
-                (
                     (
-                        state.minKh.toDoubleOrNull()
-                            ?: 0.0
-                        ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
+                            (
+                                    state.minKh.toDoubleOrNull()
+                                        ?: 0.0
+                                    ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
+                            )
                     )
-                )
 
             if (!isTempCorrect) {
                 kotlin.run {

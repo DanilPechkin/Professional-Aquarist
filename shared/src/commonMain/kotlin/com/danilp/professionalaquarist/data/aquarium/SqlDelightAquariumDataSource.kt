@@ -5,6 +5,8 @@ import com.danilp.professionalaquarist.data.plant.toPlant
 import com.danilp.professionalaquarist.database.AquariumDatabase
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
+import com.danilp.professionalaquarist.domain.dweller.DwellerTags
+import com.danilp.professionalaquarist.domain.plant.PlantTags
 
 class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
 
@@ -18,6 +20,8 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
             imageUrl = aquarium.imageUrl,
             name = aquarium.name,
             description = aquarium.description,
+            currentTags = aquarium.currentTags?.joinToString(" "),
+            requiredTags = aquarium.requiredTags?.joinToString(" "),
             liters = aquarium.liters,
             minIllumination = aquarium.minIllumination,
             currentIllumination = aquarium.currentIllumination,
@@ -82,6 +86,37 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
         getAquariumById(id)?.let { aquarium ->
             insertAquarium(
                 aquarium.copy(
+                    requiredTags = (dwellers.mapNotNull {
+                        it.tags?.filter { tag ->
+                            tag == DwellerTags.FAST_CURRENT ||
+                                    tag == DwellerTags.SLOW_CURRENT ||
+                                    tag == DwellerTags.MEDIUM_CURRENT ||
+                                    tag == DwellerTags.VEIL_TAILED ||
+                                    tag == DwellerTags.BRIGHT_LIGHT ||
+                                    tag == DwellerTags.LOW_LIGHT ||
+                                    tag == DwellerTags.PLANT_LOVER ||
+                                    tag == DwellerTags.NEEDS_SHELTER ||
+                                    tag == DwellerTags.BROADLEAF_PLANT ||
+                                    tag == DwellerTags.LONG_STEMMED_PLANT ||
+                                    tag == DwellerTags.FLOATING_PLANT ||
+                                    tag == DwellerTags.MOSS
+                        }
+                    }.flatten() + plants.mapNotNull {
+                        it.tags?.filter { tag ->
+                            tag == PlantTags.LOW_LIGHT ||
+                                    tag == PlantTags.BRIGHT_LIGHT
+                        }
+                    }.flatten()).ifEmpty { null },
+                    currentTags = ((aquarium.currentTags ?: emptyList()) +
+                            plants.mapNotNull {
+                                it.tags?.filter { tag ->
+                                    tag == PlantTags.BROADLEAF_PLANT ||
+                                            tag == PlantTags.LONG_STEMMED_PLANT ||
+                                            tag == PlantTags.FLOATING_PLANT ||
+                                            tag == PlantTags.MOSS ||
+                                            tag == PlantTags.FERN
+                                }
+                            }.flatten()).ifEmpty { null },
                     minTemperature = listOf(
                         dwellers.mapNotNull { it.minTemperature }.maxOrNull(),
                         plants.mapNotNull { it.minTemperature }.maxOrNull()

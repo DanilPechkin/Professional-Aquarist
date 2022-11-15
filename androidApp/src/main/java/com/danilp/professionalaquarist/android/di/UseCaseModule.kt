@@ -2,10 +2,10 @@ package com.danilp.professionalaquarist.android.di
 
 import com.danilp.professionalaquarist.domain.aquarium.ConvertAquariumMeasures
 import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
-import com.danilp.professionalaquarist.domain.dweller.ConvertDwellerMeasures
-import com.danilp.professionalaquarist.domain.dweller.SearchDwellers
-import com.danilp.professionalaquarist.domain.plant.ConvertPlantMeasures
-import com.danilp.professionalaquarist.domain.plant.SearchPlants
+import com.danilp.professionalaquarist.domain.dweller.use_case.ConvertDwellerMeasures
+import com.danilp.professionalaquarist.domain.dweller.use_case.SearchDwellers
+import com.danilp.professionalaquarist.domain.plant.use_case.ConvertPlantMeasures
+import com.danilp.professionalaquarist.domain.plant.use_case.SearchPlants
 import com.danilp.professionalaquarist.domain.use_case.calculation.aquairum.capacity.CalculateCapacity
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.ConvertDKH
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters

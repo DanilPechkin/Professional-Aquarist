@@ -1,4 +1,6 @@
-package com.danilp.professionalaquarist.domain.dweller
+package com.danilp.professionalaquarist.domain.dweller.use_case
+
+import com.danilp.professionalaquarist.domain.dweller.Dweller
 
 class SearchDwellers {
     fun execute(dwellers: List<Dweller>, query: String): List<Dweller> =

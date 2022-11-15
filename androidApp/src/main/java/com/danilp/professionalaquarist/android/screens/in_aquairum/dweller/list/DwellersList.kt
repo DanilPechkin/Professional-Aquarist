@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
@@ -29,9 +30,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.screens.GridItem
+import com.danilp.professionalaquarist.android.screens.GridTitle
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.DwellerEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.domain.dweller.DwellerTags
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
@@ -99,16 +103,151 @@ fun DwellersList(
                     columns = GridCells.Adaptive(128.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(state.dwellers) { dweller ->
-                        DwellersListItem(
-                            dweller = dweller,
-                            modifier = Modifier.clickable {
-                                navigator.navigate(DwellerEditDestination(dweller.id!!))
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.FISH) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.fish_title)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.FISH) ?: false
                             }
-                        )
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
+                    }
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.SHRIMP) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.shrimp_title),
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.SHRIMP) ?: false
+                            }
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
+                    }
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAB) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.crab_title),
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.CRAB) ?: false
+                            }
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
+                    }
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAYFISH) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.crayfish_title),
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.CRAYFISH) ?: false
+                            }
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
+                    }
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.SNAIL) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.snail_title),
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.SNAIL) ?: false
+                            }
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
+                    }
+                    if (state.dwellers.any { it.tags?.contains(DwellerTags.BIVALVE) == true }) {
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            GridTitle(
+                                title = stringResource(R.string.bivalve_title),
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.BIVALVE) ?: false
+                            }
+                        ) { dweller ->
+                            GridItem(
+                                label = dweller.name,
+                                message = "Healthy",
+                                imageUrl = dweller.imageUrl,
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp)
+                                    .clickable {
+                                        navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    }
+                            )
+                        }
                     }
                 }
             }

@@ -12,6 +12,7 @@ fun DwellerEntity.toDweller(): Dweller =
         genus = genus,
         amount = amount,
         description = description,
+        tags = tags?.split(" "),
         liters = liters,
         minTemperature = minTemperature,
         maxTemperature = maxTemperature,

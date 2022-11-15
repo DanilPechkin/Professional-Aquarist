@@ -4,6 +4,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,7 +30,6 @@ import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -316,20 +316,21 @@ fun AquariumTopBarWithSearch(
 
 @Composable
 fun GridItem(
-    name: String?,
+    label: String?,
     message: String,
-    cardColors: CardColors,
-    imageUri: String?,
+    imageUrl: String?,
     modifier: Modifier = Modifier
 ) {
     Card(
-        colors = cardColors,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
         shape = RoundedCornerShape(8.dp),
         modifier = modifier
     ) {
         GlideImage(
-            imageModel = imageUri ?: R.drawable.aquairum_pic,
-            contentDescription = name ?: "",
+            imageModel = imageUrl ?: R.drawable.aquairum_pic,
+            contentDescription = label ?: "",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
@@ -339,7 +340,7 @@ fun GridItem(
         Column(
             modifier = Modifier.padding(top = 6.dp, start = 10.dp, bottom = 10.dp, end = 10.dp)
         ) {
-            Text(text = name ?: "", style = MaterialTheme.typography.titleMedium, maxLines = 1)
+            Text(text = label ?: "", style = MaterialTheme.typography.titleMedium, maxLines = 1)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = message, style = MaterialTheme.typography.labelMedium)
         }
@@ -429,7 +430,10 @@ fun InfoFieldWithError(
             value = value,
             onValueChange = onValueChange,
             label = {
-                Text(text = label)
+                Text(
+                    text = label,
+                    maxLines = 1
+                )
             },
             modifier = textFieldModifier,
             isError = errorCode != null,
@@ -441,50 +445,99 @@ fun InfoFieldWithError(
                 if (alkalinityMeasureCode != null) {
                     Text(
                         text = when (alkalinityMeasureCode) {
-                            AlkalinityMeasure.DKH.code -> stringResource(R.string.alkalinity_measure_dkh)
-                            AlkalinityMeasure.MEQL.code -> stringResource(R.string.alkalinity_measure_meql)
-                            AlkalinityMeasure.MGL.code -> stringResource(R.string.alkalinity_measure_mgl)
-                            AlkalinityMeasure.PPM.code -> stringResource(R.string.alkalinity_measure_ppm)
-                            else -> ""
+                            AlkalinityMeasure.DKH.code ->
+                                stringResource(R.string.alkalinity_measure_dkh)
+
+                            AlkalinityMeasure.MEQL.code ->
+                                stringResource(R.string.alkalinity_measure_meql)
+
+                            AlkalinityMeasure.MGL.code ->
+                                stringResource(R.string.alkalinity_measure_mgl)
+
+                            AlkalinityMeasure.PPM.code ->
+                                stringResource(R.string.alkalinity_measure_ppm)
+
+                            else ->
+                                ""
                         }
                     )
                 }
                 if (temperatureMeasureCode != null) {
                     Text(
                         text = when (temperatureMeasureCode) {
-                            TemperatureMeasure.Celsius.code -> stringResource(R.string.temperature_measure_celsius)
-                            TemperatureMeasure.Fahrenheit.code -> stringResource(R.string.temperature_measure_fahrenheit)
-                            TemperatureMeasure.Kelvin.code -> stringResource(R.string.temperature_measure_kelvin)
-                            else -> ""
+                            TemperatureMeasure.Celsius.code ->
+                                stringResource(R.string.temperature_measure_celsius)
+
+                            TemperatureMeasure.Fahrenheit.code ->
+                                stringResource(R.string.temperature_measure_fahrenheit)
+
+                            TemperatureMeasure.Kelvin.code ->
+                                stringResource(R.string.temperature_measure_kelvin)
+
+                            else ->
+                                ""
                         }
                     )
                 }
                 if (capacityMeasureCode != null) {
                     Text(
                         text = when (capacityMeasureCode) {
-                            CapacityMeasure.Liters.code -> stringResource(R.string.capacity_measure_liters)
-                            CapacityMeasure.Gallons.code -> stringResource(R.string.capacity_measure_gallons)
-                            CapacityMeasure.CubicFeet.code -> stringResource(R.string.capacity_measure_cubic_feet)
-                            CapacityMeasure.USCups.code -> stringResource(R.string.capacity_measure_us_cups)
-                            CapacityMeasure.Teaspoons.code -> stringResource(R.string.capacity_measure_teaspoons)
-                            CapacityMeasure.Tablespoons.code -> stringResource(R.string.capacity_measure_tablespoons)
-                            CapacityMeasure.Milliliters.code -> stringResource(R.string.capacity_measure_milliliters)
-                            CapacityMeasure.MetricCups.code -> stringResource(R.string.capacity_measure_metric_cups)
-                            CapacityMeasure.CubicMeters.code -> stringResource(R.string.capacity_measure_cubic_meters)
-                            CapacityMeasure.CubicInches.code -> stringResource(R.string.capacity_measure_cubic_inches)
-                            CapacityMeasure.CubicCentimeters.code -> stringResource(R.string.capacity_measure_cubic_centimeters)
-                            else -> ""
+                            CapacityMeasure.Liters.code ->
+                                stringResource(R.string.capacity_measure_liters)
+
+                            CapacityMeasure.Gallons.code ->
+                                stringResource(R.string.capacity_measure_gallons)
+
+                            CapacityMeasure.CubicFeet.code ->
+                                stringResource(R.string.capacity_measure_cubic_feet)
+
+                            CapacityMeasure.USCups.code ->
+                                stringResource(R.string.capacity_measure_us_cups)
+
+                            CapacityMeasure.Teaspoons.code ->
+                                stringResource(R.string.capacity_measure_teaspoons)
+
+                            CapacityMeasure.Tablespoons.code ->
+                                stringResource(R.string.capacity_measure_tablespoons)
+
+                            CapacityMeasure.Milliliters.code ->
+                                stringResource(R.string.capacity_measure_milliliters)
+
+                            CapacityMeasure.MetricCups.code ->
+                                stringResource(R.string.capacity_measure_metric_cups)
+
+                            CapacityMeasure.CubicMeters.code ->
+                                stringResource(R.string.capacity_measure_cubic_meters)
+
+                            CapacityMeasure.CubicInches.code ->
+                                stringResource(R.string.capacity_measure_cubic_inches)
+
+                            CapacityMeasure.CubicCentimeters.code ->
+                                stringResource(R.string.capacity_measure_cubic_centimeters)
+
+                            else ->
+                                ""
                         }
                     )
                 }
                 if (metricMeasureCode != null) {
                     Text(
                         text = when (metricMeasureCode) {
-                            MetricMeasure.Millimeters.code -> stringResource(R.string.metric_measure_millimeters)
-                            MetricMeasure.Centimeters.code -> stringResource(R.string.metric_measure_centimeters)
-                            MetricMeasure.Meters.code -> stringResource(R.string.metric_measure_meters)
-                            MetricMeasure.Inches.code -> stringResource(R.string.metric_measure_inches)
-                            MetricMeasure.Feet.code -> stringResource(R.string.metric_measure_feet)
+                            MetricMeasure.Millimeters.code ->
+                                stringResource(R.string.metric_measure_millimeters)
+
+                            MetricMeasure.Centimeters.code ->
+                                stringResource(R.string.metric_measure_centimeters)
+
+                            MetricMeasure.Meters.code ->
+                                stringResource(R.string.metric_measure_meters)
+
+                            MetricMeasure.Inches.code ->
+                                stringResource(R.string.metric_measure_inches)
+
+                            MetricMeasure.Feet.code ->
+                                stringResource(R.string.metric_measure_feet)
+
                             else -> ""
                         }
                     )
@@ -545,7 +598,9 @@ fun FromToInfoFields(
     Column(modifier = modifier) {
         Text(
             text = label,
-            modifier = Modifier.padding(8.dp)
+            maxLines = 1,
+            modifier = Modifier
+                .padding(8.dp)
         )
 
         Row(
@@ -651,5 +706,23 @@ fun OutlinedDropDownMenuField(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun GridTitle(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium
+        )
     }
 }

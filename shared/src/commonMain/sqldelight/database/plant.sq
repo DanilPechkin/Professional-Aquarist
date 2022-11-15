@@ -5,6 +5,7 @@ CREATE TABLE plantEntity(
     name TEXT,
     genus TEXT,
     description TEXT,
+    tags TEXT,
     minTemperature REAL,
     maxTemperature REAL,
     minPh REAL,
@@ -36,6 +37,7 @@ INTO plantEntity(
     name,
     genus,
     description,
+    tags,
     minTemperature,
     maxTemperature,
     minPh,
@@ -46,7 +48,7 @@ INTO plantEntity(
     maxKh,
     minIllumination,
     minCO2
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deletePlantById:
 DELETE FROM

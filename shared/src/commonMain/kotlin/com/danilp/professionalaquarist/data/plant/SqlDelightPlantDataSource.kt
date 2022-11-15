@@ -16,6 +16,7 @@ class SqlDelightPlantDataSource(db: AquariumDatabase) : PlantDataSource {
             name = plant.name,
             genus = plant.genus,
             description = plant.description,
+            tags = plant.tags?.joinToString(" "),
             minTemperature = plant.minTemperature,
             maxTemperature = plant.maxTemperature,
             minPh = plant.minPh,

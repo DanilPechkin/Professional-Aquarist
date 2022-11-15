@@ -6,6 +6,7 @@ CREATE TABLE dwellerEntity(
     genus TEXT,
     amount INTEGER,
     description TEXT,
+    tags TEXT,
     liters REAL,
     minTemperature REAL,
     maxTemperature REAL,
@@ -37,6 +38,7 @@ INTO dwellerEntity(
     genus,
     amount,
     description,
+    tags,
     liters,
     minTemperature,
     maxTemperature,
@@ -46,7 +48,7 @@ INTO dwellerEntity(
     maxGh,
     minKh,
     maxKh
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteDwellerById:
 DELETE FROM

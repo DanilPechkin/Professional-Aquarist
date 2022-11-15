@@ -17,10 +17,10 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class AquariumEditViewModel @Inject constructor(
@@ -332,7 +332,11 @@ class AquariumEditViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
+            val isTempCorrect =
+                (
+                        (state.minTemperature.toDoubleOrNull() ?: 0.0) <
+                                (state.maxTemperature.toDoubleOrNull() ?: 0.0)
+                        )
             val isPhCorrect =
                 ((state.minPh.toDoubleOrNull() ?: 0.0) < (state.maxPh.toDoubleOrNull() ?: 0.0))
             val isGhCorrect =
@@ -349,11 +353,9 @@ class AquariumEditViewModel @Inject constructor(
                 ((state.minFe.toDoubleOrNull() ?: 0.0) < (state.maxFe.toDoubleOrNull() ?: 0.0))
             val isAmmoniaCorrect =
                 (
-                    (state.minAmmonia.toDoubleOrNull() ?: 0.0) < (
-                        state.maxAmmonia.toDoubleOrNull()
-                            ?: 0.0
+                        (state.minAmmonia.toDoubleOrNull() ?: 0.0) <
+                                (state.maxAmmonia.toDoubleOrNull() ?: 0.0)
                         )
-                    )
             val isPO4Correct =
                 ((state.minPO4.toDoubleOrNull() ?: 0.0) < (state.maxPO4.toDoubleOrNull() ?: 0.0))
             val isNO3Correct =

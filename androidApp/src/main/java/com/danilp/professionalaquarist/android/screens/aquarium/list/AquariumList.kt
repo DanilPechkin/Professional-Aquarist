@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.screens.GridItem
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MainAquariumScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
@@ -115,10 +116,11 @@ fun AquariumList(
                         items = state.aquariums,
                         key = { it.id!! }
                     ) { aquarium ->
-                        AquariumListItem(
-                            aquarium = aquarium,
+                        GridItem(
+                            label = aquarium.name,
+                            imageUrl = aquarium.imageUrl,
                             message = aquarium.minTemperature.toString() + " " +
-                                aquarium.maxTemperature.toString(),
+                                    aquarium.maxTemperature.toString(),
                             modifier = Modifier
                                 .animateItemPlacement()
                                 .clickable {

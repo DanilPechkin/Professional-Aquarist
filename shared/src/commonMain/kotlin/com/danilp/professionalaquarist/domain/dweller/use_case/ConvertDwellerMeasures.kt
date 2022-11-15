@@ -1,120 +1,137 @@
-package com.danilp.professionalaquarist.domain.plant
+package com.danilp.professionalaquarist.domain.dweller.use_case
 
+import com.danilp.professionalaquarist.domain.dweller.Dweller
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.ConvertDKH
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.ConvertCelsius
 
-class ConvertPlantMeasures {
+class ConvertDwellerMeasures {
 
     private val convertCelsius: ConvertCelsius = ConvertCelsius()
+    private val convertLiters: ConvertLiters = ConvertLiters()
     private val convertDKH: ConvertDKH = ConvertDKH()
 
     fun to(
-        plant: Plant,
+        dweller: Dweller,
         alkalinityMeasureCode: Int,
+        capacityMeasureCode: Int,
         temperatureMeasureCode: Int
-    ): Plant =
-        plant.copy(
-            minTemperature = plant.minTemperature?.let {
+    ): Dweller =
+        dweller.copy(
+            minTemperature = dweller.minTemperature?.let {
                 convertCelsius.to(
                     temperatureMeasureCode,
                     it
                 ).result
             },
-            maxTemperature = plant.maxTemperature?.let {
+            maxTemperature = dweller.maxTemperature?.let {
                 convertCelsius.to(
                     temperatureMeasureCode,
                     it
                 ).result
             },
-            minPh = plant.minPh?.let {
+            minPh = dweller.minPh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxPh = plant.maxPh?.let {
+            maxPh = dweller.maxPh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            minGh = plant.minGh?.let {
+            minGh = dweller.minGh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxGh = plant.maxGh?.let {
+            maxGh = dweller.maxGh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            minKh = plant.minKh?.let {
+            minKh = dweller.minKh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxKh = plant.maxKh?.let {
+            maxKh = dweller.maxKh?.let {
                 convertDKH.to(
                     alkalinityMeasureCode,
+                    it
+                ).result
+            },
+            liters = dweller.liters?.let {
+                convertLiters.to(
+                    capacityMeasureCode,
                     it
                 ).result
             }
         )
 
     fun from(
-        plant: Plant,
+        dweller: Dweller,
         alkalinityMeasureCode: Int,
+        capacityMeasureCode: Int,
         temperatureMeasureCode: Int
-    ): Plant =
-        plant.copy(
-            minTemperature = plant.minTemperature?.let {
+    ): Dweller =
+        dweller.copy(
+            minTemperature = dweller.minTemperature?.let {
                 convertCelsius.from(
                     temperatureMeasureCode,
                     it
                 ).result
             },
-            maxTemperature = plant.maxTemperature?.let {
+            maxTemperature = dweller.maxTemperature?.let {
                 convertCelsius.from(
                     temperatureMeasureCode,
                     it
                 ).result
             },
-            minPh = plant.minPh?.let {
+            minPh = dweller.minPh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxPh = plant.maxPh?.let {
+            maxPh = dweller.maxPh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            minGh = plant.minGh?.let {
+            minGh = dweller.minGh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxGh = plant.maxGh?.let {
+            maxGh = dweller.maxGh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            minKh = plant.minKh?.let {
+            minKh = dweller.minKh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
                     it
                 ).result
             },
-            maxKh = plant.maxKh?.let {
+            maxKh = dweller.maxKh?.let {
                 convertDKH.from(
                     alkalinityMeasureCode,
+                    it
+                ).result
+            },
+            liters = dweller.liters?.let {
+                convertLiters.from(
+                    capacityMeasureCode,
                     it
                 ).result
             }

@@ -148,4 +148,15 @@
     <string name="help_label">Help</string>
     <string name="history_label">History</string>
     <string name="water_label">Water</string>
+    <string name="fish_title">Fish</string>
+    <string name="shrimp_title">Shrimp</string>
+    <string name="crab_title">Crab</string>
+    <string name="crayfish_title">Crayfish</string>
+    <string name="snail_title">Snail</string>
+    <string name="bivalve_title">Bivalve</string>
+    <string name="broadleaf_title">Broadleaf</string>
+    <string name="long_stemmed_title">Long-stemmed</string>
+    <string name="floating_plant_title">Floating</string>
+    <string name="moss_title">Moss</string>
+    <string name="fern_title">Fern</string>
 </resources>
