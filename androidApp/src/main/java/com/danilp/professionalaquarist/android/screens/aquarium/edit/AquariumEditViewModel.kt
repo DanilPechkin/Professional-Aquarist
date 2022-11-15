@@ -333,8 +333,10 @@ class AquariumEditViewModel @Inject constructor(
 
         viewModelScope.launch {
             val isTempCorrect =
-                ((state.minTemperature.toDoubleOrNull() ?: 0.0) <
-                        (state.maxTemperature.toDoubleOrNull() ?: 0.0))
+                (
+                        (state.minTemperature.toDoubleOrNull() ?: 0.0) <
+                                (state.maxTemperature.toDoubleOrNull() ?: 0.0)
+                        )
             val isPhCorrect =
                 ((state.minPh.toDoubleOrNull() ?: 0.0) < (state.maxPh.toDoubleOrNull() ?: 0.0))
             val isGhCorrect =
@@ -350,8 +352,10 @@ class AquariumEditViewModel @Inject constructor(
             val isFeCorrect =
                 ((state.minFe.toDoubleOrNull() ?: 0.0) < (state.maxFe.toDoubleOrNull() ?: 0.0))
             val isAmmoniaCorrect =
-                ((state.minAmmonia.toDoubleOrNull() ?: 0.0) <
-                        (state.maxAmmonia.toDoubleOrNull() ?: 0.0))
+                (
+                        (state.minAmmonia.toDoubleOrNull() ?: 0.0) <
+                                (state.maxAmmonia.toDoubleOrNull() ?: 0.0)
+                        )
             val isPO4Correct =
                 ((state.minPO4.toDoubleOrNull() ?: 0.0) < (state.maxPO4.toDoubleOrNull() ?: 0.0))
             val isNO3Correct =

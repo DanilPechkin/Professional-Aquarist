@@ -113,9 +113,11 @@ fun PlantsList(
                                 title = stringResource(R.string.broadleaf_title)
                             )
                         }
-                        items(state.plants.filter {
-                            it.tags?.contains(DwellerTags.FISH) ?: false
-                        }) { plant ->
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(DwellerTags.FISH) ?: false
+                            }
+                        ) { plant ->
                             GridItem(
                                 label = plant.name,
                                 message = "Healthy",
@@ -132,15 +134,19 @@ fun PlantsList(
                             )
                         }
                     }
-                    if (state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }) {
+                    if (
+                        state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }
+                    ) {
                         item(span = { GridItemSpan(maxLineSpan) }) {
                             GridTitle(
                                 title = stringResource(R.string.long_stemmed_title)
                             )
                         }
-                        items(state.plants.filter {
-                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
-                        }) { plant ->
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
+                            }
+                        ) { plant ->
                             GridItem(
                                 label = plant.name,
                                 message = "Healthy",
@@ -163,9 +169,11 @@ fun PlantsList(
                                 title = stringResource(R.string.floating_plant_title)
                             )
                         }
-                        items(state.plants.filter {
-                            it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
-                        }) { plant ->
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
+                            }
+                        ) { plant ->
                             GridItem(
                                 label = plant.name,
                                 message = "Healthy",
@@ -188,9 +196,11 @@ fun PlantsList(
                                 title = stringResource(R.string.moss_title)
                             )
                         }
-                        items(state.plants.filter {
-                            it.tags?.contains(PlantTags.MOSS) ?: false
-                        }) { plant ->
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.MOSS) ?: false
+                            }
+                        ) { plant ->
                             GridItem(
                                 label = plant.name,
                                 message = "Healthy",
@@ -213,9 +223,11 @@ fun PlantsList(
                                 title = stringResource(R.string.fern_title)
                             )
                         }
-                        items(state.plants.filter {
-                            it.tags?.contains(PlantTags.FERN) ?: false
-                        }) { plant ->
+                        items(
+                            state.plants.filter {
+                                it.tags?.contains(PlantTags.FERN) ?: false
+                            }
+                        ) { plant ->
                             GridItem(
                                 label = plant.name,
                                 message = "Healthy",

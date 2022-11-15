@@ -112,9 +112,11 @@ fun DwellersList(
                                 title = stringResource(R.string.fish_title)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.FISH) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.FISH) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
@@ -134,9 +136,11 @@ fun DwellersList(
                                 modifier = Modifier.padding(top = 8.dp)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.SHRIMP) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.SHRIMP) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
@@ -156,9 +160,11 @@ fun DwellersList(
                                 modifier = Modifier.padding(top = 8.dp)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.CRAB) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.CRAB) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
@@ -178,9 +184,11 @@ fun DwellersList(
                                 modifier = Modifier.padding(top = 8.dp)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.CRAYFISH) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.CRAYFISH) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
@@ -200,9 +208,11 @@ fun DwellersList(
                                 modifier = Modifier.padding(top = 8.dp)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.SNAIL) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.SNAIL) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
@@ -222,9 +232,11 @@ fun DwellersList(
                                 modifier = Modifier.padding(top = 8.dp)
                             )
                         }
-                        items(state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.BIVALVE) ?: false
-                        }) { dweller ->
+                        items(
+                            state.dwellers.filter {
+                                it.tags?.contains(DwellerTags.BIVALVE) ?: false
+                            }
+                        ) { dweller ->
                             GridItem(
                                 label = dweller.name,
                                 message = "Healthy",
