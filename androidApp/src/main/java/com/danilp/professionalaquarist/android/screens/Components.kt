@@ -534,7 +534,7 @@ fun InfoFieldWithErrorAndIcon(
                                 stringResource(R.string.metric_measure_meters_short)
 
                             MetricMeasure.Inches.code ->
-                                stringResource(R.string.metric_measure_inche_short)
+                                stringResource(R.string.metric_measure_inches_short)
 
                             MetricMeasure.Feet.code ->
                                 stringResource(R.string.metric_measure_feet_short)
@@ -729,6 +729,7 @@ fun OutlinedDropDownMenuField(
             value = selectedItem,
             onValueChange = { },
             modifier = Modifier
+                .fillMaxWidth()
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
                 },

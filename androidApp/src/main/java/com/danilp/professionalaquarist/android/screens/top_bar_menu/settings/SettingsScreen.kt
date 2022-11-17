@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -79,7 +81,10 @@ fun SettingsScreen(
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
 
             OutlinedDropDownMenuField(
@@ -92,7 +97,8 @@ fun SettingsScreen(
                             state.capacityList.indexOf(it)
                         )
                     )
-                }
+                },
+                modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -107,7 +113,8 @@ fun SettingsScreen(
                             state.alkalinityList.indexOf(it)
                         )
                     )
-                }
+                },
+                modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -122,7 +129,8 @@ fun SettingsScreen(
                             state.metricList.indexOf(it)
                         )
                     )
-                }
+                },
+                modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -137,7 +145,8 @@ fun SettingsScreen(
                             state.temperatureList.indexOf(it)
                         )
                     )
-                }
+                },
+                modifier = Modifier.fillMaxWidth()
             )
 
             Row(
@@ -149,7 +158,10 @@ fun SettingsScreen(
                 Button(
                     onClick = {
                         viewModel.onEvent(SettingsEvent.DefaultButtonPressed)
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    )
                 ) {
                     Text(text = stringResource(R.string.set_default_button))
                 }
