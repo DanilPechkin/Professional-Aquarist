@@ -35,7 +35,6 @@ import com.danilp.professionalaquarist.android.screens.GridTitle
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
-import com.danilp.professionalaquarist.domain.dweller.DwellerTags
 import com.danilp.professionalaquarist.domain.plant.PlantTags
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -94,17 +93,19 @@ fun PlantsList(
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(top = 8.dp)
         ) {
             SwipeRefresh(
                 state = swipeRefreshState,
                 onRefresh = { viewModel.onEvent(PlantsListEvent.Refresh) }
             ) {
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(128.dp),
+                    columns = GridCells.Adaptive(160.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
@@ -115,7 +116,7 @@ fun PlantsList(
                         }
                         items(
                             state.plants.filter {
-                                it.tags?.contains(DwellerTags.FISH) ?: false
+                                it.tags?.contains(PlantTags.BROADLEAF_PLANT) ?: false
                             }
                         ) { plant ->
                             GridItem(
@@ -123,7 +124,6 @@ fun PlantsList(
                                 message = "Healthy",
                                 imageUrl = plant.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(
                                             PlantEditDestination(
@@ -134,9 +134,7 @@ fun PlantsList(
                             )
                         }
                     }
-                    if (
-                        state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }
-                    ) {
+                    if (state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }) {
                         item(span = { GridItemSpan(maxLineSpan) }) {
                             GridTitle(
                                 title = stringResource(R.string.long_stemmed_title)
@@ -152,7 +150,6 @@ fun PlantsList(
                                 message = "Healthy",
                                 imageUrl = plant.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(
                                             PlantEditDestination(
@@ -179,7 +176,6 @@ fun PlantsList(
                                 message = "Healthy",
                                 imageUrl = plant.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(
                                             PlantEditDestination(
@@ -206,7 +202,6 @@ fun PlantsList(
                                 message = "Healthy",
                                 imageUrl = plant.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(
                                             PlantEditDestination(
@@ -233,7 +228,6 @@ fun PlantsList(
                                 message = "Healthy",
                                 imageUrl = plant.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(
                                             PlantEditDestination(

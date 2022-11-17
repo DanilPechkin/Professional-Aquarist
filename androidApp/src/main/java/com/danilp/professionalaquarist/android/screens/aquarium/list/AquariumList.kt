@@ -98,7 +98,9 @@ fun AquariumList(
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(top = 8.dp)
         ) {
 
             SwipeRefresh(
@@ -109,7 +111,7 @@ fun AquariumList(
                     columns = GridCells.Adaptive(128.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(

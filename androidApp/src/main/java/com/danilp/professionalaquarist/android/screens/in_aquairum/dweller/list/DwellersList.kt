@@ -93,17 +93,19 @@ fun DwellersList(
         }
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(top = 8.dp)
         ) {
             SwipeRefresh(
                 state = swipeRefreshState,
                 onRefresh = { viewModel.onEvent(DwellersListEvent.Refresh) }
             ) {
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(128.dp),
+                    columns = GridCells.Adaptive(160.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
                     if (state.dwellers.any { it.tags?.contains(DwellerTags.FISH) == true }) {
@@ -122,7 +124,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }
@@ -146,7 +147,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }
@@ -170,7 +170,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }
@@ -194,7 +193,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }
@@ -218,7 +216,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }
@@ -242,7 +239,6 @@ fun DwellersList(
                                 message = "Healthy",
                                 imageUrl = dweller.imageUrl,
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp)
                                     .clickable {
                                         navigator.navigate(DwellerEditDestination(dweller.id!!))
                                     }

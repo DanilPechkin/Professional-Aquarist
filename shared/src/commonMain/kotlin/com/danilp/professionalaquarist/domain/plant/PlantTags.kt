@@ -2,9 +2,9 @@ package com.danilp.professionalaquarist.domain.plant
 
 object PlantTags {
 
-    const val BROADLEAF_PLANT = "Broadleaf plant" // любит широколистные растения
-    const val LONG_STEMMED_PLANT = "Long-stemmed plant" // любит длинностебельные растения
-    const val FLOATING_PLANT = "Floating plant" // любит плавающие растения
+    const val BROADLEAF_PLANT = "Broadleaf" // любит широколистные растения
+    const val LONG_STEMMED_PLANT = "Long-stemmed" // любит длинностебельные растения
+    const val FLOATING_PLANT = "Floating" // любит плавающие растения
     const val MOSS = "Moss" // мох
     const val FERN = "Fern" // папоротник
 
