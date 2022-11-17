@@ -23,11 +23,11 @@ class MetricCalculatorViewModel @Inject constructor(
     init {
         state = state.copy(
             metricMeasuresList = listOf(
-                context.getString(R.string.metric_measure_meters),
-                context.getString(R.string.metric_measure_centimeters),
-                context.getString(R.string.metric_measure_millimeters),
-                context.getString(R.string.metric_measure_feet),
-                context.getString(R.string.metric_measure_inches)
+                context.getString(R.string.metric_measure_meters_short),
+                context.getString(R.string.metric_measure_centimeters_short),
+                context.getString(R.string.metric_measure_millimeters_short),
+                context.getString(R.string.metric_measure_feet_short),
+                context.getString(R.string.metric_measure_inches_short)
             )
         )
     }

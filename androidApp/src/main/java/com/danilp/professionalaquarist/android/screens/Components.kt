@@ -95,7 +95,7 @@ fun SearchField(
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
@@ -355,7 +355,7 @@ fun AquaristListItem(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
         modifier = Modifier
             .padding(vertical = 8.dp)
@@ -446,16 +446,16 @@ fun InfoFieldWithErrorAndIcon(
                     Text(
                         text = when (alkalinityMeasureCode) {
                             AlkalinityMeasure.DKH.code ->
-                                stringResource(R.string.alkalinity_measure_dkh)
+                                stringResource(R.string.alkalinity_measure_dkh_short)
 
                             AlkalinityMeasure.MEQL.code ->
-                                stringResource(R.string.alkalinity_measure_meql)
+                                stringResource(R.string.alkalinity_measure_meql_short)
 
                             AlkalinityMeasure.MGL.code ->
-                                stringResource(R.string.alkalinity_measure_mgl)
+                                stringResource(R.string.alkalinity_measure_mgl_short)
 
                             AlkalinityMeasure.PPM.code ->
-                                stringResource(R.string.alkalinity_measure_ppm)
+                                stringResource(R.string.alkalinity_measure_ppm_short)
 
                             else ->
                                 ""

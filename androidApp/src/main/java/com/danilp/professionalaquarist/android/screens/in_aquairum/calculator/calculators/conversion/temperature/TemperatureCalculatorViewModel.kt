@@ -23,9 +23,9 @@ class TemperatureCalculatorViewModel @Inject constructor(
     init {
         state = state.copy(
             temperatureMeasuresList = listOf(
-                context.getString(R.string.temperature_measure_celsius),
-                context.getString(R.string.temperature_measure_fahrenheit),
-                context.getString(R.string.temperature_measure_kelvin)
+                context.getString(R.string.temperature_measure_celsius_short),
+                context.getString(R.string.temperature_measure_fahrenheit_short),
+                context.getString(R.string.temperature_measure_kelvin_short)
             )
         )
     }

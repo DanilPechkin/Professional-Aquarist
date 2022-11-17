@@ -23,10 +23,10 @@ class AlkalinityCalculatorViewModel @Inject constructor(
     init {
         state = state.copy(
             alkalinityMeasuresList = listOf(
-                context.getString(R.string.alkalinity_measure_dkh),
-                context.getString(R.string.alkalinity_measure_ppm),
-                context.getString(R.string.alkalinity_measure_meql),
-                context.getString(R.string.alkalinity_measure_mgl)
+                context.getString(R.string.alkalinity_measure_dkh_short),
+                context.getString(R.string.alkalinity_measure_ppm_short),
+                context.getString(R.string.alkalinity_measure_meql_short),
+                context.getString(R.string.alkalinity_measure_mgl_short)
             )
         )
     }

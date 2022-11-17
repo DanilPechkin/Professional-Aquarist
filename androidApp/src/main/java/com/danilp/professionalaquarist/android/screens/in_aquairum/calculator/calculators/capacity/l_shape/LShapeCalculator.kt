@@ -34,6 +34,7 @@ import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.CalculatorsDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -196,7 +197,50 @@ fun LShapeCalculator(
                 value = state.outputCapacity,
                 onValueChange = { },
                 label = { Text(text = stringResource(R.string.capacity_label)) },
-                readOnly = true
+                readOnly = true,
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    Text(
+                        text = when (state.capacityMeasureCode) {
+                            CapacityMeasure.Liters.code ->
+                                stringResource(R.string.capacity_measure_liters)
+
+                            CapacityMeasure.Gallons.code ->
+                                stringResource(R.string.capacity_measure_gallons)
+
+                            CapacityMeasure.CubicFeet.code ->
+                                stringResource(R.string.capacity_measure_cubic_feet)
+
+                            CapacityMeasure.USCups.code ->
+                                stringResource(R.string.capacity_measure_us_cups)
+
+                            CapacityMeasure.Teaspoons.code ->
+                                stringResource(R.string.capacity_measure_teaspoons)
+
+                            CapacityMeasure.Tablespoons.code ->
+                                stringResource(R.string.capacity_measure_tablespoons)
+
+                            CapacityMeasure.Milliliters.code ->
+                                stringResource(R.string.capacity_measure_milliliters)
+
+                            CapacityMeasure.MetricCups.code ->
+                                stringResource(R.string.capacity_measure_metric_cups)
+
+                            CapacityMeasure.CubicMeters.code ->
+                                stringResource(R.string.capacity_measure_cubic_meters)
+
+                            CapacityMeasure.CubicInches.code ->
+                                stringResource(R.string.capacity_measure_cubic_inches)
+
+                            CapacityMeasure.CubicCentimeters.code ->
+                                stringResource(R.string.capacity_measure_cubic_centimeters)
+
+                            else ->
+                                ""
+                        },
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
