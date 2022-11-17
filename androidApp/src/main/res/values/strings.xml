@@ -171,4 +171,5 @@
     <string name="alkalinity_measure_ppm_short">ppm</string>
     <string name="alkalinity_measure_meql_short">meq/l</string>
     <string name="alkalinity_measure_mgl_short">mg/l</string>
+    <string name="save_changes">Save changes</string>
 </resources>

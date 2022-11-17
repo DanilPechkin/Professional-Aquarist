@@ -12,13 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -56,6 +57,7 @@ fun AquariumList(
     var isSearchFieldVisible by remember { mutableStateOf(false) }
     val searchFieldFocusRequester = remember { FocusRequester() }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
+    val scrollState = rememberLazyGridState()
 
     LaunchedEffect(key1 = true) {
         viewModel.onEvent(AquariumListEvent.Refresh)
@@ -82,19 +84,16 @@ fun AquariumList(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                containerColor = MaterialTheme.colorScheme.primary,
+            ExtendedFloatingActionButton(
                 onClick = {
                     navigator.navigate(
                         AquariumEditDestination(-1L)
                     )
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = stringResource(R.string.add_aquarium_fab)
-                )
-            }
+                },
+                icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_aquarium_fab)) },
+                text = { Text(stringResource(R.string.add_aquarium_fab)) },
+                expanded = !scrollState.isScrollInProgress
+            )
         }
     ) { paddingValues ->
         Column(
@@ -112,6 +111,7 @@ fun AquariumList(
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    state = scrollState,
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(

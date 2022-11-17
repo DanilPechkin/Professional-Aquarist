@@ -10,13 +10,14 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,6 +56,7 @@ fun PlantsList(
     var isSearchFieldVisible by remember { mutableStateOf(false) }
     val searchFieldFocusRequester = remember { FocusRequester() }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
+    val scrollState = rememberLazyGridState()
 
     Scaffold(
         topBar = {
@@ -77,19 +79,16 @@ fun PlantsList(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                containerColor = MaterialTheme.colorScheme.primary,
+            ExtendedFloatingActionButton(
                 onClick = {
                     navigator.navigate(
                         PlantEditDestination(-1)
                     )
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = stringResource(R.string.add_plant_button)
-                )
-            }
+                },
+                icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_plant_button)) },
+                text = { Text(text = stringResource(R.string.add_plant_button)) },
+                expanded = !scrollState.isScrollInProgress
+            )
         }
     ) { paddingValues ->
         Column(
@@ -97,6 +96,7 @@ fun PlantsList(
                 .padding(paddingValues)
                 .padding(top = 8.dp)
         ) {
+            Expose
             SwipeRefresh(
                 state = swipeRefreshState,
                 onRefresh = { viewModel.onEvent(PlantsListEvent.Refresh) }
@@ -106,6 +106,7 @@ fun PlantsList(
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),
+                    state = scrollState,
                     modifier = Modifier.fillMaxSize()
                 ) {
                     if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
@@ -134,7 +135,10 @@ fun PlantsList(
                             )
                         }
                     }
-                    if (state.plants.any { it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true }) {
+                    if (state.plants.any {
+                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true
+                        }
+                    ) {
                         item(span = { GridItemSpan(maxLineSpan) }) {
                             GridTitle(
                                 title = stringResource(R.string.long_stemmed_title)

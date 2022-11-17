@@ -8,11 +8,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -77,6 +78,13 @@ fun SettingsScreen(
                 navigateBack = { navigator.navigateUp() },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination) },
                 navigateToAccount = { }
+            )
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = { viewModel.onEvent(SettingsEvent.SaveButtonPressed) },
+                icon = { Icon(Icons.Rounded.Save, "Save changes") },
+                text = { Text(text = stringResource(R.string.save_changes)) }
             )
         }
     ) { paddingValues ->
@@ -153,25 +161,14 @@ fun SettingsScreen(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.Center
             ) {
-                Button(
+                OutlinedButton(
                     onClick = {
                         viewModel.onEvent(SettingsEvent.DefaultButtonPressed)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary
-                    )
-                ) {
-                    Text(text = stringResource(R.string.set_default_button))
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Button(
-                    onClick = {
-                        viewModel.onEvent(SettingsEvent.SaveButtonPressed)
                     }
                 ) {
-                    Text(text = stringResource(R.string.save_button))
+                    Text(text = stringResource(R.string.set_default_button))
                 }
             }
         }

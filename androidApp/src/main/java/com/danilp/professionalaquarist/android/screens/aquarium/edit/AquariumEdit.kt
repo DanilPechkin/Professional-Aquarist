@@ -3,6 +3,7 @@ package com.danilp.professionalaquarist.android.screens.aquarium.edit
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,12 +13,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -49,6 +52,7 @@ fun AquariumEdit(
 
     var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
     LaunchedEffect(key1 = LocalContext.current) {
         viewModel.validationEvents.collect { event ->
@@ -71,13 +75,21 @@ fun AquariumEdit(
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
                 navigateToAccount = { }
             )
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                text = { Text(text = stringResource(R.string.save_button)) },
+                icon = { Icon(Icons.Rounded.Save, stringResource(R.string.save_button)) },
+                onClick = { viewModel.onEvent(AquariumEditEvent.InsertButtonPressed) },
+                expanded = scrollState.value == 0
+            )
         }
     ) { paddingValues ->
         Column(
             Modifier
                 .padding(paddingValues)
                 .padding(top = 0.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
         ) {
 
             val focusManager = LocalFocusManager.current
@@ -505,22 +517,22 @@ fun AquariumEdit(
             }
 
             Row(
-                Modifier.padding(16.dp)
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
                 OutlinedButton(
                     onClick = {
                         viewModel.onEvent(AquariumEditEvent.DeleteButtonPressed)
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = MaterialTheme.colorScheme.error
+                    ),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.error)
                 ) {
                     Text(text = stringResource(R.string.delete_button))
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Button(
-                    onClick = {
-                        viewModel.onEvent(AquariumEditEvent.InsertButtonPressed)
-                    }
-                ) {
-                    Text(text = stringResource(R.string.save_button))
                 }
             }
         }

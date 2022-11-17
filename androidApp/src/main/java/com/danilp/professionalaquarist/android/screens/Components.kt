@@ -94,7 +94,7 @@ fun SearchField(
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
