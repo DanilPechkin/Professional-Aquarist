@@ -29,7 +29,7 @@ import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.FromToInfoFields
 import com.danilp.professionalaquarist.android.screens.ImagePicker
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -93,7 +93,7 @@ fun AquariumEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.name,
                 onValueChange = { viewModel.onEvent(AquariumEditEvent.NameChanged(it)) },
                 label = stringResource(R.string.name_label),
@@ -113,7 +113,7 @@ fun AquariumEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.liters,
                 onValueChange = { viewModel.onEvent(AquariumEditEvent.LitersChanged(it)) },
                 label = stringResource(R.string.capacity_label),
@@ -455,7 +455,7 @@ fun AquariumEdit(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    InfoFieldWithError(
+                    InfoFieldWithErrorAndIcon(
                         value = state.minCO2,
                         onValueChange = { viewModel.onEvent(AquariumEditEvent.MinCO2Changed(it)) },
                         label = stringResource(R.string.min_co2_label),
@@ -476,7 +476,7 @@ fun AquariumEdit(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    InfoFieldWithError(
+                    InfoFieldWithErrorAndIcon(
                         value = state.minIllumination,
                         onValueChange = {
                             viewModel.onEvent(AquariumEditEvent.MinIlluminationChanged(it))

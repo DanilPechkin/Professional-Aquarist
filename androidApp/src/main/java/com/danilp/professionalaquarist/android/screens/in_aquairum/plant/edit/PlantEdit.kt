@@ -51,7 +51,7 @@ import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumN
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.FromToInfoFields
 import com.danilp.professionalaquarist.android.screens.ImagePicker
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.PlantsListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -115,7 +115,7 @@ fun PlantEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.name,
                 onValueChange = { viewModel.onEvent(PlantEditEvent.NameChanged(it)) },
                 label = stringResource(R.string.name_label),
@@ -302,7 +302,7 @@ fun PlantEdit(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    InfoFieldWithError(
+                    InfoFieldWithErrorAndIcon(
                         value = state.minCO2,
                         onValueChange = { viewModel.onEvent(PlantEditEvent.MinCO2Changed(it)) },
                         label = stringResource(R.string.min_co2_label),
@@ -323,7 +323,7 @@ fun PlantEdit(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    InfoFieldWithError(
+                    InfoFieldWithErrorAndIcon(
                         value = state.minIllumination,
                         onValueChange = {
                             viewModel.onEvent(PlantEditEvent.MinIlluminationChanged(it))

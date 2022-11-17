@@ -31,7 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.CalculatorsDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -72,7 +72,7 @@ fun LShapeCalculator(
 
             val focusManager = LocalFocusManager.current
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.height,
                 onValueChange = {
                     viewModel.onEvent(LShapeCalculatorEvent.HeightChanged(it))
@@ -96,7 +96,7 @@ fun LShapeCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.width,
                 onValueChange = {
                     viewModel.onEvent(LShapeCalculatorEvent.WidthChanged(it))
@@ -120,7 +120,7 @@ fun LShapeCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.fullWidth,
                 onValueChange = {
                     viewModel.onEvent(LShapeCalculatorEvent.FullWidthChanged(it))
@@ -144,7 +144,7 @@ fun LShapeCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.length,
                 onValueChange = {
                     viewModel.onEvent(LShapeCalculatorEvent.LengthChanged(it))
@@ -168,7 +168,7 @@ fun LShapeCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.fullLength,
                 onValueChange = {
                     viewModel.onEvent(LShapeCalculatorEvent.FullLengthChanged(it))

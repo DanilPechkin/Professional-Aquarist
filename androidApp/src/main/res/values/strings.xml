@@ -159,4 +159,12 @@
     <string name="floating_plant_title">Floating</string>
     <string name="moss_title">Moss</string>
     <string name="fern_title">Fern</string>
+    <string name="metric_measure_millimeters_short">mm</string>
+    <string name="metric_measure_centimeters_short">cm</string>
+    <string name="metric_measure_meters_short">m</string>
+    <string name="metric_measure_inche_short">in</string>
+    <string name="metric_measure_feet_short">ft</string>
+    <string name="temperature_measure_celsius_short">°C</string>
+    <string name="temperature_measure_fahrenheit_short">°F</string>
+    <string name="temperature_measure_kelvin_short">°K</string>
 </resources>

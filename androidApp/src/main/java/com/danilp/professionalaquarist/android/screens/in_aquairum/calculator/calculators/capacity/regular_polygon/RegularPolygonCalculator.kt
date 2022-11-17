@@ -31,7 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.CalculatorsDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -72,7 +72,7 @@ fun RegularPolygonCalculator(
 
             val focusManager = LocalFocusManager.current
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.height,
                 onValueChange = {
                     viewModel.onEvent(RegularPolygonCalculatorEvent.HeightChanged(it))
@@ -96,7 +96,7 @@ fun RegularPolygonCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.sides,
                 onValueChange = {
                     viewModel.onEvent(RegularPolygonCalculatorEvent.SidesChanged(it))
@@ -120,7 +120,7 @@ fun RegularPolygonCalculator(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = state.length,
                 onValueChange = {
                     viewModel.onEvent(RegularPolygonCalculatorEvent.LengthChanged(it))

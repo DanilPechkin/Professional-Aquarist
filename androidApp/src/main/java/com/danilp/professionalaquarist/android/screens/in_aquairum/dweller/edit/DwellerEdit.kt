@@ -52,6 +52,7 @@ import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.FromToInfoFields
 import com.danilp.professionalaquarist.android.screens.ImagePicker
 import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.DwellersListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -119,7 +120,7 @@ fun DwellerEdit(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                InfoFieldWithError(
+                InfoFieldWithErrorAndIcon(
                     value = state.name,
                     onValueChange = { viewModel.onEvent(DwellerEditEvent.NameChanged(it)) },
                     label = stringResource(R.string.name_label),
@@ -226,56 +227,28 @@ fun DwellerEdit(
                 exit = shrinkVertically()
             ) {
                 Column {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        InfoFieldWithError(
-                            value = state.amount,
-                            onValueChange = {
-                                viewModel.onEvent(DwellerEditEvent.AmountChanged(it))
-                            },
-                            label = stringResource(R.string.amount_label),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onNext = {
-                                    focusManager.moveFocus(FocusDirection.Next)
-                                }
-                            ),
-                            errorCode = state.amountErrorCode,
-                            maxLines = 1,
-                            singleLine = true,
-                            textFieldModifier = Modifier.fillMaxWidth(),
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(end = 16.dp)
-                        )
-                        InfoFieldWithError(
-                            value = state.liters,
-                            onValueChange = {
-                                viewModel.onEvent(DwellerEditEvent.LitersChanged(it))
-                            },
-                            label = stringResource(R.string.capacity_label),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Next
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onNext = {
-                                    focusManager.moveFocus(FocusDirection.Next)
-                                }
-                            ),
-                            errorCode = state.litersErrorCode,
-                            maxLines = 1,
-                            singleLine = true,
-                            textFieldModifier = Modifier.fillMaxWidth(),
-                            capacityMeasureCode = state.capacityMeasureCode,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+
+                    InfoFieldWithErrorAndIcon(
+                        value = state.liters,
+                        onValueChange = {
+                            viewModel.onEvent(DwellerEditEvent.LitersChanged(it))
+                        },
+                        label = stringResource(R.string.capacity_label),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onNext = {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                        ),
+                        errorCode = state.litersErrorCode,
+                        maxLines = 1,
+                        singleLine = true,
+                        textFieldModifier = Modifier.fillMaxWidth(),
+                        capacityMeasureCode = state.capacityMeasureCode
+                    )
 
                     Spacer(modifier = Modifier.height(16.dp))
 

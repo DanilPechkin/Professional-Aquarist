@@ -409,7 +409,7 @@ fun ImagePicker(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InfoFieldWithError(
+fun InfoFieldWithErrorAndIcon(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -466,13 +466,13 @@ fun InfoFieldWithError(
                     Text(
                         text = when (temperatureMeasureCode) {
                             TemperatureMeasure.Celsius.code ->
-                                stringResource(R.string.temperature_measure_celsius)
+                                stringResource(R.string.temperature_measure_celsius_short)
 
                             TemperatureMeasure.Fahrenheit.code ->
-                                stringResource(R.string.temperature_measure_fahrenheit)
+                                stringResource(R.string.temperature_measure_fahrenheit_short)
 
                             TemperatureMeasure.Kelvin.code ->
-                                stringResource(R.string.temperature_measure_kelvin)
+                                stringResource(R.string.temperature_measure_kelvin_short)
 
                             else ->
                                 ""
@@ -517,32 +517,94 @@ fun InfoFieldWithError(
 
                             else ->
                                 ""
-                        }
+                        },
+                        modifier = Modifier.padding(end = 8.dp)
                     )
                 }
                 if (metricMeasureCode != null) {
                     Text(
                         text = when (metricMeasureCode) {
                             MetricMeasure.Millimeters.code ->
-                                stringResource(R.string.metric_measure_millimeters)
+                                stringResource(R.string.metric_measure_millimeters_short)
 
                             MetricMeasure.Centimeters.code ->
-                                stringResource(R.string.metric_measure_centimeters)
+                                stringResource(R.string.metric_measure_centimeters_short)
 
                             MetricMeasure.Meters.code ->
-                                stringResource(R.string.metric_measure_meters)
+                                stringResource(R.string.metric_measure_meters_short)
 
                             MetricMeasure.Inches.code ->
-                                stringResource(R.string.metric_measure_inches)
+                                stringResource(R.string.metric_measure_inche_short)
 
                             MetricMeasure.Feet.code ->
-                                stringResource(R.string.metric_measure_feet)
+                                stringResource(R.string.metric_measure_feet_short)
 
                             else -> ""
                         }
                     )
                 }
             }
+        )
+
+        if (errorCode != null) {
+            Text(
+                text = when (errorCode) {
+                    ValidationError.BLANK_FIELD_ERROR.code -> {
+                        stringResource(R.string.this_field_cant_be_blank_error)
+                    }
+
+                    ValidationError.DECIMAL_ERROR.code -> {
+                        stringResource(R.string.should_be_decimal_error)
+                    }
+
+                    ValidationError.INTEGER_ERROR.code -> {
+                        stringResource(R.string.should_be_integer_error)
+                    }
+
+                    ValidationError.NEGATIVE_VALUE_ERROR.code -> {
+                        stringResource(R.string.this_value_cant_be_negative_error)
+                    }
+
+                    else -> {
+                        stringResource(R.string.unknown_error)
+                    }
+                },
+                color = MaterialTheme.colorScheme.error
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun InfoFieldWithError(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    textFieldModifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    errorCode: Int? = null,
+    maxLines: Int = Int.MAX_VALUE,
+    singleLine: Boolean = false
+) {
+    Column(modifier = modifier) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = {
+                Text(
+                    text = label,
+                    maxLines = 1
+                )
+            },
+            modifier = textFieldModifier,
+            isError = errorCode != null,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
+            maxLines = maxLines,
+            singleLine = singleLine
         )
 
         if (errorCode != null) {
@@ -607,7 +669,7 @@ fun FromToInfoFields(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = valueFrom,
                 onValueChange = onValueFromChange,
                 label = stringResource(R.string.label_from),
@@ -624,7 +686,7 @@ fun FromToInfoFields(
                 capacityMeasureCode = capacityMeasureCode,
                 metricMeasureCode = metricMeasureCode
             )
-            InfoFieldWithError(
+            InfoFieldWithErrorAndIcon(
                 value = valueTo,
                 onValueChange = onValueToChange,
                 label = stringResource(R.string.label_to),

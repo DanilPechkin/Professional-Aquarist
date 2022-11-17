@@ -30,7 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithError
+import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.OutlinedDropDownMenuField
 import com.danilp.professionalaquarist.android.screens.destinations.CalculatorsDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
@@ -76,7 +76,7 @@ fun TemperatureCalculator(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                InfoFieldWithError(
+                InfoFieldWithErrorAndIcon(
                     value = state.inputTemperature,
                     onValueChange = {
                         viewModel.onEvent(TemperatureCalculatorEvent.InputTemperatureChanged(it))
