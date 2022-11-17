@@ -96,7 +96,6 @@ fun PlantsList(
                 .padding(paddingValues)
                 .padding(top = 8.dp)
         ) {
-            Expose
             SwipeRefresh(
                 state = swipeRefreshState,
                 onRefresh = { viewModel.onEvent(PlantsListEvent.Refresh) }
