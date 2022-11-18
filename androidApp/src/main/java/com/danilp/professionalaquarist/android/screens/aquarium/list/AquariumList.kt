@@ -37,8 +37,6 @@ import com.danilp.professionalaquarist.android.screens.GridItem
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MainAquariumScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -53,7 +51,6 @@ fun AquariumList(
 ) {
     val state = viewModel.state
 
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = state.isRefreshing)
     var isSearchFieldVisible by remember { mutableStateOf(false) }
     val searchFieldFocusRequester = remember { FocusRequester() }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
@@ -101,40 +98,34 @@ fun AquariumList(
                 .padding(paddingValues)
                 .padding(top = 8.dp)
         ) {
-
-            SwipeRefresh(
-                state = swipeRefreshState,
-                onRefresh = { viewModel.onEvent(AquariumListEvent.Refresh) }
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(128.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                state = scrollState,
+                modifier = Modifier.fillMaxSize()
             ) {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(128.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                    state = scrollState,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(
-                        items = state.aquariums,
-                        key = { it.id!! }
-                    ) { aquarium ->
-                        GridItem(
-                            label = aquarium.name,
-                            imageUrl = aquarium.imageUrl,
-                            message = aquarium.minTemperature.toString() + " " +
-                                    aquarium.maxTemperature.toString(),
-                            modifier = Modifier
-                                .animateItemPlacement()
-                                .clickable {
-                                    viewModel.onEvent(
-                                        AquariumListEvent.OnAquariumClicked(aquarium.id!!)
-                                    )
-                                    navigator.navigate(
-                                        MainAquariumScreenDestination()
-                                    )
-                                }
-                        )
-                    }
+                items(
+                    items = state.aquariums,
+                    key = { it.id!! }
+                ) { aquarium ->
+                    GridItem(
+                        label = aquarium.name,
+                        imageUrl = aquarium.imageUrl,
+                        message = aquarium.minTemperature.toString() + " " +
+                                aquarium.maxTemperature.toString(),
+                        modifier = Modifier
+                            .animateItemPlacement()
+                            .clickable {
+                                viewModel.onEvent(
+                                    AquariumListEvent.OnAquariumClicked(aquarium.id!!)
+                                )
+                                navigator.navigate(
+                                    MainAquariumScreenDestination()
+                                )
+                            }
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))

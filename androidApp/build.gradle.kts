@@ -72,7 +72,6 @@ dependencies {
         implementation(foundation)
         implementation(foundationLayout)
         implementation(icons)
-        implementation(swipeRefresh)
         implementation(navigation)
         implementation(uiController)
         androidTestImplementation(unitTest)

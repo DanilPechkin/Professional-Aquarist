@@ -37,8 +37,6 @@ import com.danilp.professionalaquarist.android.screens.destinations.AquariumList
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.domain.plant.PlantTags
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -52,7 +50,6 @@ fun PlantsList(
 ) {
     val state = viewModel.state
 
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = state.isRefreshing)
     var isSearchFieldVisible by remember { mutableStateOf(false) }
     val searchFieldFocusRequester = remember { FocusRequester() }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
@@ -96,150 +93,145 @@ fun PlantsList(
                 .padding(paddingValues)
                 .padding(top = 8.dp)
         ) {
-            SwipeRefresh(
-                state = swipeRefreshState,
-                onRefresh = { viewModel.onEvent(PlantsListEvent.Refresh) }
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(160.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),
+                state = scrollState,
+                modifier = Modifier.fillMaxSize()
             ) {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(160.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),
-                    state = scrollState,
-                    modifier = Modifier.fillMaxSize()
+                if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        GridTitle(
+                            title = stringResource(R.string.broadleaf_title)
+                        )
+                    }
+                    items(
+                        state.plants.filter {
+                            it.tags?.contains(PlantTags.BROADLEAF_PLANT) ?: false
+                        }
+                    ) { plant ->
+                        GridItem(
+                            label = plant.name,
+                            message = "Healthy",
+                            imageUrl = plant.imageUrl,
+                            modifier = Modifier
+                                .clickable {
+                                    navigator.navigate(
+                                        PlantEditDestination(
+                                            plant.id!!
+                                        )
+                                    )
+                                }
+                        )
+                    }
+                }
+                if (state.plants.any {
+                        it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true
+                    }
                 ) {
-                    if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            GridTitle(
-                                title = stringResource(R.string.broadleaf_title)
-                            )
-                        }
-                        items(
-                            state.plants.filter {
-                                it.tags?.contains(PlantTags.BROADLEAF_PLANT) ?: false
-                            }
-                        ) { plant ->
-                            GridItem(
-                                label = plant.name,
-                                message = "Healthy",
-                                imageUrl = plant.imageUrl,
-                                modifier = Modifier
-                                    .clickable {
-                                        navigator.navigate(
-                                            PlantEditDestination(
-                                                plant.id!!
-                                            )
-                                        )
-                                    }
-                            )
-                        }
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        GridTitle(
+                            title = stringResource(R.string.long_stemmed_title)
+                        )
                     }
-                    if (state.plants.any {
-                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true
+                    items(
+                        state.plants.filter {
+                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
                         }
-                    ) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            GridTitle(
-                                title = stringResource(R.string.long_stemmed_title)
-                            )
-                        }
-                        items(
-                            state.plants.filter {
-                                it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
-                            }
-                        ) { plant ->
-                            GridItem(
-                                label = plant.name,
-                                message = "Healthy",
-                                imageUrl = plant.imageUrl,
-                                modifier = Modifier
-                                    .clickable {
-                                        navigator.navigate(
-                                            PlantEditDestination(
-                                                plant.id!!
-                                            )
+                    ) { plant ->
+                        GridItem(
+                            label = plant.name,
+                            message = "Healthy",
+                            imageUrl = plant.imageUrl,
+                            modifier = Modifier
+                                .clickable {
+                                    navigator.navigate(
+                                        PlantEditDestination(
+                                            plant.id!!
                                         )
-                                    }
-                            )
-                        }
+                                    )
+                                }
+                        )
                     }
-                    if (state.plants.any { it.tags?.contains(PlantTags.FLOATING_PLANT) == true }) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            GridTitle(
-                                title = stringResource(R.string.floating_plant_title)
-                            )
-                        }
-                        items(
-                            state.plants.filter {
-                                it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
-                            }
-                        ) { plant ->
-                            GridItem(
-                                label = plant.name,
-                                message = "Healthy",
-                                imageUrl = plant.imageUrl,
-                                modifier = Modifier
-                                    .clickable {
-                                        navigator.navigate(
-                                            PlantEditDestination(
-                                                plant.id!!
-                                            )
-                                        )
-                                    }
-                            )
-                        }
+                }
+                if (state.plants.any { it.tags?.contains(PlantTags.FLOATING_PLANT) == true }) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        GridTitle(
+                            title = stringResource(R.string.floating_plant_title)
+                        )
                     }
-                    if (state.plants.any { it.tags?.contains(PlantTags.MOSS) == true }) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            GridTitle(
-                                title = stringResource(R.string.moss_title)
-                            )
+                    items(
+                        state.plants.filter {
+                            it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
                         }
-                        items(
-                            state.plants.filter {
-                                it.tags?.contains(PlantTags.MOSS) ?: false
-                            }
-                        ) { plant ->
-                            GridItem(
-                                label = plant.name,
-                                message = "Healthy",
-                                imageUrl = plant.imageUrl,
-                                modifier = Modifier
-                                    .clickable {
-                                        navigator.navigate(
-                                            PlantEditDestination(
-                                                plant.id!!
-                                            )
+                    ) { plant ->
+                        GridItem(
+                            label = plant.name,
+                            message = "Healthy",
+                            imageUrl = plant.imageUrl,
+                            modifier = Modifier
+                                .clickable {
+                                    navigator.navigate(
+                                        PlantEditDestination(
+                                            plant.id!!
                                         )
-                                    }
-                            )
-                        }
+                                    )
+                                }
+                        )
                     }
-                    if (state.plants.any { it.tags?.contains(PlantTags.FERN) == true }) {
-                        item(span = { GridItemSpan(maxLineSpan) }) {
-                            GridTitle(
-                                title = stringResource(R.string.fern_title)
-                            )
+                }
+                if (state.plants.any { it.tags?.contains(PlantTags.MOSS) == true }) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        GridTitle(
+                            title = stringResource(R.string.moss_title)
+                        )
+                    }
+                    items(
+                        state.plants.filter {
+                            it.tags?.contains(PlantTags.MOSS) ?: false
                         }
-                        items(
-                            state.plants.filter {
-                                it.tags?.contains(PlantTags.FERN) ?: false
-                            }
-                        ) { plant ->
-                            GridItem(
-                                label = plant.name,
-                                message = "Healthy",
-                                imageUrl = plant.imageUrl,
-                                modifier = Modifier
-                                    .clickable {
-                                        navigator.navigate(
-                                            PlantEditDestination(
-                                                plant.id!!
-                                            )
+                    ) { plant ->
+                        GridItem(
+                            label = plant.name,
+                            message = "Healthy",
+                            imageUrl = plant.imageUrl,
+                            modifier = Modifier
+                                .clickable {
+                                    navigator.navigate(
+                                        PlantEditDestination(
+                                            plant.id!!
                                         )
-                                    }
-                            )
+                                    )
+                                }
+                        )
+                    }
+                }
+                if (state.plants.any { it.tags?.contains(PlantTags.FERN) == true }) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        GridTitle(
+                            title = stringResource(R.string.fern_title)
+                        )
+                    }
+                    items(
+                        state.plants.filter {
+                            it.tags?.contains(PlantTags.FERN) ?: false
                         }
+                    ) { plant ->
+                        GridItem(
+                            label = plant.name,
+                            message = "Healthy",
+                            imageUrl = plant.imageUrl,
+                            modifier = Modifier
+                                .clickable {
+                                    navigator.navigate(
+                                        PlantEditDestination(
+                                            plant.id!!
+                                        )
+                                    )
+                                }
+                        )
                     }
                 }
             }
