@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -53,6 +54,7 @@ fun AquariumEdit(
     var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
+    var openDeleteDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = LocalContext.current) {
         viewModel.validationEvents.collect { event ->
@@ -85,6 +87,24 @@ fun AquariumEdit(
             )
         }
     ) { paddingValues ->
+        if (openDeleteDialog) {
+            AlertDialog(
+                onDismissRequest = { openDeleteDialog = false },
+                icon = { Icon(Icons.Rounded.Delete, stringResource(R.string.delete_button)) },
+                title = { Text(text = stringResource(R.string.permanently_delete_title)) },
+                text = { Text(text = stringResource(R.string.permanently_delete_aquarium_text)) },
+                dismissButton = {
+                    TextButton(onClick = { openDeleteDialog = false }) {
+                        Text(text = stringResource(R.string.cancel_button))
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { viewModel.onEvent(AquariumEditEvent.DeleteButtonPressed) }) {
+                        Text(text = stringResource(R.string.delete_button))
+                    }
+                }
+            )
+        }
         Column(
             Modifier
                 .padding(paddingValues)
@@ -523,9 +543,7 @@ fun AquariumEdit(
                 horizontalArrangement = Arrangement.Center
             ) {
                 OutlinedButton(
-                    onClick = {
-                        viewModel.onEvent(AquariumEditEvent.DeleteButtonPressed)
-                    },
+                    onClick = { openDeleteDialog = true },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.error

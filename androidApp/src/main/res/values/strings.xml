@@ -172,4 +172,11 @@
     <string name="alkalinity_measure_meql_short">meq/l</string>
     <string name="alkalinity_measure_mgl_short">mg/l</string>
     <string name="save_changes">Save changes</string>
+    <string name="permanently_delete_title">Permanently delete?</string>
+    <string name="permanently_delete_plant_text">Deleting this plant will also remove it from all synced devices.</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="permanently_delete_aquarium_text">Deleting this aquarium will also remove it and all it contents from all synced devices.</string>
+    <string name="permanently_delete_dweller_text">Deleting this dweller will also remove it from all synced devices.</string>
+    <string name="set_default_title">Set default?</string>
+    <string name="set_default_settings_text">All changes will be deleted.</string>
 </resources>

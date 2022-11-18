@@ -106,27 +106,23 @@ class SettingsViewModel @Inject constructor(
         when (event) {
             is SettingsEvent.SaveButtonPressed -> {
                 viewModelScope.launch {
-                    with(sharedPreferences.edit()) {
-                        this.putInt(SharedPrefs.AlkalinityMeasure.key, state.alkalinityMeasureCode)
-                        this.putInt(SharedPrefs.CapacityMeasure.key, state.capacityMeasureCode)
-                        this.putInt(SharedPrefs.MetricMeasure.key, state.metricMeasureCode)
-                        this.putInt(
-                            SharedPrefs.TemperatureMeasure.key,
-                            state.temperatureMeasureCode
-                        )
-                        this.apply()
-                    }
-                    savingEventChannel.send(SavingEvent.Success)
+                    saveSettings()
+                    savingEventChannel.send(SavingEvent.Saved)
+                    savingEventChannel.send(SavingEvent.Done)
                 }
             }
 
             is SettingsEvent.DefaultButtonPressed -> {
-                state = state.copy(
-                    alkalinityMeasureCode = AlkalinityMeasure.DKH.code,
-                    capacityMeasureCode = CapacityMeasure.Liters.code,
-                    metricMeasureCode = MetricMeasure.Meters.code,
-                    temperatureMeasureCode = TemperatureMeasure.Celsius.code
-                )
+                viewModelScope.launch {
+                    state = state.copy(
+                        alkalinityMeasureCode = AlkalinityMeasure.DKH.code,
+                        capacityMeasureCode = CapacityMeasure.Liters.code,
+                        metricMeasureCode = MetricMeasure.Meters.code,
+                        temperatureMeasureCode = TemperatureMeasure.Celsius.code
+                    )
+                    saveSettings()
+                    savingEventChannel.send(SavingEvent.Saved)
+                }
             }
 
             is SettingsEvent.AlkalinityChanged -> {
@@ -147,7 +143,22 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    private fun saveSettings() {
+        with(sharedPreferences.edit()) {
+            this.putInt(SharedPrefs.AlkalinityMeasure.key, state.alkalinityMeasureCode)
+            this.putInt(SharedPrefs.CapacityMeasure.key, state.capacityMeasureCode)
+            this.putInt(SharedPrefs.MetricMeasure.key, state.metricMeasureCode)
+            this.putInt(
+                SharedPrefs.TemperatureMeasure.key,
+                state.temperatureMeasureCode
+            )
+            this.apply()
+        }
+    }
+
     sealed class SavingEvent {
-        object Success : SavingEvent()
+        object Done : SavingEvent()
+        object Saved : SavingEvent()
+
     }
 }

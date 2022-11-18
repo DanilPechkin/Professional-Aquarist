@@ -21,7 +21,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -76,6 +78,7 @@ fun DwellerEdit(
     var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
+    var openDeleteDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = LocalContext.current) {
         viewModel.validationEvents.collect { event ->
@@ -108,6 +111,24 @@ fun DwellerEdit(
             )
         }
     ) { paddingValues ->
+        if (openDeleteDialog) {
+            AlertDialog(
+                onDismissRequest = { openDeleteDialog = false },
+                icon = { Icon(Icons.Rounded.Delete, stringResource(R.string.delete_button)) },
+                title = { Text(text = stringResource(R.string.permanently_delete_title)) },
+                text = { Text(text = stringResource(R.string.permanently_delete_dweller_text)) },
+                dismissButton = {
+                    TextButton(onClick = { openDeleteDialog = false }) {
+                        Text(text = stringResource(R.string.cancel_button))
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { viewModel.onEvent(DwellerEditEvent.DeleteButtonPressed) }) {
+                        Text(text = stringResource(R.string.delete_button))
+                    }
+                }
+            )
+        }
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -374,9 +395,7 @@ fun DwellerEdit(
                 horizontalArrangement = Arrangement.Center
             ) {
                 OutlinedButton(
-                    onClick = {
-                        viewModel.onEvent(DwellerEditEvent.DeleteButtonPressed)
-                    },
+                    onClick = { openDeleteDialog = true },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.error

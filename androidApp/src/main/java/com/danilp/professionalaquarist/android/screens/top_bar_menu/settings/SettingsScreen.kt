@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material.icons.rounded.SettingsBackupRestore
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,21 +51,24 @@ fun SettingsScreen(
     val state = viewModel.state
 
     var isTopMenuExpanded by remember { mutableStateOf(false) }
+    var openSetDefaultDialog by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
 
     LaunchedEffect(key1 = context) {
         viewModel.savingEvents.collect { event ->
             when (event) {
-                is SettingsViewModel.SavingEvent.Success -> {
+                is SettingsViewModel.SavingEvent.Done -> {
+                    navigator.clearBackStack(AquariumListDestination)
+                    navigator.navigate(AquariumListDestination)
+                }
+
+                SettingsViewModel.SavingEvent.Saved -> {
                     Toast.makeText(
                         context,
                         context.getText(R.string.save_settings_toast),
                         Toast.LENGTH_SHORT
                     ).show()
-
-                    navigator.clearBackStack(AquariumListDestination)
-                    navigator.navigate(AquariumListDestination)
                 }
             }
         }
@@ -88,6 +94,34 @@ fun SettingsScreen(
             )
         }
     ) { paddingValues ->
+        if (openSetDefaultDialog) {
+            AlertDialog(
+                onDismissRequest = { openSetDefaultDialog = false },
+                icon = {
+                    Icon(
+                        Icons.Rounded.SettingsBackupRestore,
+                        stringResource(R.string.set_default_button)
+                    )
+                },
+                title = { Text(text = stringResource(R.string.set_default_title)) },
+                text = { Text(text = stringResource(R.string.set_default_settings_text)) },
+                dismissButton = {
+                    TextButton(onClick = { openSetDefaultDialog = false }) {
+                        Text(text = stringResource(R.string.cancel_button))
+                    }
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            openSetDefaultDialog = false
+                            viewModel.onEvent(SettingsEvent.DefaultButtonPressed)
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.set_default_button))
+                    }
+                }
+            )
+        }
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -164,9 +198,7 @@ fun SettingsScreen(
                 horizontalArrangement = Arrangement.Center
             ) {
                 OutlinedButton(
-                    onClick = {
-                        viewModel.onEvent(SettingsEvent.DefaultButtonPressed)
-                    }
+                    onClick = { openSetDefaultDialog = true }
                 ) {
                     Text(text = stringResource(R.string.set_default_button))
                 }
