@@ -29,12 +29,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
-import com.danilp.professionalaquarist.android.screens.AquariumTopBar
-import com.danilp.professionalaquarist.android.screens.FromToInfoFields
-import com.danilp.professionalaquarist.android.screens.ImagePicker
-import com.danilp.professionalaquarist.android.screens.InfoFieldWithErrorAndIcon
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.android.ui.AquariumTopBar
+import com.danilp.professionalaquarist.android.ui.FromToInfoFields
+import com.danilp.professionalaquarist.android.ui.ImagePicker
+import com.danilp.professionalaquarist.android.ui.InfoFieldWithErrorAndIcon
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

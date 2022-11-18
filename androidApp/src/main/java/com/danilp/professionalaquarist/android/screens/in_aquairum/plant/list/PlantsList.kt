@@ -30,12 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
-import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
-import com.danilp.professionalaquarist.android.screens.GridItem
-import com.danilp.professionalaquarist.android.screens.GridTitle
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.ui.GridItem
+import com.danilp.professionalaquarist.android.ui.GridTitle
+import com.danilp.professionalaquarist.android.ui.isScrollingUp
 import com.danilp.professionalaquarist.domain.plant.PlantTags
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -84,7 +85,7 @@ fun PlantsList(
                 },
                 icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_plant_button)) },
                 text = { Text(text = stringResource(R.string.add_plant_button)) },
-                expanded = !scrollState.isScrollInProgress
+                expanded = scrollState.isScrollingUp()
             )
         }
     ) { paddingValues ->

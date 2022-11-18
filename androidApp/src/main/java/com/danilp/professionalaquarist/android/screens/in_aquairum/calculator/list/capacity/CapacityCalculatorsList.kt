@@ -12,9 +12,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
-import com.danilp.professionalaquarist.android.screens.AquaristListItem
-import com.danilp.professionalaquarist.android.screens.AquariumTopBar
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.android.ui.AquaristListItem
+import com.danilp.professionalaquarist.android.ui.AquariumTopBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

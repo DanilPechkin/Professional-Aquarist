@@ -32,11 +32,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
-import com.danilp.professionalaquarist.android.screens.AquariumTopBarWithSearch
-import com.danilp.professionalaquarist.android.screens.GridItem
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MainAquariumScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
+import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
+import com.danilp.professionalaquarist.android.ui.GridItem
+import com.danilp.professionalaquarist.android.ui.isScrollingUp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -89,7 +90,7 @@ fun AquariumList(
                 },
                 icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_aquarium_fab)) },
                 text = { Text(stringResource(R.string.add_aquarium_fab)) },
-                expanded = !scrollState.isScrollInProgress
+                expanded = scrollState.isScrollingUp()
             )
         }
     ) { paddingValues ->

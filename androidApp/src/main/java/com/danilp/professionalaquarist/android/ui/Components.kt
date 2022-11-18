@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.android.screens
+package com.danilp.professionalaquarist.android.ui
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
