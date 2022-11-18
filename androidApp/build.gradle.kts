@@ -3,7 +3,7 @@ import com.danilp.buildsrc.Deps
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("com.google.devtools.ksp") version "1.7.20-1.0.6"
+    id("com.google.devtools.ksp") version "1.7.21-1.0.8"
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
@@ -30,7 +30,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.0-alpha02"
     }
     packagingOptions {
         resources {
@@ -61,7 +61,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.activity:activity-compose:1.6.0")
+    implementation("androidx.activity:activity-compose:1.6.1")
 
     with(Deps.Compose) {
         implementation(ui)
@@ -74,6 +74,7 @@ dependencies {
         implementation(icons)
         implementation(swipeRefresh)
         implementation(navigation)
+        implementation(uiController)
         androidTestImplementation(unitTest)
         debugImplementation(debugTest)
         debugImplementation(debugTooling)
