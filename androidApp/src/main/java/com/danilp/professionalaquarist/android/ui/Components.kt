@@ -122,7 +122,8 @@ fun AquariumTopBar(
     hideMenu: () -> Unit,
     navigateBack: () -> Unit,
     navigateToSettings: () -> Unit,
-    navigateToAccount: () -> Unit
+    navigateToAccount: () -> Unit,
+    navigationIcon: ImageVector = Icons.Rounded.ArrowBack
 ) {
     TopAppBar(
         title = {
@@ -137,7 +138,7 @@ fun AquariumTopBar(
                 onClick = navigateBack
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
+                    imageVector = navigationIcon,
                     contentDescription = stringResource(R.string.content_description_back_arrow)
                 )
             }

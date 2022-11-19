@@ -208,4 +208,12 @@
     <string name="show_more_button">Show more</string>
     <string name="unknown_label">unknown</string>
     <string name="occupied_volume_in_the_aquarium">Occupied volume in the aquarium</string>
+    <string name="plant_title">Plant</string>
+    <string name="plant_image">Plant image</string>
+    <string name="this_plant_is_in_danger">This plant is in danger</string>
+    <string name="wishes_of_this_plant_are_not_fulfilled">Wishes of this plant are not fulfilled</string>
+    <string name="not_enough_illumination">Not enough illumination</string>
+    <string name="needs_bright_light">Needs bright light</string>
+    <string name="needs_low_light">Needs low light</string>
+    <string name="co2_label">CO2</string>
 </resources>

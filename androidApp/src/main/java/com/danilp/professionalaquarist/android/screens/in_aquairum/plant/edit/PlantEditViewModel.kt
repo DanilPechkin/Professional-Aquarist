@@ -11,6 +11,7 @@ import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.Sha
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.plant.Plant
 import com.danilp.professionalaquarist.domain.plant.PlantDataSource
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
 import com.danilp.professionalaquarist.domain.plant.use_case.ConvertPlantMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure
@@ -302,7 +303,8 @@ class PlantEditViewModel @Inject constructor(
                     maxKh = state.maxKh.ifBlank { null }?.toDouble(),
                     minIllumination = state.minIllumination.ifBlank { null }?.toDoubleOrNull(),
                     minCO2 = state.minCO2.ifBlank { null }?.toDoubleOrNull(),
-                    description = state.description.ifBlank { null }
+                    description = state.description.ifBlank { null },
+                    tags = listOf(PlantTags.BROADLEAF_PLANT)
                 )
             )
 

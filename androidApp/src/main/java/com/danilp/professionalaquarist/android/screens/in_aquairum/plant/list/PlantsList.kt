@@ -32,6 +32,7 @@ import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
+import com.danilp.professionalaquarist.android.screens.destinations.PlantInfoDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
 import com.danilp.professionalaquarist.android.ui.GridItem
@@ -120,7 +121,7 @@ fun PlantsList(
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -149,7 +150,7 @@ fun PlantsList(
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -175,7 +176,7 @@ fun PlantsList(
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -201,7 +202,7 @@ fun PlantsList(
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -227,7 +228,7 @@ fun PlantsList(
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
