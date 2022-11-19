@@ -198,11 +198,11 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 val updatedDweller = dweller.copy(
                     statusTags = (statusTags + notMetTags).ifEmpty { null },
                     status = when (statusTags.size) {
-                        0 -> ComfortTags.EXTREMELY_SATISFIED
+                        0 -> ComfortTags.VERY_SATISFIED
                         1 -> ComfortTags.SATISFIED
                         2 -> ComfortTags.DISSATISFIED
-                        3 -> ComfortTags.EXTREMELY_DISSATISFIED
-                        else -> ComfortTags.EXTREMELY_DISSATISFIED
+                        3 -> ComfortTags.VERY_DISSATISFIED
+                        else -> ComfortTags.VERY_DISSATISFIED
                     }
                 )
                 dwellerQueries.insertDweller(
@@ -280,11 +280,11 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 val updatedPlant = plant.copy(
                     statusTags = (statusTags + notMetTags).ifEmpty { null },
                     status = when (statusTags.size) {
-                        0 -> ComfortTags.EXTREMELY_SATISFIED
+                        0 -> ComfortTags.VERY_SATISFIED
                         1 -> ComfortTags.SATISFIED
                         2 -> ComfortTags.DISSATISFIED
-                        3 -> ComfortTags.EXTREMELY_DISSATISFIED
-                        else -> ComfortTags.EXTREMELY_DISSATISFIED
+                        3 -> ComfortTags.VERY_DISSATISFIED
+                        else -> ComfortTags.VERY_DISSATISFIED
                     }
                 )
                 plantQueries.insertPlant(

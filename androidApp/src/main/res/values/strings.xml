@@ -179,4 +179,8 @@
     <string name="permanently_delete_dweller_text">Deleting this dweller will also remove it from all synced devices.</string>
     <string name="set_default_title">Set default?</string>
     <string name="set_default_settings_text">All changes will be deleted.</string>
+    <string name="very_satisfied">Very satisfied</string>
+    <string name="satisfied">Satisfied</string>
+    <string name="dissatisfied">Dissatisfied</string>
+    <string name="very_dissatisfied">Very dissatisfied</string>
 </resources>

@@ -17,6 +17,7 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -182,50 +183,53 @@ class PlantEditViewModel @Inject constructor(
     }
 
     private fun submitData() {
-        val nameResult = validate.string(state.name)
-        val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
-        val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
-        val minPhResult = validate.decimal(state.minPh)
-        val maxPhResult = validate.decimal(state.maxPh)
-        val minGhResult = validate.decimal(state.minGh)
-        val maxGhResult = validate.decimal(state.maxGh)
-        val minKhResult = validate.decimal(state.minKh)
-        val maxKhResult = validate.decimal(state.maxKh)
-        val minCO2Result = validate.decimal(state.minCO2)
-        val minIlluminationResult = validate.decimal(state.minIllumination)
+        state = state.copy(isLoading = true)
+        viewModelScope.launch(Dispatchers.IO) {
 
-        val hasError = listOf(
-            nameResult,
-            minTemperatureResult,
-            maxTemperatureResult,
-            minPhResult,
-            maxPhResult,
-            minGhResult,
-            maxGhResult,
-            minKhResult,
-            maxKhResult,
-            minCO2Result,
-            minIlluminationResult
-        ).any { it.errorCode != null }
+            val nameResult = validate.string(state.name)
+            val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
+            val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
+            val minPhResult = validate.decimal(state.minPh)
+            val maxPhResult = validate.decimal(state.maxPh)
+            val minGhResult = validate.decimal(state.minGh)
+            val maxGhResult = validate.decimal(state.maxGh)
+            val minKhResult = validate.decimal(state.minKh)
+            val maxKhResult = validate.decimal(state.maxKh)
+            val minCO2Result = validate.decimal(state.minCO2)
+            val minIlluminationResult = validate.decimal(state.minIllumination)
 
-        if (hasError) {
-            state = state.copy(
-                nameErrorCode = nameResult.errorCode,
-                minTemperatureErrorCode = minTemperatureResult.errorCode,
-                maxTemperatureErrorCode = maxTemperatureResult.errorCode,
-                minPhErrorCode = minPhResult.errorCode,
-                maxPhErrorCode = maxPhResult.errorCode,
-                minGhErrorCode = minGhResult.errorCode,
-                maxGhErrorCode = maxGhResult.errorCode,
-                minKhErrorCode = minKhResult.errorCode,
-                maxKhErrorCode = maxKhResult.errorCode,
-                minCO2ErrorCode = minCO2Result.errorCode,
-                minIlluminationErrorCode = minIlluminationResult.errorCode
-            )
-            return
-        }
+            val hasError = listOf(
+                nameResult,
+                minTemperatureResult,
+                maxTemperatureResult,
+                minPhResult,
+                maxPhResult,
+                minGhResult,
+                maxGhResult,
+                minKhResult,
+                maxKhResult,
+                minCO2Result,
+                minIlluminationResult
+            ).any { it.errorCode != null }
 
-        viewModelScope.launch {
+            if (hasError) {
+                state = state.copy(
+                    nameErrorCode = nameResult.errorCode,
+                    minTemperatureErrorCode = minTemperatureResult.errorCode,
+                    maxTemperatureErrorCode = maxTemperatureResult.errorCode,
+                    minPhErrorCode = minPhResult.errorCode,
+                    maxPhErrorCode = maxPhResult.errorCode,
+                    minGhErrorCode = minGhResult.errorCode,
+                    maxGhErrorCode = maxGhResult.errorCode,
+                    minKhErrorCode = minKhResult.errorCode,
+                    maxKhErrorCode = maxKhResult.errorCode,
+                    minCO2ErrorCode = minCO2Result.errorCode,
+                    minIlluminationErrorCode = minIlluminationResult.errorCode
+                )
+                return@launch
+            }
+
+
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
             val isPhCorrect = (
                     (
@@ -313,6 +317,7 @@ class PlantEditViewModel @Inject constructor(
             insert(state.plant)
             validationEventChannel.send(ValidationEvent.Success)
         }
+        state = state.copy(isLoading = false)
     }
 
     sealed class ValidationEvent {

@@ -7,6 +7,7 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 
 data class DwellerEditState(
     val dweller: Dweller = Dweller.createEmpty(),
+    val isLoading: Boolean = false,
     val temperatureMeasureCode: Int = TemperatureMeasure.Celsius.code,
     val alkalinityMeasureCode: Int = AlkalinityMeasure.DKH.code,
     val capacityMeasureCode: Int = CapacityMeasure.Liters.code,

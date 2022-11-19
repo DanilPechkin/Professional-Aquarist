@@ -6,6 +6,7 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 
 data class PlantEditState(
     val plant: Plant = Plant.createEmpty(),
+    val isLoading: Boolean = false,
     val temperatureMeasureCode: Int = TemperatureMeasure.Celsius.code,
     val alkalinityMeasureCode: Int = AlkalinityMeasure.DKH.code,
     // Stats
