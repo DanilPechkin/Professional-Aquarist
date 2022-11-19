@@ -29,6 +29,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -98,7 +99,7 @@ fun DwellerEdit(
                 switchMenuVisibility = { isTopMenuExpanded = !isTopMenuExpanded },
                 isMenuExpanded = isTopMenuExpanded,
                 hideMenu = { isTopMenuExpanded = false },
-                navigateBack = { navigator.navigateUp() },
+                navigateBack = { navigator.navigate(DwellersListDestination) },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
                 navigateToAccount = { },
                 navigationIcon = Icons.Rounded.Close
@@ -133,10 +134,20 @@ fun DwellerEdit(
                 }
             )
         }
+
+        if (state.isLoading) {
+            LinearProgressIndicator(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(paddingValues)
+            )
+        }
+
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
+                .padding(top = 8.dp)
                 .fillMaxSize()
                 .verticalScroll(scrollState)
         ) {

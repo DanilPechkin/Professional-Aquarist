@@ -21,5 +21,7 @@ fun DwellerEntity.toDweller(): Dweller =
         minGh = minGh,
         maxGh = maxGh,
         minKh = minKh,
-        maxKh = maxKh
+        maxKh = maxKh,
+        status = status,
+        statusTags = statusTags?.split(" ")
     )

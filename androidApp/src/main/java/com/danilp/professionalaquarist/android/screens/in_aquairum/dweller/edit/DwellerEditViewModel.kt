@@ -11,6 +11,7 @@ import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.Sha
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.dweller.Dweller
 import com.danilp.professionalaquarist.domain.dweller.DwellerDataSource
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
 import com.danilp.professionalaquarist.domain.dweller.use_case.ConvertDwellerMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
@@ -18,6 +19,7 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.te
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -189,50 +191,51 @@ class DwellerEditViewModel @Inject constructor(
     }
 
     private fun submitData() {
-        val nameResult = validate.string(state.name)
-        val amountResult = validate.integer(state.amount, isRequired = true)
-        val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
-        val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
-        val litersResult = validate.decimal(state.liters, isRequired = true)
-        val minPhResult = validate.decimal(state.minPh)
-        val maxPhResult = validate.decimal(state.maxPh)
-        val minGhResult = validate.decimal(state.minGh)
-        val maxGhResult = validate.decimal(state.maxGh)
-        val minKhResult = validate.decimal(state.minKh)
-        val maxKhResult = validate.decimal(state.maxKh)
+        state = state.copy(isLoading = true)
+        viewModelScope.launch(Dispatchers.IO) {
+            val nameResult = validate.string(state.name)
+            val amountResult = validate.integer(state.amount, isRequired = true)
+            val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
+            val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
+            val litersResult = validate.decimal(state.liters, isRequired = true)
+            val minPhResult = validate.decimal(state.minPh)
+            val maxPhResult = validate.decimal(state.maxPh)
+            val minGhResult = validate.decimal(state.minGh)
+            val maxGhResult = validate.decimal(state.maxGh)
+            val minKhResult = validate.decimal(state.minKh)
+            val maxKhResult = validate.decimal(state.maxKh)
 
-        val hasError = listOf(
-            nameResult,
-            amountResult,
-            minTemperatureResult,
-            maxTemperatureResult,
-            litersResult,
-            minPhResult,
-            maxPhResult,
-            minGhResult,
-            maxGhResult,
-            minKhResult,
-            maxKhResult
-        ).any { it.errorCode != null }
+            val hasError = listOf(
+                nameResult,
+                amountResult,
+                minTemperatureResult,
+                maxTemperatureResult,
+                litersResult,
+                minPhResult,
+                maxPhResult,
+                minGhResult,
+                maxGhResult,
+                minKhResult,
+                maxKhResult
+            ).any { it.errorCode != null }
 
-        if (hasError) {
-            state = state.copy(
-                nameErrorCode = nameResult.errorCode,
-                amountErrorCode = amountResult.errorCode,
-                minTemperatureErrorCode = minTemperatureResult.errorCode,
-                maxTemperatureErrorCode = maxTemperatureResult.errorCode,
-                litersErrorCode = litersResult.errorCode,
-                minPhErrorCode = minPhResult.errorCode,
-                maxPhErrorCode = maxPhResult.errorCode,
-                minGhErrorCode = minGhResult.errorCode,
-                maxGhErrorCode = maxGhResult.errorCode,
-                minKhErrorCode = minKhResult.errorCode,
-                maxKhErrorCode = maxKhResult.errorCode
-            )
-            return
-        }
+            if (hasError) {
+                state = state.copy(
+                    nameErrorCode = nameResult.errorCode,
+                    amountErrorCode = amountResult.errorCode,
+                    minTemperatureErrorCode = minTemperatureResult.errorCode,
+                    maxTemperatureErrorCode = maxTemperatureResult.errorCode,
+                    litersErrorCode = litersResult.errorCode,
+                    minPhErrorCode = minPhResult.errorCode,
+                    maxPhErrorCode = maxPhResult.errorCode,
+                    minGhErrorCode = minGhResult.errorCode,
+                    maxGhErrorCode = maxGhResult.errorCode,
+                    minKhErrorCode = minKhResult.errorCode,
+                    maxKhErrorCode = maxKhResult.errorCode
+                )
+                return@launch
+            }
 
-        viewModelScope.launch {
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
             val isPhCorrect =
                 ((state.minPh.toDoubleOrNull() ?: 0.0) < (state.maxPh.toDoubleOrNull() ?: 0.0))
@@ -287,7 +290,8 @@ class DwellerEditViewModel @Inject constructor(
                     maxGh = state.maxGh.ifBlank { null }?.toDouble(),
                     minKh = state.minKh.ifBlank { null }?.toDouble(),
                     maxKh = state.maxKh.ifBlank { null }?.toDouble(),
-                    description = state.description.ifBlank { null }
+                    description = state.description.ifBlank { null },
+                    tags = listOf(DwellerTags.FISH)
                 )
             )
 
@@ -303,6 +307,7 @@ class DwellerEditViewModel @Inject constructor(
             insert(state.dweller)
             validationEventChannel.send(ValidationEvent.Success)
         }
+        state = state.copy(isLoading = false)
     }
 
     sealed class ValidationEvent {

@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
-import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
+import com.danilp.professionalaquarist.domain.aquarium.use_case.SearchAquariums
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class AquariumListViewModel @Inject constructor(

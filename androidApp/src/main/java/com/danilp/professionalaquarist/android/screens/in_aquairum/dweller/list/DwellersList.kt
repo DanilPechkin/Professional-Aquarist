@@ -32,12 +32,13 @@ import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.DwellerEditDestination
+import com.danilp.professionalaquarist.android.screens.destinations.DwellerInfoDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
 import com.danilp.professionalaquarist.android.ui.GridItem
 import com.danilp.professionalaquarist.android.ui.GridTitle
 import com.danilp.professionalaquarist.android.ui.isScrollingUp
-import com.danilp.professionalaquarist.domain.dweller.DwellerTags
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -115,11 +116,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }
@@ -138,11 +139,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }
@@ -161,11 +162,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }
@@ -184,11 +185,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }
@@ -207,11 +208,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }
@@ -230,11 +231,11 @@ fun DwellersList(
                     ) { dweller ->
                         GridItem(
                             label = dweller.name,
-                            message = "Healthy",
+                            message = dweller.status ?: "",
                             imageUrl = dweller.imageUrl,
                             modifier = Modifier
                                 .clickable {
-                                    navigator.navigate(DwellerEditDestination(dweller.id!!))
+                                    navigator.navigate(DwellerInfoDestination(dweller.id!!))
                                 }
                         )
                     }

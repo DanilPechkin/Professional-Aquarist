@@ -32,12 +32,13 @@ import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.PlantEditDestination
+import com.danilp.professionalaquarist.android.screens.destinations.PlantInfoDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
 import com.danilp.professionalaquarist.android.ui.GridItem
 import com.danilp.professionalaquarist.android.ui.GridTitle
 import com.danilp.professionalaquarist.android.ui.isScrollingUp
-import com.danilp.professionalaquarist.domain.plant.PlantTags
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -115,12 +116,12 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -144,12 +145,12 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -170,12 +171,12 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -196,12 +197,12 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )
@@ -222,12 +223,12 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
                                     navigator.navigate(
-                                        PlantEditDestination(
+                                        PlantInfoDestination(
                                             plant.id!!
                                         )
                                     )

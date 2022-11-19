@@ -1,7 +1,7 @@
 package com.danilp.professionalaquarist.android.di
 
-import com.danilp.professionalaquarist.domain.aquarium.ConvertAquariumMeasures
-import com.danilp.professionalaquarist.domain.aquarium.SearchAquariums
+import com.danilp.professionalaquarist.domain.aquarium.use_case.ConvertAquariumMeasures
+import com.danilp.professionalaquarist.domain.aquarium.use_case.SearchAquariums
 import com.danilp.professionalaquarist.domain.dweller.use_case.ConvertDwellerMeasures
 import com.danilp.professionalaquarist.domain.dweller.use_case.SearchDwellers
 import com.danilp.professionalaquarist.domain.plant.use_case.ConvertPlantMeasures

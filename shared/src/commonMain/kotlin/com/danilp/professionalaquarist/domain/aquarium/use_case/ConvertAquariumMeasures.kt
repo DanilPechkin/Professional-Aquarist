@@ -1,5 +1,6 @@
-package com.danilp.professionalaquarist.domain.aquarium
+package com.danilp.professionalaquarist.domain.aquarium.use_case
 
+import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.ConvertDKH
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.ConvertCelsius

@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.domain.plant
+package com.danilp.professionalaquarist.domain.plant.tags
 
 object PlantTags {
 

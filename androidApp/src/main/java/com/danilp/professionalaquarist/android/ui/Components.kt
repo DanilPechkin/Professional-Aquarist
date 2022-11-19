@@ -65,6 +65,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.domain.aquarium.ComfortTags
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.metric.MetricMeasure
@@ -94,7 +95,7 @@ fun SearchField(
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
                 focusedIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
@@ -342,7 +343,18 @@ fun GridItem(
         ) {
             Text(text = label ?: "", style = MaterialTheme.typography.titleMedium, maxLines = 1)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = message, style = MaterialTheme.typography.labelMedium)
+            Text(
+                text = when (message) {
+                    ComfortTags.VERY_SATISFIED -> stringResource(R.string.very_satisfied)
+                    ComfortTags.SATISFIED -> stringResource(R.string.satisfied)
+                    ComfortTags.NEUTRAL -> stringResource(R.string.neutral_label)
+                    ComfortTags.DISSATISFIED -> stringResource(R.string.dissatisfied)
+                    ComfortTags.VERY_DISSATISFIED ->
+                        stringResource(R.string.very_dissatisfied)
+                    else -> message
+                },
+                style = MaterialTheme.typography.labelMedium
+            )
         }
     }
 }
@@ -785,7 +797,7 @@ fun GridTitle(
         Card(
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                containerColor = MaterialTheme.colorScheme.tertiary
             )
         ) {
             Text(

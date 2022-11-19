@@ -15,7 +15,9 @@ CREATE TABLE plantEntity(
     minKh REAL,
     maxKh REAL,
     minIllumination REAL,
-    minCO2 REAL
+    minCO2 REAL,
+    status TEXT,
+    statusTags TEXT
 );
 
 getAllPlantsByAquarium:
@@ -47,8 +49,10 @@ INTO plantEntity(
     minKh,
     maxKh,
     minIllumination,
-    minCO2
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    minCO2,
+    status,
+    statusTags
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deletePlantById:
 DELETE FROM

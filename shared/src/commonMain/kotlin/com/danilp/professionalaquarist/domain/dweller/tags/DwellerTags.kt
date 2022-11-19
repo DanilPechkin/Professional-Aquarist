@@ -1,4 +1,4 @@
-package com.danilp.professionalaquarist.domain.dweller
+package com.danilp.professionalaquarist.domain.dweller.tags
 
 object DwellerTags {
     const val HERBIVOROUS = "Herbivorous" // травоядные

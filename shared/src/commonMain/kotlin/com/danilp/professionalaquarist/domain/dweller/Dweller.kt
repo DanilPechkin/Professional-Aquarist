@@ -17,12 +17,16 @@ data class Dweller(
     val minKh: Double?,
     val maxKh: Double?,
     val description: String?,
-    val tags: List<String>?
+    val tags: List<String>?,
+    val status: String?,
+    val statusTags: List<String>?
 ) {
     companion object {
         fun createEmpty(): Dweller = Dweller(
             null,
             0,
+            null,
+            null,
             null,
             null,
             null,

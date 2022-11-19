@@ -21,5 +21,7 @@ fun PlantEntity.toPlant(): Plant =
         minCO2 = minCO2,
         minIllumination = minIllumination,
         description = description,
-        tags = tags?.split(" ")
+        tags = tags?.split(" "),
+        status = status,
+        statusTags = statusTags?.split(" ")
     )

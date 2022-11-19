@@ -5,8 +5,11 @@ import com.danilp.professionalaquarist.data.plant.toPlant
 import com.danilp.professionalaquarist.database.AquariumDatabase
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
-import com.danilp.professionalaquarist.domain.dweller.DwellerTags
-import com.danilp.professionalaquarist.domain.plant.PlantTags
+import com.danilp.professionalaquarist.domain.aquarium.ComfortTags
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerStatusTags
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
+import com.danilp.professionalaquarist.domain.plant.tags.PlantStatusTags
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
 
 class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
 
@@ -137,6 +140,177 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                     minCO2 = plants.mapNotNull { it.minCO2 }.maxOrNull()
                 )
             )
+
+            val isAquariumCapacityEnough =
+                (aquarium.liters ?: 0.0) >= dwellers.sumOf {
+                    (it.liters ?: 0.0) * (it.amount ?: 0)
+                }
+
+            dwellers.forEach { dweller ->
+                val isWaterParametersMatch =
+                    (dweller.minTemperature ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentTemperature ?: dweller.minTemperature ?: 0.0) &&
+                            (dweller.maxTemperature ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentTemperature ?: dweller.maxTemperature ?: 0.0) &&
+                            (dweller.minPh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentPh ?: dweller.minPh ?: 0.0) &&
+                            (dweller.maxPh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentPh ?: dweller.maxPh ?: 0.0) &&
+                            (dweller.minGh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentGh ?: dweller.minGh ?: 0.0) &&
+                            (dweller.maxGh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentGh ?: dweller.maxGh ?: 0.0) &&
+                            (dweller.minKh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentKh ?: dweller.minKh ?: 0.0) &&
+                            (dweller.maxKh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentKh ?: dweller.maxKh ?: 0.0)
+                val notMetTags = dweller.tags?.filter { tag ->
+                    listOf(
+                        DwellerTags.FAST_CURRENT,
+                        DwellerTags.SLOW_CURRENT,
+                        DwellerTags.MEDIUM_CURRENT,
+                        DwellerTags.VEIL_TAILED,
+                        DwellerTags.BRIGHT_LIGHT,
+                        DwellerTags.LOW_LIGHT,
+                        DwellerTags.PLANT_LOVER,
+                        DwellerTags.NEEDS_SHELTER,
+                        DwellerTags.BROADLEAF_PLANT,
+                        DwellerTags.LONG_STEMMED_PLANT,
+                        DwellerTags.FLOATING_PLANT,
+                        DwellerTags.MOSS
+                    ).contains(tag)
+                }?.filter { tag ->
+                    !((aquarium.currentTags ?: emptyList()).contains(tag))
+                } ?: emptyList()
+
+                val statusTags = (
+                        if (!isAquariumCapacityEnough) {
+                            listOf(DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET)
+                        } else listOf<String?>() +
+                                if (!isWaterParametersMatch) {
+                                    listOf(DwellerStatusTags.WATER_PARAMETERS_NOT_MET)
+                                } else listOf<String?>() +
+                                        if (notMetTags.isNotEmpty()) {
+                                            listOf(DwellerStatusTags.TAGS_NOT_MET)
+                                        } else listOf()
+                        ).mapNotNull { it }
+
+                val updatedDweller = dweller.copy(
+                    statusTags = (statusTags + notMetTags).ifEmpty { null },
+                    status = when (statusTags.size) {
+                        0 -> ComfortTags.VERY_SATISFIED
+                        1 -> ComfortTags.SATISFIED
+                        2 -> ComfortTags.NEUTRAL
+                        3 -> ComfortTags.DISSATISFIED
+                        4 -> ComfortTags.VERY_DISSATISFIED
+                        else -> ComfortTags.VERY_DISSATISFIED
+                    }
+                )
+                dwellerQueries.insertDweller(
+                    id = updatedDweller.id,
+                    aquariumId = updatedDweller.aquariumId,
+                    imageUrl = updatedDweller.imageUrl,
+                    name = updatedDweller.name,
+                    genus = updatedDweller.genus,
+                    amount = updatedDweller.amount,
+                    description = updatedDweller.description,
+                    tags = updatedDweller.tags?.joinToString(" "),
+                    liters = updatedDweller.liters,
+                    minTemperature = updatedDweller.minTemperature,
+                    maxTemperature = updatedDweller.maxTemperature,
+                    minPh = updatedDweller.minPh,
+                    maxPh = updatedDweller.maxPh,
+                    minGh = updatedDweller.minGh,
+                    maxGh = updatedDweller.maxGh,
+                    minKh = updatedDweller.minKh,
+                    maxKh = updatedDweller.maxKh,
+                    statusTags = updatedDweller.statusTags?.joinToString(" "),
+                    status = updatedDweller.status
+                )
+            }
+
+            plants.forEach { plant ->
+                val isWaterParametersMatch =
+                    (plant.minTemperature ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentTemperature ?: plant.minTemperature ?: 0.0) &&
+                            (plant.maxTemperature ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentTemperature ?: plant.maxTemperature ?: 0.0) &&
+                            (plant.minPh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentPh ?: plant.minPh ?: 0.0) &&
+                            (plant.maxPh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentPh ?: plant.maxPh ?: 0.0) &&
+                            (plant.minGh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentGh ?: plant.minGh ?: 0.0) &&
+                            (plant.maxGh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentGh ?: plant.maxGh ?: 0.0) &&
+                            (plant.minKh ?: aquarium.currentTemperature ?: 0.0) <=
+                            (aquarium.currentKh ?: plant.minKh ?: 0.0) &&
+                            (plant.maxKh ?: aquarium.currentTemperature ?: 0.0) >=
+                            (aquarium.currentKh ?: plant.maxKh ?: 0.0) &&
+                            (plant.minCO2 ?: aquarium.currentCO2 ?: 0.0) <=
+                            (aquarium.currentCO2 ?: plant.minCO2 ?: 0.0)
+                val notMetTags = plant.tags?.filter { tag ->
+                    listOf(
+                        PlantTags.LOW_LIGHT,
+                        PlantTags.BRIGHT_LIGHT
+                    ).contains(tag)
+                }?.filter { tag ->
+                    !((aquarium.currentTags ?: emptyList()).contains(tag))
+                } ?: emptyList()
+
+                val isEnoughIllumination = (aquarium.currentIllumination ?: 0.0) >=
+                        (plant.minIllumination ?: 0.0)
+
+                val isInDanger = (aquarium.currentTags?.contains(DwellerTags.PLANT_EATER)) ?: false
+
+                val statusTags =
+                    if (!isEnoughIllumination) {
+                        listOf(PlantStatusTags.NOT_ENOUGH_ILLUMINATION)
+                    } else listOf<String>() +
+                            if (!isWaterParametersMatch) {
+                                listOf(PlantStatusTags.WATER_PARAMETERS_NOT_MET)
+                            } else listOf<String>() +
+                                    if (notMetTags.isNotEmpty()) {
+                                        listOf(PlantStatusTags.TAGS_NOT_MET)
+                                    } else listOf<String>() +
+                                            if (isInDanger) {
+                                                listOf(PlantStatusTags.IN_DANGER)
+                                            } else listOf()
+
+
+                val updatedPlant = plant.copy(
+                    statusTags = (statusTags + notMetTags).ifEmpty { null },
+                    status = when (statusTags.size) {
+                        0 -> ComfortTags.VERY_SATISFIED
+                        1 -> ComfortTags.SATISFIED
+                        2 -> ComfortTags.NEUTRAL
+                        3 -> ComfortTags.DISSATISFIED
+                        4 -> ComfortTags.VERY_DISSATISFIED
+                        else -> ComfortTags.VERY_DISSATISFIED
+                    }
+                )
+                plantQueries.insertPlant(
+                    id = updatedPlant.id,
+                    aquariumId = updatedPlant.aquariumId,
+                    imageUrl = updatedPlant.imageUrl,
+                    name = updatedPlant.name,
+                    genus = updatedPlant.genus,
+                    description = updatedPlant.description,
+                    tags = updatedPlant.tags?.joinToString(" "),
+                    minTemperature = updatedPlant.minTemperature,
+                    maxTemperature = updatedPlant.maxTemperature,
+                    minPh = updatedPlant.minPh,
+                    maxPh = updatedPlant.maxPh,
+                    minGh = updatedPlant.minGh,
+                    maxGh = updatedPlant.maxGh,
+                    minKh = updatedPlant.minKh,
+                    maxKh = updatedPlant.maxKh,
+                    minIllumination = updatedPlant.minIllumination,
+                    minCO2 = updatedPlant.minCO2,
+                    statusTags = updatedPlant.statusTags?.joinToString(" "),
+                    status = updatedPlant.status
+                )
+            }
         }
     }
 }

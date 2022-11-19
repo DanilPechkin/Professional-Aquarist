@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
 import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
-import com.danilp.professionalaquarist.domain.aquarium.ConvertAquariumMeasures
+import com.danilp.professionalaquarist.domain.aquarium.use_case.ConvertAquariumMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.temperature.TemperatureMeasure

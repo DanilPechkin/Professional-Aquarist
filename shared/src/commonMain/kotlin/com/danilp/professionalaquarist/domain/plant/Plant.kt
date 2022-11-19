@@ -17,12 +17,16 @@ data class Plant(
     val minCO2: Double?,
     val minIllumination: Double?,
     val description: String?,
-    val tags: List<String>?
+    val tags: List<String>?,
+    val status: String?,
+    val statusTags: List<String>?
 ) {
     companion object {
         fun createEmpty(): Plant = Plant(
             null,
             0,
+            null,
+            null,
             null,
             null,
             null,
