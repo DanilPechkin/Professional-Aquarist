@@ -184,7 +184,9 @@ fun PlantInfo(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "${stringResource(R.string.description_label)}: ${state.plant.description}"
+                    text = "${stringResource(R.string.description_label)}: ${
+                        state.plant.description
+                    }"
                 )
             }
 

@@ -217,7 +217,9 @@ fun DwellerInfo(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "${stringResource(R.string.description_label)}: ${state.dweller.description}"
+                    text = "${stringResource(R.string.description_label)}: ${
+                        state.dweller.description
+                    }"
                 )
             }
 

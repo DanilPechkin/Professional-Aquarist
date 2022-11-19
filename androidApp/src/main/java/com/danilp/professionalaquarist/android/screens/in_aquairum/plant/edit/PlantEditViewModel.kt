@@ -230,7 +230,6 @@ class PlantEditViewModel @Inject constructor(
                 return@launch
             }
 
-
             val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
             val isPhCorrect = (
                     (
