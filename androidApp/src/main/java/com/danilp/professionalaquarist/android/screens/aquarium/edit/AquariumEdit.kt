@@ -77,7 +77,7 @@ fun AquariumEdit(
                 navigateBack = { navigator.navigateUp() },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
                 navigateToAccount = { },
-                navigationIcon = Icons.Rounded.Close
+                Icons.Rounded.Close
             )
         },
         floatingActionButton = {
