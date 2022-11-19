@@ -1,4 +1,6 @@
-package com.danilp.professionalaquarist.domain.aquarium
+package com.danilp.professionalaquarist.domain.aquarium.use_case
+
+import com.danilp.professionalaquarist.domain.aquarium.Aquarium
 
 class SearchAquariums {
     fun execute(aquariums: List<Aquarium>, query: String): List<Aquarium> =

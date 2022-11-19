@@ -26,7 +26,9 @@ class SqlDelightPlantDataSource(db: AquariumDatabase) : PlantDataSource {
             minKh = plant.minKh,
             maxKh = plant.maxKh,
             minCO2 = plant.minCO2,
-            minIllumination = plant.minIllumination
+            minIllumination = plant.minIllumination,
+            status = plant.status,
+            statusTags = plant.statusTags?.joinToString(" ")
         )
     }
 

@@ -15,7 +15,9 @@ CREATE TABLE dwellerEntity(
     minGh REAL,
     maxGh REAL,
     minKh REAL,
-    maxKh REAL
+    maxKh REAL,
+    status TEXT,
+    statusTags TEXT
 );
 
 getAllDwellersByAquarium:
@@ -47,8 +49,10 @@ INTO dwellerEntity(
     minGh,
     maxGh,
     minKh,
-    maxKh
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    maxKh,
+    status,
+    statusTags
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteDwellerById:
 DELETE FROM

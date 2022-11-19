@@ -173,8 +173,8 @@ class PlantEditViewModel @Inject constructor(
     }
 
     private fun delete(plantId: Long) = viewModelScope.launch {
-        refreshAquarium(state.plant.aquariumId)
         plantDataSource.deletePlantById(plantId)
+        refreshAquarium(state.plant.aquariumId)
     }
 
     private fun refreshAquarium(aquariumId: Long) = viewModelScope.launch {

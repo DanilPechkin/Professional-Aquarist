@@ -26,7 +26,9 @@ class SqlDelightDwellerDataSource(db: AquariumDatabase) : DwellerDataSource {
             minGh = dweller.minGh,
             maxGh = dweller.maxGh,
             minKh = dweller.minKh,
-            maxKh = dweller.maxKh
+            maxKh = dweller.maxKh,
+            status = dweller.status,
+            statusTags = dweller.statusTags?.joinToString(" ")
         )
     }
 

@@ -37,7 +37,7 @@ import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
 import com.danilp.professionalaquarist.android.ui.GridItem
 import com.danilp.professionalaquarist.android.ui.GridTitle
 import com.danilp.professionalaquarist.android.ui.isScrollingUp
-import com.danilp.professionalaquarist.domain.plant.PlantTags
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -115,7 +115,7 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
@@ -144,7 +144,7 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
@@ -170,7 +170,7 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
@@ -196,7 +196,7 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
@@ -222,7 +222,7 @@ fun PlantsList(
                     ) { plant ->
                         GridItem(
                             label = plant.name,
-                            message = "Healthy",
+                            message = plant.status ?: "",
                             imageUrl = plant.imageUrl,
                             modifier = Modifier
                                 .clickable {
