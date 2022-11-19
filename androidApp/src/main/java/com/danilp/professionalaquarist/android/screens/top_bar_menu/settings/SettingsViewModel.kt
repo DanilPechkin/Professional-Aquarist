@@ -159,6 +159,5 @@ class SettingsViewModel @Inject constructor(
     sealed class SavingEvent {
         object Done : SavingEvent()
         object Saved : SavingEvent()
-
     }
 }

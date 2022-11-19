@@ -101,7 +101,9 @@ fun AquariumEdit(
                     }
                 },
                 confirmButton = {
-                    TextButton(onClick = { viewModel.onEvent(AquariumEditEvent.DeleteButtonPressed) }) {
+                    TextButton(
+                        onClick = { viewModel.onEvent(AquariumEditEvent.DeleteButtonPressed) }
+                    ) {
                         Text(text = stringResource(R.string.delete_button))
                     }
                 }

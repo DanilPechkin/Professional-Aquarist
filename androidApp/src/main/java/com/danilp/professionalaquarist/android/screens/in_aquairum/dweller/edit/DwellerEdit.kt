@@ -125,7 +125,9 @@ fun DwellerEdit(
                     }
                 },
                 confirmButton = {
-                    TextButton(onClick = { viewModel.onEvent(DwellerEditEvent.DeleteButtonPressed) }) {
+                    TextButton(
+                        onClick = { viewModel.onEvent(DwellerEditEvent.DeleteButtonPressed) }
+                    ) {
                         Text(text = stringResource(R.string.delete_button))
                     }
                 }

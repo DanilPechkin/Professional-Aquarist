@@ -124,7 +124,9 @@ fun PlantEdit(
                     }
                 },
                 confirmButton = {
-                    TextButton(onClick = { viewModel.onEvent(PlantEditEvent.DeleteButtonPressed) }) {
+                    TextButton(
+                        onClick = { viewModel.onEvent(PlantEditEvent.DeleteButtonPressed) }
+                    ) {
                         Text(text = stringResource(R.string.delete_button))
                     }
                 }
