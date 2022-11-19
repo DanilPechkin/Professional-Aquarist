@@ -98,7 +98,7 @@ fun DwellerEdit(
                 switchMenuVisibility = { isTopMenuExpanded = !isTopMenuExpanded },
                 isMenuExpanded = isTopMenuExpanded,
                 hideMenu = { isTopMenuExpanded = false },
-                navigateBack = { navigator.navigateUp() },
+                navigateBack = { navigator.navigate(DwellersListDestination) },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
                 navigateToAccount = { }
             )

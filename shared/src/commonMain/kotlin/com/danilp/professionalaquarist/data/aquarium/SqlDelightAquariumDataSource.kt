@@ -200,8 +200,9 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                     status = when (statusTags.size) {
                         0 -> ComfortTags.VERY_SATISFIED
                         1 -> ComfortTags.SATISFIED
-                        2 -> ComfortTags.DISSATISFIED
-                        3 -> ComfortTags.VERY_DISSATISFIED
+                        2 -> ComfortTags.NEUTRAL
+                        3 -> ComfortTags.DISSATISFIED
+                        4 -> ComfortTags.VERY_DISSATISFIED
                         else -> ComfortTags.VERY_DISSATISFIED
                     }
                 )
@@ -282,8 +283,9 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                     status = when (statusTags.size) {
                         0 -> ComfortTags.VERY_SATISFIED
                         1 -> ComfortTags.SATISFIED
-                        2 -> ComfortTags.DISSATISFIED
-                        3 -> ComfortTags.VERY_DISSATISFIED
+                        2 -> ComfortTags.NEUTRAL
+                        3 -> ComfortTags.DISSATISFIED
+                        4 -> ComfortTags.VERY_DISSATISFIED
                         else -> ComfortTags.VERY_DISSATISFIED
                     }
                 )

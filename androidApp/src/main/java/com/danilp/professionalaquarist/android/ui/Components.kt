@@ -346,10 +346,10 @@ fun GridItem(
                 text = when (message) {
                     ComfortTags.VERY_SATISFIED -> stringResource(R.string.very_satisfied)
                     ComfortTags.SATISFIED -> stringResource(R.string.satisfied)
+                    ComfortTags.NEUTRAL -> stringResource(R.string.neutral_label)
                     ComfortTags.DISSATISFIED -> stringResource(R.string.dissatisfied)
                     ComfortTags.VERY_DISSATISFIED ->
                         stringResource(R.string.very_dissatisfied)
-
                     else -> message
                 },
                 style = MaterialTheme.typography.labelMedium
