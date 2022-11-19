@@ -21,6 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material3.AlertDialog
@@ -98,7 +99,8 @@ fun PlantEdit(
                 hideMenu = { isTopMenuExpanded = false },
                 navigateBack = { navigator.navigateUp() },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
-                navigateToAccount = { }
+                navigateToAccount = { },
+                Icons.Rounded.Close
             )
         },
         floatingActionButton = {
