@@ -11,7 +11,6 @@ import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.Sha
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.dweller.Dweller
 import com.danilp.professionalaquarist.domain.dweller.DwellerDataSource
-import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
 import com.danilp.professionalaquarist.domain.dweller.use_case.ConvertDwellerMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
@@ -290,8 +289,7 @@ class DwellerEditViewModel @Inject constructor(
                     maxGh = state.maxGh.ifBlank { null }?.toDouble(),
                     minKh = state.minKh.ifBlank { null }?.toDouble(),
                     maxKh = state.maxKh.ifBlank { null }?.toDouble(),
-                    description = state.description.ifBlank { null },
-                    tags = listOf(DwellerTags.FISH)
+                    description = state.description.ifBlank { null }
                 )
             )
 

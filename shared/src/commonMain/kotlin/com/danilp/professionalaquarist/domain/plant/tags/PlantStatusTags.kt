@@ -1,8 +1,8 @@
 package com.danilp.professionalaquarist.domain.plant.tags
 
-object PlantStatusTags {
-    const val WATER_PARAMETERS_NOT_MET = "water_parameters_not_met"
-    const val TAGS_NOT_MET = "tags_not_met"
-    const val IN_DANGER = "in_danger"
-    const val NOT_ENOUGH_ILLUMINATION = "not_enough_illumination"
+enum class PlantStatusTags(val code: String) {
+    WATER_PARAMETERS_NOT_MET("water_parameters_not_met"),
+    TAGS_NOT_MET("tags_not_met"),
+    IN_DANGER("in_danger"),
+    NOT_ENOUGH_ILLUMINATION("not_enough_illumination")
 }

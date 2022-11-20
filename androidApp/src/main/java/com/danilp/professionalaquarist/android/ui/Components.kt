@@ -4,6 +4,11 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +28,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.MoreVert
@@ -33,6 +39,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -66,6 +74,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.domain.aquarium.ComfortTags
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.metric.MetricMeasure
@@ -345,12 +355,13 @@ fun GridItem(
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = when (message) {
-                    ComfortTags.VERY_SATISFIED -> stringResource(R.string.very_satisfied)
-                    ComfortTags.SATISFIED -> stringResource(R.string.satisfied)
-                    ComfortTags.NEUTRAL -> stringResource(R.string.neutral_label)
-                    ComfortTags.DISSATISFIED -> stringResource(R.string.dissatisfied)
-                    ComfortTags.VERY_DISSATISFIED ->
+                    ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
+                    ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
+                    ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
+                    ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
+                    ComfortTags.VERY_DISSATISFIED.code ->
                         stringResource(R.string.very_dissatisfied)
+
                     else -> message
                 },
                 style = MaterialTheme.typography.labelMedium
@@ -808,4 +819,77 @@ fun GridTitle(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@Composable
+fun SelectChip(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    label: String? = null,
+    labelCode: String? = null
+) {
+    FilterChip(
+        selected = selected,
+        onClick = onClick,
+        label = {
+            Text(
+                text = label ?: when (labelCode) {
+                    PlantTags.BROADLEAF_PLANT.code ->
+                        stringResource(R.string.broadleaf_title)
+
+                    PlantTags.LONG_STEMMED_PLANT.code ->
+                        stringResource(R.string.long_stemmed_title)
+
+                    PlantTags.FLOATING_PLANT.code ->
+                        stringResource(R.string.floating_plant_title)
+
+                    PlantTags.MOSS.code ->
+                        stringResource(R.string.moss_title)
+
+                    PlantTags.FERN.code ->
+                        stringResource(R.string.fern_title)
+
+                    DwellerTags.CRAB.code ->
+                        stringResource(R.string.crab_title)
+
+                    DwellerTags.SNAIL.code ->
+                        stringResource(R.string.snail_title)
+
+                    DwellerTags.SHRIMP.code ->
+                        stringResource(R.string.shrimp_title)
+
+                    DwellerTags.FISH.code ->
+                        stringResource(R.string.fish_title)
+
+                    DwellerTags.BIVALVE.code ->
+                        stringResource(R.string.bivalve_title)
+
+                    DwellerTags.CRAYFISH.code ->
+                        stringResource(R.string.crayfish_title)
+
+                    else -> ""
+                }
+            )
+        },
+        leadingIcon = {
+            AnimatedVisibility(
+                visible = selected,
+                enter = scaleIn()
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Done,
+                    contentDescription = stringResource(androidx.compose.ui.R.string.selected),
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
+            }
+        },
+        modifier = modifier.animateContentSize(
+            animationSpec = tween(
+                durationMillis = 150,
+                easing = LinearEasing
+            )
+        )
+    )
 }

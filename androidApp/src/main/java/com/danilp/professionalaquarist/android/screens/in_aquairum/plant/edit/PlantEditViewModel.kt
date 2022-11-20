@@ -90,7 +90,17 @@ class PlantEditViewModel @Inject constructor(
                 maxKh = (state.plant.maxKh ?: "").toString(),
                 minCO2 = (state.plant.minCO2 ?: "").toString(),
                 minIllumination = (state.plant.minIllumination ?: "").toString(),
-                description = state.plant.description ?: ""
+                description = state.plant.description ?: "",
+                typeTag = state.plant.tags?.find { tag ->
+                    listOf(
+                        PlantTags.BROADLEAF_PLANT.code,
+                        PlantTags.FLOATING_PLANT.code,
+                        PlantTags.FERN.code,
+                        PlantTags.MOSS.code,
+                        PlantTags.LONG_STEMMED_PLANT.code
+                    ).contains(tag)
+                } ?: "",
+                tags = state.plant.tags ?: listOf()
             )
         }
     }
@@ -166,12 +176,26 @@ class PlantEditViewModel @Inject constructor(
                     plant = state.plant.copy(imageUrl = event.imageUrl)
                 )
             }
+
+            is PlantEditEvent.TagSelected -> {
+                state = state.copy(
+                    tags = if (state.tags.contains(event.tag)) {
+                        state.tags.filter { it != event.tag }
+                    } else {
+                        state.tags + event.tag
+                    }
+                )
+            }
+
+            is PlantEditEvent.TypeTagSelected -> {
+                state = state.copy(typeTag = event.typeTag)
+            }
         }
     }
 
     private fun insert(plant: Plant) = viewModelScope.launch {
-        refreshAquarium(state.plant.aquariumId)
         plantDataSource.insertPlant(plant)
+        refreshAquarium(state.plant.aquariumId)
     }
 
     private fun delete(plantId: Long) = viewModelScope.launch {
@@ -188,8 +212,8 @@ class PlantEditViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             val nameResult = validate.string(state.name)
-            val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
-            val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
+            val minTemperatureResult = validate.decimal(state.minTemperature)
+            val maxTemperatureResult = validate.decimal(state.maxTemperature)
             val minPhResult = validate.decimal(state.minPh)
             val maxPhResult = validate.decimal(state.maxPh)
             val minGhResult = validate.decimal(state.minGh)
@@ -303,7 +327,17 @@ class PlantEditViewModel @Inject constructor(
                     minIllumination = state.minIllumination.ifBlank { null }?.toDoubleOrNull(),
                     minCO2 = state.minCO2.ifBlank { null }?.toDoubleOrNull(),
                     description = state.description.ifBlank { null },
-                    tags = listOf(PlantTags.BROADLEAF_PLANT)
+                    tags = (
+                            state.tags.filter { tag ->
+                                !listOf(
+                                    PlantTags.BROADLEAF_PLANT.code,
+                                    PlantTags.FLOATING_PLANT.code,
+                                    PlantTags.FERN.code,
+                                    PlantTags.MOSS.code,
+                                    PlantTags.LONG_STEMMED_PLANT.code
+                                ).contains(tag)
+                            } + state.typeTag
+                            ).ifEmpty { null },
                 )
             )
 

@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material.icons.rounded.Spa
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -62,6 +63,9 @@ import com.danilp.professionalaquarist.android.ui.AquariumTopBar
 import com.danilp.professionalaquarist.android.ui.FromToInfoFields
 import com.danilp.professionalaquarist.android.ui.ImagePicker
 import com.danilp.professionalaquarist.android.ui.InfoFieldWithErrorAndIcon
+import com.danilp.professionalaquarist.android.ui.SelectChip
+import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
+import com.google.accompanist.flowlayout.FlowRow
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -162,6 +166,45 @@ fun PlantEdit(
                     .heightIn(max = 256.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Spa,
+                    contentDescription = stringResource(R.string.plant_title),
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                )
+
+                Text(text = stringResource(R.string.plant_type_label))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            FlowRow(
+                mainAxisSpacing = 8.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp)
+            ) {
+                listOf(
+                    PlantTags.BROADLEAF_PLANT.code,
+                    PlantTags.MOSS.code,
+                    PlantTags.LONG_STEMMED_PLANT.code,
+                    PlantTags.FLOATING_PLANT.code,
+                    PlantTags.FERN.code
+                ).forEach { tag ->
+                    SelectChip(
+                        selected = state.typeTag == tag,
+                        onClick = { viewModel.onEvent(PlantEditEvent.TypeTagSelected(tag)) },
+                        labelCode = tag
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 

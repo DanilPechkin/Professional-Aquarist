@@ -74,6 +74,7 @@ dependencies {
         implementation(icons)
         implementation(navigation)
         implementation(uiController)
+        implementation(flowLayout)
         androidTestImplementation(unitTest)
         debugImplementation(debugTest)
         debugImplementation(debugTooling)
