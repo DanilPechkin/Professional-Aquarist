@@ -91,33 +91,33 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 aquarium.copy(
                     requiredTags = (dwellers.mapNotNull {
                         it.tags?.filter { tag ->
-                            tag == DwellerTags.FAST_CURRENT ||
-                                    tag == DwellerTags.SLOW_CURRENT ||
-                                    tag == DwellerTags.MEDIUM_CURRENT ||
-                                    tag == DwellerTags.VEIL_TAILED ||
-                                    tag == DwellerTags.BRIGHT_LIGHT ||
-                                    tag == DwellerTags.LOW_LIGHT ||
-                                    tag == DwellerTags.PLANT_LOVER ||
-                                    tag == DwellerTags.NEEDS_SHELTER ||
-                                    tag == DwellerTags.BROADLEAF_PLANT ||
-                                    tag == DwellerTags.LONG_STEMMED_PLANT ||
-                                    tag == DwellerTags.FLOATING_PLANT ||
-                                    tag == DwellerTags.MOSS
+                            tag == DwellerTags.FAST_CURRENT.code ||
+                                    tag == DwellerTags.SLOW_CURRENT.code ||
+                                    tag == DwellerTags.MEDIUM_CURRENT.code ||
+                                    tag == DwellerTags.VEIL_TAILED.code ||
+                                    tag == DwellerTags.BRIGHT_LIGHT.code ||
+                                    tag == DwellerTags.LOW_LIGHT.code ||
+                                    tag == DwellerTags.PLANT_LOVER.code ||
+                                    tag == DwellerTags.NEEDS_SHELTER.code ||
+                                    tag == DwellerTags.BROADLEAF_PLANT.code ||
+                                    tag == DwellerTags.LONG_STEMMED_PLANT.code ||
+                                    tag == DwellerTags.FLOATING_PLANT.code ||
+                                    tag == DwellerTags.MOSS.code
                         }
                     }.flatten() + plants.mapNotNull {
                         it.tags?.filter { tag ->
-                            tag == PlantTags.LOW_LIGHT ||
-                                    tag == PlantTags.BRIGHT_LIGHT
+                            tag == PlantTags.LOW_LIGHT.code ||
+                                    tag == PlantTags.BRIGHT_LIGHT.code
                         }
                     }.flatten()).ifEmpty { null },
                     currentTags = ((aquarium.currentTags ?: emptyList()) +
                             plants.mapNotNull {
                                 it.tags?.filter { tag ->
-                                    tag == PlantTags.BROADLEAF_PLANT ||
-                                            tag == PlantTags.LONG_STEMMED_PLANT ||
-                                            tag == PlantTags.FLOATING_PLANT ||
-                                            tag == PlantTags.MOSS ||
-                                            tag == PlantTags.FERN
+                                    tag == PlantTags.BROADLEAF_PLANT.code ||
+                                            tag == PlantTags.LONG_STEMMED_PLANT.code ||
+                                            tag == PlantTags.FLOATING_PLANT.code ||
+                                            tag == PlantTags.MOSS.code ||
+                                            tag == PlantTags.FERN.code
                                 }
                             }.flatten()).ifEmpty { null },
                     minTemperature = (dwellers.mapNotNull { it.minTemperature } +
@@ -166,18 +166,18 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                             (aquarium.currentKh ?: dweller.maxKh ?: 0.0)
                 val notMetTags = dweller.tags?.filter { tag ->
                     listOf(
-                        DwellerTags.FAST_CURRENT,
-                        DwellerTags.SLOW_CURRENT,
-                        DwellerTags.MEDIUM_CURRENT,
-                        DwellerTags.VEIL_TAILED,
-                        DwellerTags.BRIGHT_LIGHT,
-                        DwellerTags.LOW_LIGHT,
-                        DwellerTags.PLANT_LOVER,
-                        DwellerTags.NEEDS_SHELTER,
-                        DwellerTags.BROADLEAF_PLANT,
-                        DwellerTags.LONG_STEMMED_PLANT,
-                        DwellerTags.FLOATING_PLANT,
-                        DwellerTags.MOSS
+                        DwellerTags.FAST_CURRENT.code,
+                        DwellerTags.SLOW_CURRENT.code,
+                        DwellerTags.MEDIUM_CURRENT.code,
+                        DwellerTags.VEIL_TAILED.code,
+                        DwellerTags.BRIGHT_LIGHT.code,
+                        DwellerTags.LOW_LIGHT.code,
+                        DwellerTags.PLANT_LOVER.code,
+                        DwellerTags.NEEDS_SHELTER.code,
+                        DwellerTags.BROADLEAF_PLANT.code,
+                        DwellerTags.LONG_STEMMED_PLANT.code,
+                        DwellerTags.FLOATING_PLANT.code,
+                        DwellerTags.MOSS.code
                     ).contains(tag)
                 }?.filter { tag ->
                     !((aquarium.currentTags ?: emptyList()).contains(tag))
@@ -185,25 +185,25 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
 
                 val statusTags = (
                         if (!isAquariumCapacityEnough) {
-                            listOf(DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET)
+                            listOf(DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET.code)
                         } else listOf<String?>() +
                                 if (!isWaterParametersMatch) {
-                                    listOf(DwellerStatusTags.WATER_PARAMETERS_NOT_MET)
+                                    listOf(DwellerStatusTags.WATER_PARAMETERS_NOT_MET.code)
                                 } else listOf<String?>() +
                                         if (notMetTags.isNotEmpty()) {
-                                            listOf(DwellerStatusTags.TAGS_NOT_MET)
+                                            listOf(DwellerStatusTags.TAGS_NOT_MET.code)
                                         } else listOf()
                         ).mapNotNull { it }
 
                 val updatedDweller = dweller.copy(
                     statusTags = (statusTags + notMetTags).ifEmpty { null },
                     status = when (statusTags.size) {
-                        0 -> ComfortTags.VERY_SATISFIED
-                        1 -> ComfortTags.SATISFIED
-                        2 -> ComfortTags.NEUTRAL
-                        3 -> ComfortTags.DISSATISFIED
-                        4 -> ComfortTags.VERY_DISSATISFIED
-                        else -> ComfortTags.VERY_DISSATISFIED
+                        0 -> ComfortTags.VERY_SATISFIED.code
+                        1 -> ComfortTags.SATISFIED.code
+                        2 -> ComfortTags.NEUTRAL.code
+                        3 -> ComfortTags.DISSATISFIED.code
+                        4 -> ComfortTags.VERY_DISSATISFIED.code
+                        else -> ComfortTags.VERY_DISSATISFIED.code
                     }
                 )
                 dwellerQueries.insertDweller(
@@ -251,8 +251,8 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                             (aquarium.currentCO2 ?: plant.minCO2 ?: 0.0)
                 val notMetTags = plant.tags?.filter { tag ->
                     listOf(
-                        PlantTags.LOW_LIGHT,
-                        PlantTags.BRIGHT_LIGHT
+                        PlantTags.LOW_LIGHT.code,
+                        PlantTags.BRIGHT_LIGHT.code
                     ).contains(tag)
                 }?.filter { tag ->
                     !((aquarium.currentTags ?: emptyList()).contains(tag))
@@ -261,32 +261,33 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 val isEnoughIllumination = (aquarium.currentIllumination ?: 0.0) >=
                         (plant.minIllumination ?: 0.0)
 
-                val isInDanger = (aquarium.currentTags?.contains(DwellerTags.PLANT_EATER)) ?: false
+                val isInDanger =
+                    (aquarium.currentTags?.contains(DwellerTags.PLANT_EATER.code)) ?: false
 
                 val statusTags =
                     if (!isEnoughIllumination) {
-                        listOf(PlantStatusTags.NOT_ENOUGH_ILLUMINATION)
+                        listOf(PlantStatusTags.NOT_ENOUGH_ILLUMINATION.code)
                     } else listOf<String>() +
                             if (!isWaterParametersMatch) {
-                                listOf(PlantStatusTags.WATER_PARAMETERS_NOT_MET)
+                                listOf(PlantStatusTags.WATER_PARAMETERS_NOT_MET.code)
                             } else listOf<String>() +
                                     if (notMetTags.isNotEmpty()) {
-                                        listOf(PlantStatusTags.TAGS_NOT_MET)
+                                        listOf(PlantStatusTags.TAGS_NOT_MET.code)
                                     } else listOf<String>() +
                                             if (isInDanger) {
-                                                listOf(PlantStatusTags.IN_DANGER)
+                                                listOf(PlantStatusTags.IN_DANGER.code)
                                             } else listOf()
 
 
                 val updatedPlant = plant.copy(
                     statusTags = (statusTags + notMetTags).ifEmpty { null },
                     status = when (statusTags.size) {
-                        0 -> ComfortTags.VERY_SATISFIED
-                        1 -> ComfortTags.SATISFIED
-                        2 -> ComfortTags.NEUTRAL
-                        3 -> ComfortTags.DISSATISFIED
-                        4 -> ComfortTags.VERY_DISSATISFIED
-                        else -> ComfortTags.VERY_DISSATISFIED
+                        0 -> ComfortTags.VERY_SATISFIED.code
+                        1 -> ComfortTags.SATISFIED.code
+                        2 -> ComfortTags.NEUTRAL.code
+                        3 -> ComfortTags.DISSATISFIED.code
+                        4 -> ComfortTags.VERY_DISSATISFIED.code
+                        else -> ComfortTags.VERY_DISSATISFIED.code
                     }
                 )
                 plantQueries.insertPlant(

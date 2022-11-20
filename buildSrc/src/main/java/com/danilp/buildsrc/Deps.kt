@@ -8,6 +8,7 @@ private object Versions {
     const val compose = "1.4.0-alpha02"
     const val hilt = "2.44"
     const val hiltCompose = "1.0.0"
+    const val composeAccompanist = "0.27.1"
 }
 
 object Deps {
@@ -50,12 +51,12 @@ object Deps {
         const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
         const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val icons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
-        const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:0.26.2-beta"
-        const val uiController = "com.google.accompanist:accompanist-systemuicontroller:0.27.1"
         const val unitTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
         const val debugTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
         const val debugTest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
         const val navigation = "androidx.navigation:navigation-compose:2.5.2"
+        const val uiController = "com.google.accompanist:accompanist-systemuicontroller:${Versions.composeAccompanist}"
+        const val flowLayout = "com.google.accompanist:accompanist-flowlayout:${Versions.composeAccompanist}"
     }
 
 }

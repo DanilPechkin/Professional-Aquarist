@@ -23,6 +23,8 @@ data class PlantEditState(
     val minCO2: String = "",
     val minIllumination: String = "",
     val description: String = "",
+    val typeTag: String = "",
+    val tags: List<String> = listOf(),
     // Stats errors
     val nameErrorCode: Int? = null,
     /*TODO: val genusError: Int? = null,*/
@@ -35,5 +37,6 @@ data class PlantEditState(
     val minKhErrorCode: Int? = null,
     val maxKhErrorCode: Int? = null,
     val minCO2ErrorCode: Int? = null,
-    val minIlluminationErrorCode: Int? = null
+    val minIlluminationErrorCode: Int? = null,
+    val typeTagErrorCode: Int? = null,
 )

@@ -17,4 +17,6 @@ sealed interface PlantEditEvent {
     data class MinIlluminationChanged(val illumination: String) : PlantEditEvent
     data class DescriptionChanged(val description: String) : PlantEditEvent
     data class ImagePicked(val imageUrl: String) : PlantEditEvent
+    data class TypeTagSelected(val typeTag: String) : PlantEditEvent
+    data class TagSelected(val tag: String) : PlantEditEvent
 }

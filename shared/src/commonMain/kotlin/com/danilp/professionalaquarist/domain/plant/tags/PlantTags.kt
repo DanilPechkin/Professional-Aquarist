@@ -1,14 +1,14 @@
 package com.danilp.professionalaquarist.domain.plant.tags
 
-object PlantTags {
+enum class PlantTags(val code: String) {
 
-    const val BROADLEAF_PLANT = "Broadleaf" // любит широколистные растения
-    const val LONG_STEMMED_PLANT = "Long-stemmed" // любит длинностебельные растения
-    const val FLOATING_PLANT = "Floating" // любит плавающие растения
-    const val MOSS = "Moss" // мох
-    const val FERN = "Fern" // папоротник
+    BROADLEAF_PLANT("Broadleaf"), // любит широколистные растения
+    LONG_STEMMED_PLANT("Long-stemmed"), // любит длинностебельные растения
+    FLOATING_PLANT("Floating"), // любит плавающие растения
+    MOSS("Moss"), // мох
+    FERN("Fern"), // папоротник
 
-    const val BRIGHT_LIGHT = "Bright light" // любит яркий свет
-    const val LOW_LIGHT = "Low light" // любит слабый свет
+    BRIGHT_LIGHT("Bright light"), // любит яркий свет
+    LOW_LIGHT("Low light") // любит слабый свет
 
 }

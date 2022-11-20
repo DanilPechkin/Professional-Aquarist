@@ -103,7 +103,9 @@ fun PlantsList(
                 state = scrollState,
                 modifier = Modifier.fillMaxSize()
             ) {
-                if (state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT) == true }) {
+                if (
+                    state.plants.any { it.tags?.contains(PlantTags.BROADLEAF_PLANT.code) == true }
+                ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.broadleaf_title)
@@ -111,7 +113,7 @@ fun PlantsList(
                     }
                     items(
                         state.plants.filter {
-                            it.tags?.contains(PlantTags.BROADLEAF_PLANT) ?: false
+                            it.tags?.contains(PlantTags.BROADLEAF_PLANT.code) ?: false
                         }
                     ) { plant ->
                         GridItem(
@@ -130,7 +132,7 @@ fun PlantsList(
                     }
                 }
                 if (state.plants.any {
-                        it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) == true
+                        it.tags?.contains(PlantTags.LONG_STEMMED_PLANT.code) == true
                     }
                 ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
@@ -140,7 +142,7 @@ fun PlantsList(
                     }
                     items(
                         state.plants.filter {
-                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT) ?: false
+                            it.tags?.contains(PlantTags.LONG_STEMMED_PLANT.code) ?: false
                         }
                     ) { plant ->
                         GridItem(
@@ -158,7 +160,7 @@ fun PlantsList(
                         )
                     }
                 }
-                if (state.plants.any { it.tags?.contains(PlantTags.FLOATING_PLANT) == true }) {
+                if (state.plants.any { it.tags?.contains(PlantTags.FLOATING_PLANT.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.floating_plant_title)
@@ -166,7 +168,7 @@ fun PlantsList(
                     }
                     items(
                         state.plants.filter {
-                            it.tags?.contains(PlantTags.FLOATING_PLANT) ?: false
+                            it.tags?.contains(PlantTags.FLOATING_PLANT.code) ?: false
                         }
                     ) { plant ->
                         GridItem(
@@ -184,7 +186,7 @@ fun PlantsList(
                         )
                     }
                 }
-                if (state.plants.any { it.tags?.contains(PlantTags.MOSS) == true }) {
+                if (state.plants.any { it.tags?.contains(PlantTags.MOSS.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.moss_title)
@@ -192,7 +194,7 @@ fun PlantsList(
                     }
                     items(
                         state.plants.filter {
-                            it.tags?.contains(PlantTags.MOSS) ?: false
+                            it.tags?.contains(PlantTags.MOSS.code) ?: false
                         }
                     ) { plant ->
                         GridItem(
@@ -210,7 +212,7 @@ fun PlantsList(
                         )
                     }
                 }
-                if (state.plants.any { it.tags?.contains(PlantTags.FERN) == true }) {
+                if (state.plants.any { it.tags?.contains(PlantTags.FERN.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.fern_title)
@@ -218,7 +220,7 @@ fun PlantsList(
                     }
                     items(
                         state.plants.filter {
-                            it.tags?.contains(PlantTags.FERN) ?: false
+                            it.tags?.contains(PlantTags.FERN.code) ?: false
                         }
                     ) { plant ->
                         GridItem(

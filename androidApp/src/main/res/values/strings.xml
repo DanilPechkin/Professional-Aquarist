@@ -216,4 +216,5 @@
     <string name="needs_bright_light">Needs bright light</string>
     <string name="needs_low_light">Needs low light</string>
     <string name="co2_label">CO2</string>
+    <string name="plant_type_label">Plant type</string>
 </resources>

@@ -128,11 +128,11 @@ fun DwellerInfo(
             Text(
                 text = "${stringResource(R.string.status_label)}: ${
                     when (state.dweller.status) {
-                        ComfortTags.VERY_SATISFIED -> stringResource(R.string.very_satisfied)
-                        ComfortTags.SATISFIED -> stringResource(R.string.satisfied)
-                        ComfortTags.NEUTRAL -> stringResource(R.string.neutral_label)
-                        ComfortTags.DISSATISFIED -> stringResource(R.string.dissatisfied)
-                        ComfortTags.VERY_DISSATISFIED -> stringResource(R.string.very_dissatisfied)
+                        ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
+                        ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
+                        ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
+                        ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
+                        ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
                         else -> stringResource(R.string.satisfied)
                     }
                 }"
@@ -146,16 +146,16 @@ fun DwellerInfo(
                     text = "${stringResource(R.string.cause_discomfort_label)}: ${
                         state.dweller.statusTags!!.map { tag ->
                             when (tag) {
-                                DwellerStatusTags.WATER_PARAMETERS_NOT_MET ->
+                                DwellerStatusTags.WATER_PARAMETERS_NOT_MET.code ->
                                     stringResource(R.string.inappropriate_water_parameters)
 
-                                DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET ->
+                                DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET.code ->
                                     stringResource(R.string.fish_are_crowded_in_the_aquarium)
 
-                                DwellerStatusTags.IN_DANGER ->
+                                DwellerStatusTags.IN_DANGER.code ->
                                     stringResource(R.string.this_fish_is_in_danger)
 
-                                DwellerStatusTags.TAGS_NOT_MET ->
+                                DwellerStatusTags.TAGS_NOT_MET.code ->
                                     stringResource(R.string.wishes_of_this_fish_are_not_fulfilled)
 
                                 else -> null
@@ -165,7 +165,7 @@ fun DwellerInfo(
                 )
             }
 
-            if (state.dweller.statusTags?.contains(DwellerStatusTags.TAGS_NOT_MET) == true) {
+            if (state.dweller.statusTags?.contains(DwellerStatusTags.TAGS_NOT_MET.code) == true) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -173,37 +173,37 @@ fun DwellerInfo(
                     text = "${stringResource(R.string.unfulfilled_wishes_label)}: ${
                         state.dweller.statusTags!!.map { tag ->
                             when (tag) {
-                                DwellerTags.FAST_CURRENT ->
+                                DwellerTags.FAST_CURRENT.code ->
                                     stringResource(R.string.needs_fast_current_label)
 
-                                DwellerTags.SLOW_CURRENT ->
+                                DwellerTags.SLOW_CURRENT.code ->
                                     stringResource(R.string.needs_slow_current_label)
 
-                                DwellerTags.MEDIUM_CURRENT ->
+                                DwellerTags.MEDIUM_CURRENT.code ->
                                     stringResource(R.string.needs_medium_current_label)
 
-                                DwellerTags.BRIGHT_LIGHT ->
+                                DwellerTags.BRIGHT_LIGHT.code ->
                                     stringResource(R.string.needs_bright_light_label)
 
-                                DwellerTags.LOW_LIGHT ->
+                                DwellerTags.LOW_LIGHT.code ->
                                     stringResource(R.string.needs_low_light_label)
 
-                                DwellerTags.PLANT_LOVER ->
+                                DwellerTags.PLANT_LOVER.code ->
                                     stringResource(R.string.needs_lot_of_plants_label)
 
-                                DwellerTags.NEEDS_SHELTER ->
+                                DwellerTags.NEEDS_SHELTER.code ->
                                     stringResource(R.string.needs_shelter_label)
 
-                                DwellerTags.BROADLEAF_PLANT ->
+                                DwellerTags.BROADLEAF_PLANT.code ->
                                     stringResource(R.string.needs_broadleaf_plant_label)
 
-                                DwellerTags.LONG_STEMMED_PLANT ->
+                                DwellerTags.LONG_STEMMED_PLANT.code ->
                                     stringResource(R.string.needs_long_stemmed_label)
 
-                                DwellerTags.FLOATING_PLANT ->
+                                DwellerTags.FLOATING_PLANT.code ->
                                     stringResource(R.string.needs_floating_plant_label)
 
-                                DwellerTags.MOSS ->
+                                DwellerTags.MOSS.code ->
                                     stringResource(R.string.needs_moss_label)
 
                                 else -> null

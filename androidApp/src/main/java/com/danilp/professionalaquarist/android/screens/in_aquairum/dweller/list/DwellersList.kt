@@ -103,7 +103,7 @@ fun DwellersList(
                 state = scrollState,
                 modifier = Modifier.fillMaxSize()
             ) {
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.FISH) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.FISH.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.fish_title)
@@ -111,7 +111,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.FISH) ?: false
+                            it.tags?.contains(DwellerTags.FISH.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(
@@ -125,7 +125,7 @@ fun DwellersList(
                         )
                     }
                 }
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.SHRIMP) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.SHRIMP.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.shrimp_title),
@@ -134,7 +134,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.SHRIMP) ?: false
+                            it.tags?.contains(DwellerTags.SHRIMP.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(
@@ -148,7 +148,7 @@ fun DwellersList(
                         )
                     }
                 }
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAB) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAB.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.crab_title),
@@ -157,7 +157,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.CRAB) ?: false
+                            it.tags?.contains(DwellerTags.CRAB.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(
@@ -171,7 +171,7 @@ fun DwellersList(
                         )
                     }
                 }
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAYFISH) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.CRAYFISH.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.crayfish_title),
@@ -180,7 +180,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.CRAYFISH) ?: false
+                            it.tags?.contains(DwellerTags.CRAYFISH.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(
@@ -194,7 +194,7 @@ fun DwellersList(
                         )
                     }
                 }
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.SNAIL) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.SNAIL.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.snail_title),
@@ -203,7 +203,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.SNAIL) ?: false
+                            it.tags?.contains(DwellerTags.SNAIL.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(
@@ -217,7 +217,7 @@ fun DwellersList(
                         )
                     }
                 }
-                if (state.dwellers.any { it.tags?.contains(DwellerTags.BIVALVE) == true }) {
+                if (state.dwellers.any { it.tags?.contains(DwellerTags.BIVALVE.code) == true }) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(
                             title = stringResource(R.string.bivalve_title),
@@ -226,7 +226,7 @@ fun DwellersList(
                     }
                     items(
                         state.dwellers.filter {
-                            it.tags?.contains(DwellerTags.BIVALVE) ?: false
+                            it.tags?.contains(DwellerTags.BIVALVE.code) ?: false
                         }
                     ) { dweller ->
                         GridItem(

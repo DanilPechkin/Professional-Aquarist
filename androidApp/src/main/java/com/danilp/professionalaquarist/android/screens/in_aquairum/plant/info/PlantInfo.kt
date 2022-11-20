@@ -122,11 +122,11 @@ fun PlantInfo(
             Text(
                 text = "${stringResource(R.string.status_label)}: ${
                     when (state.plant.status) {
-                        ComfortTags.VERY_SATISFIED -> stringResource(R.string.very_satisfied)
-                        ComfortTags.SATISFIED -> stringResource(R.string.satisfied)
-                        ComfortTags.NEUTRAL -> stringResource(R.string.neutral_label)
-                        ComfortTags.DISSATISFIED -> stringResource(R.string.dissatisfied)
-                        ComfortTags.VERY_DISSATISFIED -> stringResource(R.string.very_dissatisfied)
+                        ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
+                        ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
+                        ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
+                        ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
+                        ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
                         else -> stringResource(R.string.satisfied)
                     }
                 }"
@@ -140,16 +140,16 @@ fun PlantInfo(
                     text = "${stringResource(R.string.cause_discomfort_label)}: ${
                         state.plant.statusTags!!.map { tag ->
                             when (tag) {
-                                PlantStatusTags.WATER_PARAMETERS_NOT_MET ->
+                                PlantStatusTags.WATER_PARAMETERS_NOT_MET.code ->
                                     stringResource(R.string.inappropriate_water_parameters)
 
-                                PlantStatusTags.NOT_ENOUGH_ILLUMINATION ->
+                                PlantStatusTags.NOT_ENOUGH_ILLUMINATION.code ->
                                     stringResource(R.string.not_enough_illumination)
 
-                                PlantStatusTags.IN_DANGER ->
+                                PlantStatusTags.IN_DANGER.code ->
                                     stringResource(R.string.this_plant_is_in_danger)
 
-                                PlantStatusTags.TAGS_NOT_MET ->
+                                PlantStatusTags.TAGS_NOT_MET.code ->
                                     stringResource(R.string.wishes_of_this_plant_are_not_fulfilled)
 
                                 else -> null
@@ -159,7 +159,7 @@ fun PlantInfo(
                 )
             }
 
-            if (state.plant.statusTags?.contains(PlantStatusTags.TAGS_NOT_MET) == true) {
+            if (state.plant.statusTags?.contains(PlantStatusTags.TAGS_NOT_MET.code) == true) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -167,10 +167,10 @@ fun PlantInfo(
                     text = "${stringResource(R.string.unfulfilled_wishes_label)}: ${
                         state.plant.statusTags!!.map { tag ->
                             when (tag) {
-                                PlantTags.BRIGHT_LIGHT ->
+                                PlantTags.BRIGHT_LIGHT.code ->
                                     stringResource(R.string.needs_bright_light)
 
-                                PlantTags.LOW_LIGHT ->
+                                PlantTags.LOW_LIGHT.code ->
                                     stringResource(R.string.needs_low_light)
 
                                 else -> null
