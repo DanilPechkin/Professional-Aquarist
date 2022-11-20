@@ -23,8 +23,8 @@
     <string name="add_plant_button">Add new plant</string>
     <string name="should_be_decimal_error">Should be decimal</string>
     <string name="edit_plant_title">Edit plant</string>
-    <string name="label_from">From</string>
-    <string name="label_to">To</string>
+    <string name="min_label">Min</string>
+    <string name="max_label">Max</string>
     <string name="temperature_label">Temperature</string>
     <string name="ph_label">pH</string>
     <string name="gh_label">gH</string>
@@ -217,4 +217,22 @@
     <string name="needs_low_light">Needs low light</string>
     <string name="co2_label">CO2</string>
     <string name="plant_type_label">Plant type</string>
+    <string name="herbivorous_label">Herbivorous</string>
+    <string name="carnivorous_label">Carnivorous</string>
+    <string name="predator_label">Predator</string>
+    <string name="peaceful_label">Peaceful</string>
+    <string name="territorial_label">Territorial</string>
+    <string name="veil_tailed_label">Veil-tailed</string>
+    <string name="large_label">Large</string>
+    <string name="big_label">Big</string>
+    <string name="medium_label">Medium</string>
+    <string name="small_label">Small</string>
+    <string name="monogamous_label">Monogamous</string>
+    <string name="polygamous_label">Polygamous</string>
+    <string name="livebearer_label">Livebearer</string>
+    <string name="oviparous_label">Oviparous</string>
+    <string name="shoal_label">Shoaling</string>
+    <string name="cleaner_label">Cleaner</string>
+    <string name="plant_eater_label">Plant eater</string>
+    <string name="choose_one_label">Choose one</string>
 </resources>

@@ -194,9 +194,9 @@ class DwellerEditViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val nameResult = validate.string(state.name)
             val amountResult = validate.integer(state.amount, isRequired = true)
-            val minTemperatureResult = validate.decimal(state.minTemperature, isRequired = true)
-            val maxTemperatureResult = validate.decimal(state.maxTemperature, isRequired = true)
-            val litersResult = validate.decimal(state.liters, isRequired = true)
+            val minTemperatureResult = validate.decimal(state.minTemperature)
+            val maxTemperatureResult = validate.decimal(state.maxTemperature)
+            val litersResult = validate.decimal(state.liters)
             val minPhResult = validate.decimal(state.minPh)
             val maxPhResult = validate.decimal(state.maxPh)
             val minGhResult = validate.decimal(state.minGh)
@@ -233,46 +233,6 @@ class DwellerEditViewModel @Inject constructor(
                     maxKhErrorCode = maxKhResult.errorCode
                 )
                 return@launch
-            }
-
-            val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
-            val isPhCorrect =
-                ((state.minPh.toDoubleOrNull() ?: 0.0) < (state.maxPh.toDoubleOrNull() ?: 0.0))
-            val isGhCorrect =
-                ((state.minGh.toDoubleOrNull() ?: 0.0) < (state.maxGh.toDoubleOrNull() ?: 0.0))
-            val isKhCorrect =
-                ((state.minKh.toDoubleOrNull() ?: 0.0) < (state.maxKh.toDoubleOrNull() ?: 0.0))
-
-            if (!isTempCorrect) {
-                kotlin.run {
-                    val temp = state.minTemperature
-                    state = state.copy(minTemperature = state.maxTemperature)
-                    state = state.copy(maxTemperature = temp)
-                }
-            }
-
-            if (!isPhCorrect) {
-                kotlin.run {
-                    val temp = state.minPh
-                    state = state.copy(minPh = state.maxPh)
-                    state = state.copy(maxPh = temp)
-                }
-            }
-
-            if (!isGhCorrect) {
-                kotlin.run {
-                    val temp = state.minGh
-                    state = state.copy(minGh = state.maxGh)
-                    state = state.copy(maxGh = temp)
-                }
-            }
-
-            if (!isKhCorrect) {
-                kotlin.run {
-                    val temp = state.minKh
-                    state = state.copy(minKh = state.maxKh)
-                    state = state.copy(maxKh = temp)
-                }
             }
 
             state = state.copy(

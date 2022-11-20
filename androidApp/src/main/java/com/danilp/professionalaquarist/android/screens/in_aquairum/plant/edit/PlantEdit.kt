@@ -31,6 +31,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -102,7 +103,7 @@ fun PlantEdit(
                 switchMenuVisibility = { isTopMenuExpanded = !isTopMenuExpanded },
                 isMenuExpanded = isTopMenuExpanded,
                 hideMenu = { isTopMenuExpanded = false },
-                navigateBack = { navigator.navigateUp() },
+                navigateBack = { navigator.navigate(PlantsListDestination) },
                 navigateToSettings = { navigator.navigate(SettingsScreenDestination()) },
                 navigateToAccount = { },
                 Icons.Rounded.Close
@@ -169,45 +170,6 @@ fun PlantEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Spa,
-                    contentDescription = stringResource(R.string.plant_title),
-                    modifier = Modifier
-                        .padding(end = 8.dp)
-                )
-
-                Text(text = stringResource(R.string.plant_type_label))
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            FlowRow(
-                mainAxisSpacing = 8.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
-            ) {
-                listOf(
-                    PlantTags.BROADLEAF_PLANT.code,
-                    PlantTags.MOSS.code,
-                    PlantTags.LONG_STEMMED_PLANT.code,
-                    PlantTags.FLOATING_PLANT.code,
-                    PlantTags.FERN.code
-                ).forEach { tag ->
-                    SelectChip(
-                        selected = state.typeTag == tag,
-                        onClick = { viewModel.onEvent(PlantEditEvent.TypeTagSelected(tag)) },
-                        labelCode = tag
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             InfoFieldWithErrorAndIcon(
                 value = state.name,
                 onValueChange = { viewModel.onEvent(PlantEditEvent.NameChanged(it)) },
@@ -268,6 +230,60 @@ fun PlantEdit(
                     }
                 )
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Column(
+                Modifier.padding(horizontal = 8.dp)
+            ) {
+                Row {
+                    Icon(
+                        imageVector = Icons.Rounded.Spa,
+                        contentDescription = stringResource(R.string.plant_title),
+                        tint = if (state.typeTagErrorCode != null) MaterialTheme.colorScheme.error
+                        else LocalContentColor.current,
+                        modifier = Modifier
+                            .padding(end = 8.dp)
+                    )
+
+                    Text(
+                        text = stringResource(R.string.plant_type_label),
+                        color = if (state.typeTagErrorCode != null) MaterialTheme.colorScheme.error
+                        else LocalContentColor.current,
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                FlowRow(
+                    mainAxisSpacing = 8.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp)
+                ) {
+                    listOf(
+                        PlantTags.BROADLEAF_PLANT.code,
+                        PlantTags.MOSS.code,
+                        PlantTags.FLOATING_PLANT.code,
+                        PlantTags.LONG_STEMMED_PLANT.code,
+                        PlantTags.FERN.code
+                    ).forEach { tag ->
+                        SelectChip(
+                            selected = state.typeTag == tag,
+                            onClick = { viewModel.onEvent(PlantEditEvent.TypeTagSelected(tag)) },
+                            labelCode = tag,
+                            isError = state.typeTagErrorCode != null
+                        )
+                    }
+                }
+
+                if (state.typeTagErrorCode != null) {
+                    Text(
+                        text = stringResource(R.string.choose_one_label),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 

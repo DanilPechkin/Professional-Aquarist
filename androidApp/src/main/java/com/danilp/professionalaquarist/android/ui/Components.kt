@@ -695,7 +695,7 @@ fun FromToInfoFields(
             InfoFieldWithErrorAndIcon(
                 value = valueFrom,
                 onValueChange = onValueFromChange,
-                label = stringResource(R.string.label_from),
+                label = stringResource(R.string.min_label),
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .weight(1f),
@@ -712,7 +712,7 @@ fun FromToInfoFields(
             InfoFieldWithErrorAndIcon(
                 value = valueTo,
                 onValueChange = onValueToChange,
-                label = stringResource(R.string.label_to),
+                label = stringResource(R.string.max_label),
                 modifier = Modifier.weight(1f),
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActionsTo,
@@ -828,7 +828,8 @@ fun SelectChip(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     label: String? = null,
-    labelCode: String? = null
+    labelCode: String? = null,
+    isError: Boolean = false
 ) {
     FilterChip(
         selected = selected,
@@ -851,6 +852,12 @@ fun SelectChip(
                     PlantTags.FERN.code ->
                         stringResource(R.string.fern_title)
 
+                    PlantTags.BRIGHT_LIGHT.code ->
+                        stringResource(R.string.needs_bright_light)
+
+                    PlantTags.LOW_LIGHT.code ->
+                        stringResource(R.string.needs_low_light)
+
                     DwellerTags.CRAB.code ->
                         stringResource(R.string.crab_title)
 
@@ -869,6 +876,90 @@ fun SelectChip(
                     DwellerTags.CRAYFISH.code ->
                         stringResource(R.string.crayfish_title)
 
+                    DwellerTags.FAST_CURRENT.code ->
+                        stringResource(R.string.needs_fast_current_label)
+
+                    DwellerTags.SLOW_CURRENT.code ->
+                        stringResource(R.string.needs_slow_current_label)
+
+                    DwellerTags.MEDIUM_CURRENT.code ->
+                        stringResource(R.string.needs_medium_current_label)
+
+                    DwellerTags.BRIGHT_LIGHT.code ->
+                        stringResource(R.string.needs_bright_light_label)
+
+                    DwellerTags.LOW_LIGHT.code ->
+                        stringResource(R.string.needs_low_light_label)
+
+                    DwellerTags.PLANT_LOVER.code ->
+                        stringResource(R.string.needs_lot_of_plants_label)
+
+                    DwellerTags.NEEDS_SHELTER.code ->
+                        stringResource(R.string.needs_shelter_label)
+
+                    DwellerTags.BROADLEAF_PLANT.code ->
+                        stringResource(R.string.needs_broadleaf_plant_label)
+
+                    DwellerTags.LONG_STEMMED_PLANT.code ->
+                        stringResource(R.string.needs_long_stemmed_label)
+
+                    DwellerTags.FLOATING_PLANT.code ->
+                        stringResource(R.string.needs_floating_plant_label)
+
+                    DwellerTags.MOSS.code ->
+                        stringResource(R.string.needs_moss_label)
+
+                    DwellerTags.HERBIVOROUS.code ->
+                        stringResource(R.string.herbivorous_label)
+
+                    DwellerTags.CARNIVOROUS.code ->
+                        stringResource(R.string.carnivorous_label)
+
+                    DwellerTags.PREDATOR.code ->
+                        stringResource(R.string.predator_label)
+
+                    DwellerTags.PEACEFUL.code ->
+                        stringResource(R.string.peaceful_label)
+
+                    DwellerTags.TERRITORIAL.code ->
+                        stringResource(R.string.territorial_label)
+
+                    DwellerTags.VEIL_TAILED.code ->
+                        stringResource(R.string.veil_tailed_label)
+
+                    DwellerTags.LARGE.code ->
+                        stringResource(R.string.large_label)
+
+                    DwellerTags.BIG.code ->
+                        stringResource(R.string.big_label)
+
+                    DwellerTags.MEDIUM.code ->
+                        stringResource(R.string.medium_label)
+
+                    DwellerTags.SMALL.code ->
+                        stringResource(R.string.small_label)
+
+                    DwellerTags.MONOGAMOUS.code ->
+                        stringResource(R.string.monogamous_label)
+
+                    DwellerTags.POLYGAMOUS.code ->
+                        stringResource(R.string.polygamous_label)
+
+                    DwellerTags.LIVEBEARER.code ->
+                        stringResource(R.string.livebearer_label)
+
+                    DwellerTags.OVIPAROUS.code ->
+                        stringResource(R.string.oviparous_label)
+
+                    DwellerTags.SHOAL.code ->
+                        stringResource(R.string.shoal_label)
+
+                    DwellerTags.CLEANER.code ->
+                        stringResource(R.string.cleaner_label)
+
+                    DwellerTags.PLANT_EATER.code ->
+                        stringResource(R.string.plant_eater_label)
+
                     else -> ""
                 }
             )
@@ -884,6 +975,20 @@ fun SelectChip(
                     modifier = Modifier.size(FilterChipDefaults.IconSize)
                 )
             }
+        },
+        colors = if (isError) {
+            FilterChipDefaults.filterChipColors(
+                labelColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            FilterChipDefaults.filterChipColors()
+        },
+        border = if (isError) {
+            FilterChipDefaults.filterChipBorder(
+                borderColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            FilterChipDefaults.filterChipBorder()
         },
         modifier = modifier.animateContentSize(
             animationSpec = tween(

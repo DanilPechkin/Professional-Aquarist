@@ -16,7 +16,6 @@ enum class DwellerTags(val code: String) {
 
     BRIGHT_LIGHT("Bright light"), // любит яркий свет
     LOW_LIGHT("Low light"), // любит слабый свет
-    IGNORE_LIGHT("Ignore light"), // не обращает внимания на свет
 
     LARGE("Large"), // очень большой
     BIG("Big"), // большой
@@ -41,10 +40,10 @@ enum class DwellerTags(val code: String) {
     PLANT_LOVER("Plant lover"), // любит растения
     NEEDS_SHELTER("Needs shelter"), // нуждается в укрытии
 
-    BROADLEAF_PLANT("Broadleaf plant"), // любит широколистные растения
-    LONG_STEMMED_PLANT("Long-stemmed plant"), // любит длинностебельные растения
-    FLOATING_PLANT("Floating plant"), // любит плавающие растения
-    MOSS("Moss"), // мох
+    BROADLEAF_PLANT("Broadleaf plant lover"), // любит широколистные растения
+    LONG_STEMMED_PLANT("Long-stemmed plant lover"), // любит длинностебельные растения
+    FLOATING_PLANT("Floating plant lover"), // любит плавающие растения
+    MOSS("Moss lover"), // мох
 
     CLEANER("Cleaner"), // чистильщик
 

@@ -120,7 +120,7 @@ class PlantEditViewModel @Inject constructor(
             }
 
             is PlantEditEvent.NameChanged -> {
-                state = state.copy(name = event.name)
+                state = state.copy(name = event.name, nameErrorCode = null)
             }
 
             is PlantEditEvent.GenusChanged -> {
@@ -128,43 +128,52 @@ class PlantEditViewModel @Inject constructor(
             }
 
             is PlantEditEvent.MinTemperatureChanged -> {
-                state = state.copy(minTemperature = event.temp)
+                state = state.copy(
+                    minTemperature = event.temp,
+                    minTemperatureErrorCode = null
+                )
             }
 
             is PlantEditEvent.MaxTemperatureChanged -> {
-                state = state.copy(maxTemperature = event.temp)
+                state = state.copy(
+                    maxTemperature = event.temp,
+                    maxTemperatureErrorCode = null
+                )
             }
 
             is PlantEditEvent.MinPhChanged -> {
-                state = state.copy(minPh = event.ph)
+                state = state.copy(minPh = event.ph, minPhErrorCode = null)
             }
 
             is PlantEditEvent.MaxPhChanged -> {
-                state = state.copy(maxPh = event.ph)
+                state = state.copy(maxPh = event.ph, maxPhErrorCode = null)
             }
 
             is PlantEditEvent.MinGhChanged -> {
-                state = state.copy(minGh = event.gh)
+                state = state.copy(minGh = event.gh, minGhErrorCode = null)
             }
 
             is PlantEditEvent.MaxGhChanged -> {
-                state = state.copy(maxGh = event.gh)
+                state = state.copy(maxGh = event.gh, maxGhErrorCode = null)
             }
 
             is PlantEditEvent.MinKhChanged -> {
-                state = state.copy(minKh = event.kh)
+                state = state.copy(minKh = event.kh, minKhErrorCode = null)
             }
 
             is PlantEditEvent.MaxKhChanged -> {
-                state = state.copy(maxKh = event.kh)
+                state = state.copy(maxKh = event.kh, maxKhErrorCode = null)
             }
 
             is PlantEditEvent.MinCO2Changed -> {
-                state = state.copy(minCO2 = event.co2)
+                state = state.copy(minCO2 = event.co2, minCO2ErrorCode = null)
             }
 
             is PlantEditEvent.MinIlluminationChanged -> {
-                state = state.copy(minIllumination = event.illumination)
+                state = state.copy(
+                    minIllumination = event.illumination,
+                    minIlluminationErrorCode = null
+                )
             }
 
             is PlantEditEvent.DescriptionChanged -> {
@@ -188,7 +197,7 @@ class PlantEditViewModel @Inject constructor(
             }
 
             is PlantEditEvent.TypeTagSelected -> {
-                state = state.copy(typeTag = event.typeTag)
+                state = state.copy(typeTag = event.typeTag, typeTagErrorCode = null)
             }
         }
     }
@@ -222,6 +231,7 @@ class PlantEditViewModel @Inject constructor(
             val maxKhResult = validate.decimal(state.maxKh)
             val minCO2Result = validate.decimal(state.minCO2)
             val minIlluminationResult = validate.decimal(state.minIllumination)
+            val typeTagResult = validate.string(state.typeTag)
 
             val hasError = listOf(
                 nameResult,
@@ -234,7 +244,8 @@ class PlantEditViewModel @Inject constructor(
                 minKhResult,
                 maxKhResult,
                 minCO2Result,
-                minIlluminationResult
+                minIlluminationResult,
+                typeTagResult
             ).any { it.errorCode != null }
 
             if (hasError) {
@@ -249,67 +260,10 @@ class PlantEditViewModel @Inject constructor(
                     minKhErrorCode = minKhResult.errorCode,
                     maxKhErrorCode = maxKhResult.errorCode,
                     minCO2ErrorCode = minCO2Result.errorCode,
-                    minIlluminationErrorCode = minIlluminationResult.errorCode
+                    minIlluminationErrorCode = minIlluminationResult.errorCode,
+                    typeTagErrorCode = typeTagResult.errorCode
                 )
                 return@launch
-            }
-
-            val isTempCorrect = (state.minTemperature.toDouble() < state.maxTemperature.toDouble())
-            val isPhCorrect = (
-                    (
-                            (
-                                    state.minPh.toDoubleOrNull()
-                                        ?: 0.0
-                                    ) < (state.maxPh.toDoubleOrNull() ?: 0.0)
-                            )
-                    )
-            val isGhCorrect = (
-                    (
-                            (
-                                    state.minGh.toDoubleOrNull()
-                                        ?: 0.0
-                                    ) < (state.maxGh.toDoubleOrNull() ?: 0.0)
-                            )
-                    )
-            val isKhCorrect = (
-                    (
-                            (
-                                    state.minKh.toDoubleOrNull()
-                                        ?: 0.0
-                                    ) < (state.maxKh.toDoubleOrNull() ?: 0.0)
-                            )
-                    )
-
-            if (!isTempCorrect) {
-                kotlin.run {
-                    val temp = state.minTemperature
-                    state = state.copy(minTemperature = state.maxTemperature)
-                    state = state.copy(maxTemperature = temp)
-                }
-            }
-
-            if (!isPhCorrect) {
-                kotlin.run {
-                    val temp = state.minPh
-                    state = state.copy(minPh = state.maxPh)
-                    state = state.copy(maxPh = temp)
-                }
-            }
-
-            if (!isGhCorrect) {
-                kotlin.run {
-                    val temp = state.minGh
-                    state = state.copy(minGh = state.maxGh)
-                    state = state.copy(maxGh = temp)
-                }
-            }
-
-            if (!isKhCorrect) {
-                kotlin.run {
-                    val temp = state.minKh
-                    state = state.copy(minKh = state.maxKh)
-                    state = state.copy(maxKh = temp)
-                }
             }
 
             state = state.copy(
