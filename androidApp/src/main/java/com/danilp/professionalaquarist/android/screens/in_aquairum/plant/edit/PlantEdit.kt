@@ -25,6 +25,7 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material.icons.rounded.Spa
+import androidx.compose.material.icons.rounded.Tungsten
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -301,12 +302,60 @@ fun PlantEdit(
                 )
             }
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             AnimatedVisibility(
                 visible = isAdvancedExpanded,
                 enter = expandVertically(),
                 exit = shrinkVertically()
             ) {
                 Column {
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Tungsten,
+                                contentDescription = stringResource(R.string.illumination_label),
+                                tint = if (state.typeTagErrorCode != null)
+                                    MaterialTheme.colorScheme.error
+                                else LocalContentColor.current,
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.preffered_light_label),
+                                color = if (state.typeTagErrorCode != null)
+                                    MaterialTheme.colorScheme.error
+                                else LocalContentColor.current,
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                PlantTags.LOW_LIGHT.code,
+                                PlantTags.BRIGHT_LIGHT.code,
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = { viewModel.onEvent(PlantEditEvent.TagSelected(tag)) },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     FromToInfoFields(
                         label = stringResource(R.string.temperature_label),
                         valueFrom = state.minTemperature,

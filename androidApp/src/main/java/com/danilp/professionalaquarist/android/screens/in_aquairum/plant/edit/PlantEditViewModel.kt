@@ -290,7 +290,7 @@ class PlantEditViewModel @Inject constructor(
                                     PlantTags.MOSS.code,
                                     PlantTags.LONG_STEMMED_PLANT.code
                                 ).contains(tag)
-                            } + state.typeTag
+                            } + listOf(state.typeTag)
                             ).ifEmpty { null },
                 )
             )

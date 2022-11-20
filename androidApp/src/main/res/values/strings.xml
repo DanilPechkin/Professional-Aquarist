@@ -235,4 +235,5 @@
     <string name="cleaner_label">Cleaner</string>
     <string name="plant_eater_label">Plant eater</string>
     <string name="choose_one_label">Choose one</string>
+    <string name="preffered_light_label">Preffered light</string>
 </resources>

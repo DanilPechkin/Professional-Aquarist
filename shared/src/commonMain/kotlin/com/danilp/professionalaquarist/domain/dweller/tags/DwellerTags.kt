@@ -10,12 +10,12 @@ enum class DwellerTags(val code: String) {
 
     VEIL_TAILED("Veil-tailed"), // вуалевый
 
-    FAST_CURRENT("Fast current"), // любит быстрое течение
-    MEDIUM_CURRENT("Medium current"), // любит среднее течение
-    SLOW_CURRENT("Slow current"), // любит мягкое течение
+    FAST_CURRENT("Fast_current"), // любит быстрое течение
+    MEDIUM_CURRENT("Medium_current"), // любит среднее течение
+    SLOW_CURRENT("Slow_current"), // любит мягкое течение
 
-    BRIGHT_LIGHT("Bright light"), // любит яркий свет
-    LOW_LIGHT("Low light"), // любит слабый свет
+    BRIGHT_LIGHT("Bright_light"), // любит яркий свет
+    LOW_LIGHT("Low_light"), // любит слабый свет
 
     LARGE("Large"), // очень большой
     BIG("Big"), // большой
@@ -37,15 +37,15 @@ enum class DwellerTags(val code: String) {
     CRAYFISH("Crayfish"), // рак
     BIVALVE("Bivalve"), // двухстворчатое
 
-    PLANT_LOVER("Plant lover"), // любит растения
-    NEEDS_SHELTER("Needs shelter"), // нуждается в укрытии
+    PLANT_LOVER("Plant_lover"), // любит растения
+    NEEDS_SHELTER("Needs_shelter"), // нуждается в укрытии
 
-    BROADLEAF_PLANT("Broadleaf plant lover"), // любит широколистные растения
-    LONG_STEMMED_PLANT("Long-stemmed plant lover"), // любит длинностебельные растения
-    FLOATING_PLANT("Floating plant lover"), // любит плавающие растения
-    MOSS("Moss lover"), // мох
+    BROADLEAF_PLANT("Broadleaf_plant_lover"), // любит широколистные растения
+    LONG_STEMMED_PLANT("Long-stemmed_plant_lover"), // любит длинностебельные растения
+    FLOATING_PLANT("Floating_plant_lover"), // любит плавающие растения
+    MOSS("Moss_lover"), // мох
 
     CLEANER("Cleaner"), // чистильщик
 
-    PLANT_EATER("Plant eater") // угроза для растений
+    PLANT_EATER("Plant_eater") // угроза для растений
 }

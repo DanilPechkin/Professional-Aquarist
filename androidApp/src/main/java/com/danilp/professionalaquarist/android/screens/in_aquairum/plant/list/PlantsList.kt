@@ -96,7 +96,7 @@ fun PlantsList(
                 .padding(top = 8.dp)
         ) {
             LazyVerticalGrid(
-                columns = GridCells.Adaptive(160.dp),
+                columns = GridCells.Adaptive(128.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(bottom = 16.dp, start = 16.dp, end = 16.dp),

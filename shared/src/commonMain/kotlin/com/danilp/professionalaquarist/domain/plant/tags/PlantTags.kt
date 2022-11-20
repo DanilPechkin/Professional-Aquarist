@@ -8,7 +8,7 @@ enum class PlantTags(val code: String) {
     MOSS("Moss"), // мох
     FERN("Fern"), // папоротник
 
-    BRIGHT_LIGHT("Bright light"), // любит яркий свет
-    LOW_LIGHT("Low light") // любит слабый свет
+    BRIGHT_LIGHT("Bright_light"), // любит яркий свет
+    LOW_LIGHT("Low_light") // любит слабый свет
 
 }
