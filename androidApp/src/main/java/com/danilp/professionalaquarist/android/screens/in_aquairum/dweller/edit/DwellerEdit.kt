@@ -21,15 +21,26 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Air
+import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.Checklist
+import androidx.compose.material.icons.rounded.ChildFriendly
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.FamilyRestroom
+import androidx.compose.material.icons.rounded.Psychology
+import androidx.compose.material.icons.rounded.Restaurant
 import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material.icons.rounded.SetMeal
+import androidx.compose.material.icons.rounded.Spa
+import androidx.compose.material.icons.rounded.Tungsten
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -63,6 +74,9 @@ import com.danilp.professionalaquarist.android.ui.FromToInfoFields
 import com.danilp.professionalaquarist.android.ui.ImagePicker
 import com.danilp.professionalaquarist.android.ui.InfoFieldWithError
 import com.danilp.professionalaquarist.android.ui.InfoFieldWithErrorAndIcon
+import com.danilp.professionalaquarist.android.ui.SelectChip
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
+import com.google.accompanist.flowlayout.FlowRow
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -78,6 +92,7 @@ fun DwellerEdit(
     val state = viewModel.state
 
     var isAdvancedExpanded by rememberSaveable { mutableStateOf(false) }
+    var isTagsExpanded by rememberSaveable { mutableStateOf(false) }
     var isTopMenuExpanded by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     var openDeleteDialog by remember { mutableStateOf(false) }
@@ -256,18 +271,463 @@ fun DwellerEdit(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            TextButton(
-                onClick = { isAdvancedExpanded = !isAdvancedExpanded }
+            Column(
+                Modifier.padding(horizontal = 8.dp)
             ) {
-                Text(text = stringResource(R.string.show_advanced_button))
-                Icon(
-                    imageVector =
-                    if (isAdvancedExpanded)
-                        Icons.Default.ExpandLess
-                    else
-                        Icons.Default.ExpandMore,
-                    contentDescription = stringResource(R.string.show_advanced_button)
-                )
+                Row {
+                    Icon(
+                        imageVector = Icons.Rounded.SetMeal,
+                        contentDescription = stringResource(R.string.dweller_title),
+                        tint = if (state.typeTagErrorCode != null) MaterialTheme.colorScheme.error
+                        else LocalContentColor.current,
+                        modifier = Modifier
+                            .padding(end = 8.dp)
+                    )
+
+                    Text(
+                        text = stringResource(R.string.dweller_type_label),
+                        color = if (state.typeTagErrorCode != null) MaterialTheme.colorScheme.error
+                        else LocalContentColor.current,
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                FlowRow(
+                    mainAxisSpacing = 8.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp)
+                ) {
+                    listOf(
+                        DwellerTags.FISH.code,
+                        DwellerTags.BIVALVE.code,
+                        DwellerTags.CRAYFISH.code,
+                        DwellerTags.SHRIMP.code,
+                        DwellerTags.CRAB.code,
+                        DwellerTags.SNAIL.code
+                    ).forEach { tag ->
+                        SelectChip(
+                            selected = state.typeTag == tag,
+                            onClick = { viewModel.onEvent(DwellerEditEvent.TypeTagSelected(tag)) },
+                            labelCode = tag,
+                            isError = state.typeTagErrorCode != null
+                        )
+                    }
+                }
+
+                if (state.typeTagErrorCode != null) {
+                    Text(
+                        text = stringResource(R.string.choose_one_label),
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row {
+                TextButton(
+                    onClick = { isAdvancedExpanded = !isAdvancedExpanded }
+                ) {
+                    Text(text = stringResource(R.string.show_advanced_button))
+                    Icon(
+                        imageVector =
+                        if (isAdvancedExpanded)
+                            Icons.Default.ExpandLess
+                        else
+                            Icons.Default.ExpandMore,
+                        contentDescription = stringResource(R.string.show_advanced_button)
+                    )
+                }
+
+                TextButton(
+                    onClick = { isTagsExpanded = !isTagsExpanded }
+                ) {
+                    Text(text = stringResource(R.string.show_tags_button))
+                    Icon(
+                        imageVector =
+                        if (isTagsExpanded)
+                            Icons.Default.ExpandLess
+                        else
+                            Icons.Default.ExpandMore,
+                        contentDescription = stringResource(R.string.show_tags_button)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            AnimatedVisibility(
+                visible = isTagsExpanded,
+                enter = expandVertically(),
+                exit = shrinkVertically()
+            ) {
+                Column {
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Restaurant,
+                                contentDescription = stringResource(R.string.food_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.diet_label)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.CARNIVOROUS.code,
+                                DwellerTags.HERBIVOROUS.code,
+                                DwellerTags.OMNIVOROUS.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Psychology,
+                                contentDescription = stringResource(R.string.behavior_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.behavior_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.PREDATOR.code,
+                                DwellerTags.PEACEFUL.code,
+                                DwellerTags.TERRITORIAL.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Air,
+                                contentDescription = stringResource(R.string.current_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.preffered_current_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.FAST_CURRENT.code,
+                                DwellerTags.MEDIUM_CURRENT.code,
+                                DwellerTags.SLOW_CURRENT.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Tungsten,
+                                contentDescription = stringResource(R.string.illumination_label)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.preffered_light_label)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.BRIGHT_LIGHT.code,
+                                DwellerTags.LOW_LIGHT.code,
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.FamilyRestroom,
+                                contentDescription = stringResource(R.string.family_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.family_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.MONOGAMOUS.code,
+                                DwellerTags.POLYGAMOUS.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.ChildFriendly,
+                                contentDescription = stringResource(R.string.childbirh_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.childbirh_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.LIVEBEARER.code,
+                                DwellerTags.OVIPAROUS.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.AutoAwesome,
+                                contentDescription =
+                                stringResource(R.string.particular_qualities_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.particular_qualities_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.VEIL_TAILED.code,
+                                DwellerTags.SHOAL.code,
+                                DwellerTags.CLEANER.code,
+                                DwellerTags.PLANT_EATER.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Checklist,
+                                contentDescription =
+                                stringResource(R.string.wishes_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.wishes_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.PLANT_LOVER.code,
+                                DwellerTags.NEEDS_SHELTER.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Column(
+                        Modifier.padding(horizontal = 8.dp)
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Rounded.Spa,
+                                contentDescription =
+                                stringResource(R.string.favorite_plants_title)
+                            )
+
+                            Text(
+                                text = stringResource(R.string.favorite_plants_title)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        FlowRow(
+                            mainAxisSpacing = 8.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            listOf(
+                                DwellerTags.BROADLEAF_PLANT.code,
+                                DwellerTags.FLOATING_PLANT.code,
+                                DwellerTags.MOSS.code,
+                                DwellerTags.LONG_STEMMED_PLANT.code
+                            ).forEach { tag ->
+                                SelectChip(
+                                    selected = state.tags.contains(tag),
+                                    onClick = {
+                                        viewModel.onEvent(DwellerEditEvent.TagSelected(tag))
+                                    },
+                                    labelCode = tag
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+
+                }
             }
 
             AnimatedVisibility(

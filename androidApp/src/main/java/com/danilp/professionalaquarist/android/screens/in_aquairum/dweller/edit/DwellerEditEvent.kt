@@ -17,4 +17,6 @@ sealed interface DwellerEditEvent {
     data class MaxKhChanged(val kh: String) : DwellerEditEvent
     data class DescriptionChanged(val description: String) : DwellerEditEvent
     data class ImagePicked(val imageUrl: String) : DwellerEditEvent
+    data class TypeTagSelected(val typeTag: String) : DwellerEditEvent
+    data class TagSelected(val tag: String) : DwellerEditEvent
 }

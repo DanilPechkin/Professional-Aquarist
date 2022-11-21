@@ -11,6 +11,7 @@ import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.Sha
 import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.dweller.Dweller
 import com.danilp.professionalaquarist.domain.dweller.DwellerDataSource
+import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
 import com.danilp.professionalaquarist.domain.dweller.use_case.ConvertDwellerMeasures
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.alkalinity.AlkalinityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
@@ -96,7 +97,18 @@ class DwellerEditViewModel @Inject constructor(
                 maxGh = (state.dweller.maxGh ?: "").toString(),
                 minKh = (state.dweller.minKh ?: "").toString(),
                 maxKh = (state.dweller.maxKh ?: "").toString(),
-                description = state.dweller.description ?: ""
+                description = state.dweller.description ?: "",
+                typeTag = state.dweller.tags?.find { tag ->
+                    listOf(
+                        DwellerTags.FISH.code,
+                        DwellerTags.SHRIMP.code,
+                        DwellerTags.CRAYFISH.code,
+                        DwellerTags.CRAB.code,
+                        DwellerTags.SNAIL.code,
+                        DwellerTags.BIVALVE.code
+                    ).contains(tag)
+                } ?: "",
+                tags = state.dweller.tags ?: listOf()
             )
         }
     }
@@ -116,7 +128,7 @@ class DwellerEditViewModel @Inject constructor(
             }
 
             is DwellerEditEvent.NameChanged -> {
-                state = state.copy(name = event.name)
+                state = state.copy(name = event.name, nameErrorCode = null)
             }
 
             is DwellerEditEvent.GenusChanged -> {
@@ -124,43 +136,43 @@ class DwellerEditViewModel @Inject constructor(
             }
 
             is DwellerEditEvent.AmountChanged -> {
-                state = state.copy(amount = event.amount)
+                state = state.copy(amount = event.amount, amountErrorCode = null)
             }
 
             is DwellerEditEvent.MinTemperatureChanged -> {
-                state = state.copy(minTemperature = event.temp)
+                state = state.copy(minTemperature = event.temp, minTemperatureErrorCode = null)
             }
 
             is DwellerEditEvent.MaxTemperatureChanged -> {
-                state = state.copy(maxTemperature = event.temp)
+                state = state.copy(maxTemperature = event.temp, maxTemperatureErrorCode = null)
             }
 
             is DwellerEditEvent.LitersChanged -> {
-                state = state.copy(liters = event.liters)
+                state = state.copy(liters = event.liters, litersErrorCode = null)
             }
 
             is DwellerEditEvent.MinPhChanged -> {
-                state = state.copy(minPh = event.ph)
+                state = state.copy(minPh = event.ph, minPhErrorCode = null)
             }
 
             is DwellerEditEvent.MaxPhChanged -> {
-                state = state.copy(maxPh = event.ph)
+                state = state.copy(maxPh = event.ph, maxPhErrorCode = null)
             }
 
             is DwellerEditEvent.MinGhChanged -> {
-                state = state.copy(minGh = event.gh)
+                state = state.copy(minGh = event.gh, minGhErrorCode = null)
             }
 
             is DwellerEditEvent.MaxGhChanged -> {
-                state = state.copy(maxGh = event.gh)
+                state = state.copy(maxGh = event.gh, maxGhErrorCode = null)
             }
 
             is DwellerEditEvent.MinKhChanged -> {
-                state = state.copy(minKh = event.kh)
+                state = state.copy(minKh = event.kh, minKhErrorCode = null)
             }
 
             is DwellerEditEvent.MaxKhChanged -> {
-                state = state.copy(maxKh = event.kh)
+                state = state.copy(maxKh = event.kh, maxKhErrorCode = null)
             }
 
             is DwellerEditEvent.DescriptionChanged -> {
@@ -171,6 +183,20 @@ class DwellerEditViewModel @Inject constructor(
                 state = state.copy(
                     dweller = state.dweller.copy(imageUrl = event.imageUrl)
                 )
+            }
+
+            is DwellerEditEvent.TagSelected -> {
+                state = state.copy(
+                    tags = if (state.tags.contains(event.tag)) {
+                        state.tags.filter { it != event.tag }
+                    } else {
+                        state.tags + event.tag
+                    }
+                )
+            }
+
+            is DwellerEditEvent.TypeTagSelected -> {
+                state = state.copy(typeTag = event.typeTag, typeTagErrorCode = null)
             }
         }
     }
@@ -203,6 +229,7 @@ class DwellerEditViewModel @Inject constructor(
             val maxGhResult = validate.decimal(state.maxGh)
             val minKhResult = validate.decimal(state.minKh)
             val maxKhResult = validate.decimal(state.maxKh)
+            val typeTagResult = validate.string(state.typeTag)
 
             val hasError = listOf(
                 nameResult,
@@ -215,7 +242,8 @@ class DwellerEditViewModel @Inject constructor(
                 minGhResult,
                 maxGhResult,
                 minKhResult,
-                maxKhResult
+                maxKhResult,
+                typeTagResult
             ).any { it.errorCode != null }
 
             if (hasError) {
@@ -230,7 +258,8 @@ class DwellerEditViewModel @Inject constructor(
                     minGhErrorCode = minGhResult.errorCode,
                     maxGhErrorCode = maxGhResult.errorCode,
                     minKhErrorCode = minKhResult.errorCode,
-                    maxKhErrorCode = maxKhResult.errorCode
+                    maxKhErrorCode = maxKhResult.errorCode,
+                    typeTagErrorCode = typeTagResult.errorCode
                 )
                 return@launch
             }
@@ -249,7 +278,19 @@ class DwellerEditViewModel @Inject constructor(
                     maxGh = state.maxGh.ifBlank { null }?.toDouble(),
                     minKh = state.minKh.ifBlank { null }?.toDouble(),
                     maxKh = state.maxKh.ifBlank { null }?.toDouble(),
-                    description = state.description.ifBlank { null }
+                    description = state.description.ifBlank { null },
+                    tags = (
+                            state.tags.filter { tag ->
+                                !listOf(
+                                    DwellerTags.FISH.code,
+                                    DwellerTags.BIVALVE.code,
+                                    DwellerTags.CRAYFISH.code,
+                                    DwellerTags.SHRIMP.code,
+                                    DwellerTags.CRAB.code,
+                                    DwellerTags.SNAIL.code
+                                ).contains(tag)
+                            } + listOf(state.typeTag)
+                            ).ifEmpty { null },
                 )
             )
 

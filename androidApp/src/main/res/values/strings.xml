@@ -236,4 +236,18 @@
     <string name="plant_eater_label">Plant eater</string>
     <string name="choose_one_label">Choose one</string>
     <string name="preffered_light_label">Preffered light</string>
+    <string name="dweller_type_label">Dweller type</string>
+    <string name="food_title">Food</string>
+    <string name="omnivorous_label">Omnivorous</string>
+    <string name="diet_label">Diet</string>
+    <string name="behavior_title">Behavior</string>
+    <string name="show_tags_button">Show tags</string>
+    <string name="current_title">Current</string>
+    <string name="preffered_current_title">Preffered current</string>
+    <string name="size_title">Size</string>
+    <string name="family_title">Family</string>
+    <string name="childbirh_title">Childbirth</string>
+    <string name="particular_qualities_title">Particular qualities</string>
+    <string name="wishes_title">Wishes</string>
+    <string name="favorite_plants_title">Favorite plants</string>
 </resources>

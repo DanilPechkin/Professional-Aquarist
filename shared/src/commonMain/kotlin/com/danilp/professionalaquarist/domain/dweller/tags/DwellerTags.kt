@@ -3,6 +3,7 @@ package com.danilp.professionalaquarist.domain.dweller.tags
 enum class DwellerTags(val code: String) {
     HERBIVOROUS("Herbivorous"), // травоядные
     CARNIVOROUS("Carnivorous"), // мясоядные
+    OMNIVOROUS("Omnivorous"), // всеядные
 
     PREDATOR("Predator"), // хищник
     PEACEFUL("Peaceful"), // миролюбивый

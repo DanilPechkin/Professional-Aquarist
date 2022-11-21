@@ -186,14 +186,20 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 val statusTags = (
                         if (!isAquariumCapacityEnough) {
                             listOf(DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET.code)
-                        } else listOf<String?>() +
+                        } else {
+                            listOf()
+                        } +
                                 if (!isWaterParametersMatch) {
                                     listOf(DwellerStatusTags.WATER_PARAMETERS_NOT_MET.code)
-                                } else listOf<String?>() +
-                                        if (notMetTags.isNotEmpty()) {
-                                            listOf(DwellerStatusTags.TAGS_NOT_MET.code)
-                                        } else listOf()
-                        ).mapNotNull { it }
+                                } else {
+                                    listOf()
+                                } +
+                                if (notMetTags.isNotEmpty()) {
+                                    listOf(DwellerStatusTags.TAGS_NOT_MET.code)
+                                } else {
+                                    listOf()
+                                }
+                        )
 
                 val updatedDweller = dweller.copy(
                     statusTags = (statusTags + notMetTags).ifEmpty { null },
@@ -267,16 +273,24 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                 val statusTags =
                     if (!isEnoughIllumination) {
                         listOf(PlantStatusTags.NOT_ENOUGH_ILLUMINATION.code)
-                    } else listOf<String>() +
+                    } else {
+                        listOf()
+                    } +
                             if (!isWaterParametersMatch) {
                                 listOf(PlantStatusTags.WATER_PARAMETERS_NOT_MET.code)
-                            } else listOf<String>() +
-                                    if (notMetTags.isNotEmpty()) {
-                                        listOf(PlantStatusTags.TAGS_NOT_MET.code)
-                                    } else listOf<String>() +
-                                            if (isInDanger) {
-                                                listOf(PlantStatusTags.IN_DANGER.code)
-                                            } else listOf()
+                            } else {
+                                listOf()
+                            } +
+                            if (notMetTags.isNotEmpty()) {
+                                listOf(PlantStatusTags.TAGS_NOT_MET.code)
+                            } else {
+                                listOf()
+                            } +
+                            if (isInDanger) {
+                                listOf(PlantStatusTags.IN_DANGER.code)
+                            } else {
+                                listOf()
+                            }
 
 
                 val updatedPlant = plant.copy(

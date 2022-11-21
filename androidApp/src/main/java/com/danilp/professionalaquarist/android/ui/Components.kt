@@ -915,6 +915,9 @@ fun SelectChip(
                     DwellerTags.CARNIVOROUS.code ->
                         stringResource(R.string.carnivorous_label)
 
+                    DwellerTags.OMNIVOROUS.code ->
+                        stringResource(R.string.omnivorous_label)
+
                     DwellerTags.PREDATOR.code ->
                         stringResource(R.string.predator_label)
 

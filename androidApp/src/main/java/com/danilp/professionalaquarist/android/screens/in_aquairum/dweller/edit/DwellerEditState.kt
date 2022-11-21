@@ -25,6 +25,8 @@ data class DwellerEditState(
     val minKh: String = "",
     val maxKh: String = "",
     val description: String = "",
+    val typeTag: String = "",
+    val tags: List<String> = listOf(),
     // Stats errors
     val nameErrorCode: Int? = null,
     /*TODO: val genusError: Int? = null,*/
@@ -37,5 +39,6 @@ data class DwellerEditState(
     val minGhErrorCode: Int? = null,
     val maxGhErrorCode: Int? = null,
     val minKhErrorCode: Int? = null,
-    val maxKhErrorCode: Int? = null
+    val maxKhErrorCode: Int? = null,
+    val typeTagErrorCode: Int? = null
 )

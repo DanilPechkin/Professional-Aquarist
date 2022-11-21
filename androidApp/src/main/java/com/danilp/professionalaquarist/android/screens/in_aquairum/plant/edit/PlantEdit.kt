@@ -317,19 +317,11 @@ fun PlantEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Tungsten,
-                                contentDescription = stringResource(R.string.illumination_label),
-                                tint = if (state.typeTagErrorCode != null)
-                                    MaterialTheme.colorScheme.error
-                                else LocalContentColor.current,
-                                modifier = Modifier
-                                    .padding(end = 8.dp)
+                                contentDescription = stringResource(R.string.illumination_label)
                             )
 
                             Text(
-                                text = stringResource(R.string.preffered_light_label),
-                                color = if (state.typeTagErrorCode != null)
-                                    MaterialTheme.colorScheme.error
-                                else LocalContentColor.current,
+                                text = stringResource(R.string.preffered_light_label)
                             )
                         }
 
