@@ -317,7 +317,7 @@ fun PlantEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Tungsten,
-                                contentDescription = stringResource(R.string.illumination_label)
+                                contentDescription = stringResource(R.string.required_illumination_label)
                             )
 
                             Text(
@@ -478,7 +478,7 @@ fun PlantEdit(
                         onValueChange = {
                             viewModel.onEvent(PlantEditEvent.MinIlluminationChanged(it))
                         },
-                        label = stringResource(R.string.illumination_label),
+                        label = stringResource(R.string.required_illumination_label),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next

@@ -30,7 +30,7 @@
     <string name="gh_label">gH</string>
     <string name="kh_label">kH</string>
     <string name="min_co2_label">Min CO2</string>
-    <string name="illumination_label">Required illumination</string>
+    <string name="required_illumination_label">Required illumination</string>
     <string name="notes_title">Notes</string>
     <string name="aquarium_title">Aquarium</string>
     <string name="calculators_title">Calculators</string>
@@ -250,4 +250,6 @@
     <string name="particular_qualities_title">Particular qualities</string>
     <string name="wishes_title">Wishes</string>
     <string name="favorite_plants_title">Favorite plants</string>
+    <string name="create_aquarium_title">Create aquarium</string>
+    <string name="illumination_label">Illumination</string>
 </resources>

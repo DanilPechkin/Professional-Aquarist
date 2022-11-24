@@ -219,7 +219,7 @@ class DwellerEditViewModel @Inject constructor(
         state = state.copy(isLoading = true)
         viewModelScope.launch(Dispatchers.IO) {
             val nameResult = validate.string(state.name)
-            val amountResult = validate.integer(state.amount, isRequired = true)
+            val amountResult = validate.integer(state.amount)
             val minTemperatureResult = validate.decimal(state.minTemperature)
             val maxTemperatureResult = validate.decimal(state.maxTemperature)
             val litersResult = validate.decimal(state.liters)

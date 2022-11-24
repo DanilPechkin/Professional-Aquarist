@@ -85,7 +85,7 @@ fun AquariumList(
             ExtendedFloatingActionButton(
                 onClick = {
                     navigator.navigate(
-                        AquariumEditDestination(-1L)
+                        AquariumEditDestination()
                     )
                 },
                 icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_aquarium_fab)) },
