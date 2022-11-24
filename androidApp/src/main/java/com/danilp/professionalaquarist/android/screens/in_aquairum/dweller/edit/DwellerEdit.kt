@@ -491,7 +491,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Tungsten,
-                                contentDescription = stringResource(R.string.required_illumination_label)
+                                contentDescription = stringResource(
+                                    R.string.required_illumination_label
+                                )
                             )
 
                             Text(
@@ -725,8 +727,6 @@ fun DwellerEdit(
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
-
-
                 }
             }
 

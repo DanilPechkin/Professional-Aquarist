@@ -4,6 +4,8 @@ sealed interface BullnoseCalculatorEvent {
 
     object CalculateButtonPressed : BullnoseCalculatorEvent
 
+    object ApplyButtonPressed : BullnoseCalculatorEvent
+
     data class HeightChanged(val height: String) : BullnoseCalculatorEvent
 
     data class WidthChanged(val width: String) : BullnoseCalculatorEvent

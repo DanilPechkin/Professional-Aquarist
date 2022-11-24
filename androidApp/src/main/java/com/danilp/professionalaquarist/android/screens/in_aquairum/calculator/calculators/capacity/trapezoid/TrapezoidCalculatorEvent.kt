@@ -4,6 +4,8 @@ sealed interface TrapezoidCalculatorEvent {
 
     object CalculateButtonPressed : TrapezoidCalculatorEvent
 
+    object ApplyButtonPressed : TrapezoidCalculatorEvent
+
     data class HeightChanged(val height: String) : TrapezoidCalculatorEvent
 
     data class WidthChanged(val width: String) : TrapezoidCalculatorEvent

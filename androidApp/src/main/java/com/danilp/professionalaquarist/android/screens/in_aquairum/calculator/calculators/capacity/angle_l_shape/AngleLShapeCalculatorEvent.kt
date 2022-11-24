@@ -4,6 +4,8 @@ sealed interface AngleLShapeCalculatorEvent {
 
     object CalculateButtonPressed : AngleLShapeCalculatorEvent
 
+    object ApplyButtonPressed : AngleLShapeCalculatorEvent
+
     data class HeightChanged(val height: String) : AngleLShapeCalculatorEvent
 
     data class WidthChanged(val width: String) : AngleLShapeCalculatorEvent

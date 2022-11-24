@@ -4,6 +4,8 @@ sealed interface CornerBowfrontCalculatorEvent {
 
     object CalculateButtonPressed : CornerBowfrontCalculatorEvent
 
+    object ApplyButtonPressed : CornerBowfrontCalculatorEvent
+
     data class HeightChanged(val height: String) : CornerBowfrontCalculatorEvent
 
     data class WidthChanged(val width: String) : CornerBowfrontCalculatorEvent

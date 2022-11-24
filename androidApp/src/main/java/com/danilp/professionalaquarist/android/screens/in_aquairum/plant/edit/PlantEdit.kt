@@ -317,7 +317,9 @@ fun PlantEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Tungsten,
-                                contentDescription = stringResource(R.string.required_illumination_label)
+                                contentDescription = stringResource(
+                                    R.string.required_illumination_label
+                                )
                             )
 
                             Text(
@@ -339,7 +341,9 @@ fun PlantEdit(
                             ).forEach { tag ->
                                 SelectChip(
                                     selected = state.tags.contains(tag),
-                                    onClick = { viewModel.onEvent(PlantEditEvent.TagSelected(tag)) },
+                                    onClick = {
+                                        viewModel.onEvent(PlantEditEvent.TagSelected(tag))
+                                    },
                                     labelCode = tag
                                 )
                             }

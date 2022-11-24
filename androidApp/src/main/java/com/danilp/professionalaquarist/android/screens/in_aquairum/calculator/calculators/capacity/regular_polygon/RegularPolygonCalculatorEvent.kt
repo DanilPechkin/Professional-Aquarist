@@ -4,6 +4,8 @@ sealed interface RegularPolygonCalculatorEvent {
 
     object CalculateButtonPressed : RegularPolygonCalculatorEvent
 
+    object ApplyButtonPressed : RegularPolygonCalculatorEvent
+
     data class HeightChanged(val height: String) : RegularPolygonCalculatorEvent
 
     data class SidesChanged(val sides: String) : RegularPolygonCalculatorEvent

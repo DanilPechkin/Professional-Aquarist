@@ -4,6 +4,8 @@ sealed interface FlatBackHexCalculatorEvent {
 
     object CalculateButtonPressed : FlatBackHexCalculatorEvent
 
+    object ApplyButtonPressed : FlatBackHexCalculatorEvent
+
     data class HeightChanged(val height: String) : FlatBackHexCalculatorEvent
 
     data class WidthChanged(val width: String) : FlatBackHexCalculatorEvent

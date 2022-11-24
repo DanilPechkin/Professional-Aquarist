@@ -4,6 +4,8 @@ sealed interface BowfrontCalculatorEvent {
 
     object CalculateButtonPressed : BowfrontCalculatorEvent
 
+    object ApplyButtonPressed : BowfrontCalculatorEvent
+
     data class HeightChanged(val height: String) : BowfrontCalculatorEvent
 
     data class WidthChanged(val width: String) : BowfrontCalculatorEvent

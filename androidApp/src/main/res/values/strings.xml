@@ -252,4 +252,5 @@
     <string name="favorite_plants_title">Favorite plants</string>
     <string name="create_aquarium_title">Create aquarium</string>
     <string name="illumination_label">Illumination</string>
+    <string name="apply_for_aquarium_button">Apply for aquarium</string>
 </resources>

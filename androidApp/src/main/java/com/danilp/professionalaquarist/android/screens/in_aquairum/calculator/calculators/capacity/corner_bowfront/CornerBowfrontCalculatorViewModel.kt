@@ -5,7 +5,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.SharedPrefs
+import com.danilp.professionalaquarist.domain.aquarium.AquariumDataSource
 import com.danilp.professionalaquarist.domain.use_case.calculation.aquairum.capacity.CalculateCapacity
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.CapacityMeasure
 import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.capacity.ConvertLiters
@@ -14,6 +16,8 @@ import com.danilp.professionalaquarist.domain.use_case.calculation.conversion.me
 import com.danilp.professionalaquarist.domain.use_case.validation.Validate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,16 +26,21 @@ class CornerBowfrontCalculatorViewModel @Inject constructor(
     private val calculateCapacity: CalculateCapacity,
     private val convertLiters: ConvertLiters,
     private val convertMeters: ConvertMeters,
-    private val validate: Validate
+    private val validate: Validate,
+    private val aquariumDataSource: AquariumDataSource
 ) : ViewModel() {
 
     var state by mutableStateOf(CornerBowfrontCalculatorState())
+
+    var aquariumId: Long? = null
 
     init {
         val sharedPreferences = context.getSharedPreferences(
             SharedPrefs.InAquariumInfo.key,
             Context.MODE_PRIVATE
         )
+
+        aquariumId = sharedPreferences.getLong(SharedPrefs.CurrentAquarium.key, -1)
 
         state = state.copy(
             capacityMeasureCode = sharedPreferences.getInt(
@@ -52,15 +61,19 @@ class CornerBowfrontCalculatorViewModel @Inject constructor(
             }
 
             is CornerBowfrontCalculatorEvent.HeightChanged -> {
-                state = state.copy(height = event.height)
+                state = state.copy(height = event.height, heightErrorCode = null)
             }
 
             is CornerBowfrontCalculatorEvent.LengthChanged -> {
-                state = state.copy(length = event.length)
+                state = state.copy(length = event.length, lengthErrorCode = null)
             }
 
             is CornerBowfrontCalculatorEvent.WidthChanged -> {
-                state = state.copy(width = event.width)
+                state = state.copy(width = event.width, widthErrorCode = null)
+            }
+
+            CornerBowfrontCalculatorEvent.ApplyButtonPressed -> {
+                applyForAquarium()
             }
         }
     }
@@ -117,5 +130,21 @@ class CornerBowfrontCalculatorViewModel @Inject constructor(
                 ).result
             ).result.toString()
         )
+    }
+
+    private fun applyForAquarium() {
+        viewModelScope.launch(Dispatchers.IO) {
+            aquariumDataSource.getAquariumById(aquariumId ?: -1)?.let { aquarium ->
+                aquariumDataSource.insertAquarium(
+                    aquarium.copy(
+                        liters = convertLiters.from(
+                            state.capacityMeasureCode,
+                            state.outputCapacity.toDouble()
+                        ).result
+                    )
+                )
+            }
+            aquariumDataSource.refreshAquariumById(aquariumId ?: -1)
+        }
     }
 }

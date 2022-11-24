@@ -1,5 +1,6 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.calculator.calculators.capacity.bowfront
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,8 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -69,6 +73,7 @@ fun BowfrontCalculator(
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
 
             val focusManager = LocalFocusManager.current
@@ -225,6 +230,20 @@ fun BowfrontCalculator(
                 horizontalArrangement = Arrangement.End,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                AnimatedVisibility(
+                    visible = state.outputCapacity.isNotEmpty()
+                ) {
+                    Button(
+                        onClick = {
+                            viewModel.onEvent(BowfrontCalculatorEvent.ApplyButtonPressed)
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.apply_for_aquarium_button))
+                    }
+                }
+
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Button(
                     onClick = {
                         viewModel.onEvent(BowfrontCalculatorEvent.CalculateButtonPressed)

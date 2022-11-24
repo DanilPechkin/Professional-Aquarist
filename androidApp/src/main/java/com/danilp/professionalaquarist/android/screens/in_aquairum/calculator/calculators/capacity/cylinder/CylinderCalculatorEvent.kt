@@ -4,6 +4,8 @@ sealed interface CylinderCalculatorEvent {
 
     object CalculateButtonPressed : CylinderCalculatorEvent
 
+    object ApplyButtonPressed : CylinderCalculatorEvent
+
     data class HeightChanged(val height: String) : CylinderCalculatorEvent
 
     data class DiameterChanged(val diameter: String) : CylinderCalculatorEvent

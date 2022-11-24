@@ -4,6 +4,8 @@ sealed interface RectangleCalculatorEvent {
 
     object CalculateButtonPressed : RectangleCalculatorEvent
 
+    object ApplyButtonPressed : RectangleCalculatorEvent
+
     data class LengthChanged(val length: String) : RectangleCalculatorEvent
 
     data class WidthChanged(val width: String) : RectangleCalculatorEvent

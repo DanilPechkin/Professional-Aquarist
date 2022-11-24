@@ -4,6 +4,8 @@ sealed interface LShapeCalculatorEvent {
 
     object CalculateButtonPressed : LShapeCalculatorEvent
 
+    object ApplyButtonPressed : LShapeCalculatorEvent
+
     data class HeightChanged(val height: String) : LShapeCalculatorEvent
 
     data class WidthChanged(val width: String) : LShapeCalculatorEvent
