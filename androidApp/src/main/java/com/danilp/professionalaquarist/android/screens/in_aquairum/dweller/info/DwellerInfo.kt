@@ -127,14 +127,14 @@ fun DwellerInfo(
 
             Text(
                 text = "${stringResource(R.string.status_label)}: ${
-                    when (state.dweller.status) {
-                        ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
-                        ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
-                        ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
-                        ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
-                        ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
-                        else -> stringResource(R.string.satisfied)
-                    }
+                when (state.dweller.status) {
+                    ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
+                    ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
+                    ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
+                    ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
+                    ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
+                    else -> stringResource(R.string.satisfied)
+                }
                 }"
             )
 
@@ -144,23 +144,23 @@ fun DwellerInfo(
 
                 Text(
                     text = "${stringResource(R.string.cause_discomfort_label)}: ${
-                        state.dweller.statusTags!!.map { tag ->
-                            when (tag) {
-                                DwellerStatusTags.WATER_PARAMETERS_NOT_MET.code ->
-                                    stringResource(R.string.inappropriate_water_parameters)
+                    state.dweller.statusTags!!.map { tag ->
+                        when (tag) {
+                            DwellerStatusTags.WATER_PARAMETERS_NOT_MET.code ->
+                                stringResource(R.string.inappropriate_water_parameters)
 
-                                DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET.code ->
-                                    stringResource(R.string.fish_are_crowded_in_the_aquarium)
+                            DwellerStatusTags.AQUARIUM_CAPACITY_NOT_MET.code ->
+                                stringResource(R.string.fish_are_crowded_in_the_aquarium)
 
-                                DwellerStatusTags.IN_DANGER.code ->
-                                    stringResource(R.string.this_fish_is_in_danger)
+                            DwellerStatusTags.IN_DANGER.code ->
+                                stringResource(R.string.this_fish_is_in_danger)
 
-                                DwellerStatusTags.TAGS_NOT_MET.code ->
-                                    stringResource(R.string.wishes_of_this_fish_are_not_fulfilled)
+                            DwellerStatusTags.TAGS_NOT_MET.code ->
+                                stringResource(R.string.wishes_of_this_fish_are_not_fulfilled)
 
-                                else -> null
-                            }
-                        }.mapNotNull { it }.joinToString(", ")
+                            else -> null
+                        }
+                    }.mapNotNull { it }.joinToString(", ")
                     }"
                 )
             }
@@ -171,44 +171,47 @@ fun DwellerInfo(
 
                 Text(
                     text = "${stringResource(R.string.unfulfilled_wishes_label)}: ${
-                        state.dweller.statusTags!!.map { tag ->
-                            when (tag) {
-                                DwellerTags.FAST_CURRENT.code ->
-                                    stringResource(R.string.needs_fast_current_label)
+                    state.dweller.statusTags!!.map { tag ->
+                        when (tag) {
+                            DwellerTags.FAST_CURRENT.code ->
+                                stringResource(R.string.needs_fast_current_label)
 
-                                DwellerTags.SLOW_CURRENT.code ->
-                                    stringResource(R.string.needs_slow_current_label)
+                            DwellerTags.SLOW_CURRENT.code ->
+                                stringResource(R.string.needs_slow_current_label)
 
-                                DwellerTags.MEDIUM_CURRENT.code ->
-                                    stringResource(R.string.needs_medium_current_label)
+                            DwellerTags.MEDIUM_CURRENT.code ->
+                                stringResource(R.string.needs_medium_current_label)
 
-                                DwellerTags.BRIGHT_LIGHT.code ->
-                                    stringResource(R.string.needs_bright_light_label)
+                            DwellerTags.BRIGHT_LIGHT.code ->
+                                stringResource(R.string.needs_bright_light_label)
 
-                                DwellerTags.LOW_LIGHT.code ->
-                                    stringResource(R.string.needs_low_light_label)
+                            DwellerTags.LOW_LIGHT.code ->
+                                stringResource(R.string.needs_low_light_label)
 
-                                DwellerTags.PLANT_LOVER.code ->
-                                    stringResource(R.string.needs_lot_of_plants_label)
+                            DwellerTags.PLANT_LOVER.code ->
+                                stringResource(R.string.needs_lot_of_plants_label)
 
-                                DwellerTags.NEEDS_SHELTER.code ->
-                                    stringResource(R.string.needs_shelter_label)
+                            DwellerTags.NEEDS_SHELTER.code ->
+                                stringResource(R.string.needs_shelter_label)
 
-                                DwellerTags.BROADLEAF_PLANT.code ->
-                                    stringResource(R.string.needs_broadleaf_plant_label)
+                            DwellerTags.BROADLEAF_PLANT.code ->
+                                stringResource(R.string.needs_broadleaf_plant_label)
 
-                                DwellerTags.LONG_STEMMED_PLANT.code ->
-                                    stringResource(R.string.needs_long_stemmed_label)
+                            DwellerTags.LONG_STEMMED_PLANT.code ->
+                                stringResource(R.string.needs_long_stemmed_label)
 
-                                DwellerTags.FLOATING_PLANT.code ->
-                                    stringResource(R.string.needs_floating_plant_label)
+                            DwellerTags.FLOATING_PLANT.code ->
+                                stringResource(R.string.needs_floating_plant_label)
 
-                                DwellerTags.MOSS.code ->
-                                    stringResource(R.string.needs_moss_label)
+                            DwellerTags.MOSS.code ->
+                                stringResource(R.string.needs_moss_label)
 
-                                else -> null
-                            }
-                        }.mapNotNull { it }.joinToString(", ")
+                            DwellerTags.NEEDS_DRIFTWOOD.code ->
+                                stringResource(R.string.needs_driftwood_label)
+
+                            else -> null
+                        }
+                    }.mapNotNull { it }.joinToString(", ")
                     }"
                 )
             }
@@ -218,7 +221,7 @@ fun DwellerInfo(
 
                 Text(
                     text = "${stringResource(R.string.description_label)}: ${
-                        state.dweller.description
+                    state.dweller.description
                     }"
                 )
             }
@@ -247,7 +250,7 @@ fun DwellerInfo(
                     if (state.dweller.liters != null) {
                         Text(
                             text = "${stringResource(R.string.occupied_volume_in_the_aquarium)}: ${
-                                state.dweller.liters!! * state.dweller.amount!!
+                            state.dweller.liters!! * state.dweller.amount!!
                             }"
                         )
 
@@ -256,9 +259,9 @@ fun DwellerInfo(
 
                     Text(
                         text = "${stringResource(R.string.temperature_label)}: ${
-                            state.dweller.minTemperature ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.minTemperature ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.dweller.maxTemperature ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.maxTemperature ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -266,9 +269,9 @@ fun DwellerInfo(
 
                     Text(
                         text = "${stringResource(R.string.ph_label)}: ${
-                            state.dweller.minPh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.minPh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.dweller.maxPh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.maxPh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -276,9 +279,9 @@ fun DwellerInfo(
 
                     Text(
                         text = "${stringResource(R.string.gh_label)}: ${
-                            state.dweller.minGh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.minGh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.dweller.maxGh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.maxGh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -286,9 +289,9 @@ fun DwellerInfo(
 
                     Text(
                         text = "${stringResource(R.string.kh_label)}: ${
-                            state.dweller.minKh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.minKh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.dweller.maxKh ?: stringResource(id = R.string.unknown_label)
+                        state.dweller.maxKh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
                 }

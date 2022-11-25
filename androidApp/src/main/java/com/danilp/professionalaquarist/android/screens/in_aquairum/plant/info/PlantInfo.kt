@@ -121,14 +121,14 @@ fun PlantInfo(
 
             Text(
                 text = "${stringResource(R.string.status_label)}: ${
-                    when (state.plant.status) {
-                        ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
-                        ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
-                        ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
-                        ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
-                        ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
-                        else -> stringResource(R.string.satisfied)
-                    }
+                when (state.plant.status) {
+                    ComfortTags.VERY_SATISFIED.code -> stringResource(R.string.very_satisfied)
+                    ComfortTags.SATISFIED.code -> stringResource(R.string.satisfied)
+                    ComfortTags.NEUTRAL.code -> stringResource(R.string.neutral_label)
+                    ComfortTags.DISSATISFIED.code -> stringResource(R.string.dissatisfied)
+                    ComfortTags.VERY_DISSATISFIED.code -> stringResource(R.string.very_dissatisfied)
+                    else -> stringResource(R.string.satisfied)
+                }
                 }"
             )
 
@@ -138,23 +138,23 @@ fun PlantInfo(
 
                 Text(
                     text = "${stringResource(R.string.cause_discomfort_label)}: ${
-                        state.plant.statusTags!!.map { tag ->
-                            when (tag) {
-                                PlantStatusTags.WATER_PARAMETERS_NOT_MET.code ->
-                                    stringResource(R.string.inappropriate_water_parameters)
+                    state.plant.statusTags!!.map { tag ->
+                        when (tag) {
+                            PlantStatusTags.WATER_PARAMETERS_NOT_MET.code ->
+                                stringResource(R.string.inappropriate_water_parameters)
 
-                                PlantStatusTags.NOT_ENOUGH_ILLUMINATION.code ->
-                                    stringResource(R.string.not_enough_illumination)
+                            PlantStatusTags.NOT_ENOUGH_ILLUMINATION.code ->
+                                stringResource(R.string.not_enough_illumination)
 
-                                PlantStatusTags.IN_DANGER.code ->
-                                    stringResource(R.string.this_plant_is_in_danger)
+                            PlantStatusTags.IN_DANGER.code ->
+                                stringResource(R.string.this_plant_is_in_danger)
 
-                                PlantStatusTags.TAGS_NOT_MET.code ->
-                                    stringResource(R.string.wishes_of_this_plant_are_not_fulfilled)
+                            PlantStatusTags.TAGS_NOT_MET.code ->
+                                stringResource(R.string.wishes_of_this_plant_are_not_fulfilled)
 
-                                else -> null
-                            }
-                        }.mapNotNull { it }.joinToString(", ")
+                            else -> null
+                        }
+                    }.mapNotNull { it }.joinToString(", ")
                     }"
                 )
             }
@@ -165,17 +165,17 @@ fun PlantInfo(
 
                 Text(
                     text = "${stringResource(R.string.unfulfilled_wishes_label)}: ${
-                        state.plant.statusTags!!.map { tag ->
-                            when (tag) {
-                                PlantTags.BRIGHT_LIGHT.code ->
-                                    stringResource(R.string.needs_bright_light)
+                    state.plant.statusTags!!.map { tag ->
+                        when (tag) {
+                            PlantTags.BRIGHT_LIGHT.code ->
+                                stringResource(R.string.needs_bright_light)
 
-                                PlantTags.LOW_LIGHT.code ->
-                                    stringResource(R.string.needs_low_light)
+                            PlantTags.LOW_LIGHT.code ->
+                                stringResource(R.string.needs_low_light)
 
-                                else -> null
-                            }
-                        }.mapNotNull { it }.joinToString(", ")
+                            else -> null
+                        }
+                    }.mapNotNull { it }.joinToString(", ")
                     }"
                 )
             }
@@ -185,7 +185,7 @@ fun PlantInfo(
 
                 Text(
                     text = "${stringResource(R.string.description_label)}: ${
-                        state.plant.description
+                    state.plant.description
                     }"
                 )
             }
@@ -213,9 +213,9 @@ fun PlantInfo(
 
                     Text(
                         text = "${stringResource(R.string.temperature_label)}: ${
-                            state.plant.minTemperature ?: stringResource(id = R.string.unknown_label)
+                        state.plant.minTemperature ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.plant.maxTemperature ?: stringResource(id = R.string.unknown_label)
+                        state.plant.maxTemperature ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -223,9 +223,9 @@ fun PlantInfo(
 
                     Text(
                         text = "${stringResource(R.string.ph_label)}: ${
-                            state.plant.minPh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.minPh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.plant.maxPh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.maxPh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -233,9 +233,9 @@ fun PlantInfo(
 
                     Text(
                         text = "${stringResource(R.string.gh_label)}: ${
-                            state.plant.minGh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.minGh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.plant.maxGh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.maxGh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -243,9 +243,9 @@ fun PlantInfo(
 
                     Text(
                         text = "${stringResource(R.string.kh_label)}: ${
-                            state.plant.minKh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.minKh ?: stringResource(id = R.string.unknown_label)
                         }-${
-                            state.plant.maxKh ?: stringResource(id = R.string.unknown_label)
+                        state.plant.maxKh ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 
@@ -253,7 +253,7 @@ fun PlantInfo(
 
                     Text(
                         text = "${stringResource(R.string.co2_label)}: ${
-                            state.plant.minCO2 ?: stringResource(id = R.string.unknown_label)
+                        state.plant.minCO2 ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
                 }

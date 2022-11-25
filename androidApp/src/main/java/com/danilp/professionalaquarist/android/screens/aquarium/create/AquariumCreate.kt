@@ -35,7 +35,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @RootNavGraph
 @Destination
 @Composable
-fun AquariumEdit(
+fun AquariumCreate(
     navigator: DestinationsNavigator,
     viewModel: AquariumCreateViewModel = hiltViewModel()
 ) {

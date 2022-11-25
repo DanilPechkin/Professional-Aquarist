@@ -99,10 +99,19 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                                     tag == DwellerTags.LOW_LIGHT.code ||
                                     tag == DwellerTags.PLANT_LOVER.code ||
                                     tag == DwellerTags.NEEDS_SHELTER.code ||
+                                    tag == DwellerTags.NEEDS_DRIFTWOOD.code ||
                                     tag == DwellerTags.BROADLEAF_PLANT.code ||
                                     tag == DwellerTags.LONG_STEMMED_PLANT.code ||
                                     tag == DwellerTags.FLOATING_PLANT.code ||
                                     tag == DwellerTags.MOSS.code
+                        }?.map { tag ->
+                            when (tag) {
+                                DwellerTags.MOSS.code -> PlantTags.MOSS.code
+                                DwellerTags.FLOATING_PLANT.code -> PlantTags.FLOATING_PLANT.code
+                                DwellerTags.LONG_STEMMED_PLANT.code -> PlantTags.LONG_STEMMED_PLANT.code
+                                DwellerTags.BROADLEAF_PLANT.code -> PlantTags.BROADLEAF_PLANT.code
+                                else -> tag
+                            }
                         }
                     }.flatten() + plants.mapNotNull {
                         it.tags?.filter { tag ->
@@ -119,7 +128,11 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                                             tag == PlantTags.MOSS.code ||
                                             tag == PlantTags.FERN.code
                                 }
-                            }.flatten()).ifEmpty { null },
+                            }.flatten() +
+                            if (plants.isNotEmpty())
+                                listOf(DwellerTags.PLANT_LOVER.code)
+                            else listOf()
+                            ).ifEmpty { null },
                     minTemperature = (dwellers.mapNotNull { it.minTemperature } +
                             plants.mapNotNull { it.minTemperature }).maxOrNull(),
                     maxTemperature = (dwellers.mapNotNull { it.maxTemperature } +
@@ -177,8 +190,17 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                         DwellerTags.BROADLEAF_PLANT.code,
                         DwellerTags.LONG_STEMMED_PLANT.code,
                         DwellerTags.FLOATING_PLANT.code,
-                        DwellerTags.MOSS.code
+                        DwellerTags.MOSS.code,
+                        DwellerTags.NEEDS_DRIFTWOOD.code
                     ).contains(tag)
+                }?.map { tag ->
+                    when (tag) {
+                        DwellerTags.MOSS.code -> PlantTags.MOSS.code
+                        DwellerTags.FLOATING_PLANT.code -> PlantTags.FLOATING_PLANT.code
+                        DwellerTags.LONG_STEMMED_PLANT.code -> PlantTags.LONG_STEMMED_PLANT.code
+                        DwellerTags.BROADLEAF_PLANT.code -> PlantTags.BROADLEAF_PLANT.code
+                        else -> tag
+                    }
                 }?.filter { tag ->
                     !((aquarium.currentTags ?: emptyList()).contains(tag))
                 } ?: emptyList()

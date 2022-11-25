@@ -112,7 +112,8 @@ class PlantEditViewModel @Inject constructor(
             }
 
             is PlantEditEvent.DeleteButtonPressed -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
+                    state = state.copy(isLoading = true)
                     if (state.plant.id != null)
                         delete(state.plant.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
@@ -217,8 +218,9 @@ class PlantEditViewModel @Inject constructor(
     }
 
     private fun submitData() {
-        state = state.copy(isLoading = true)
         viewModelScope.launch(Dispatchers.IO) {
+
+            state = state.copy(isLoading = true)
 
             val nameResult = validate.string(state.name)
             val minTemperatureResult = validate.decimal(state.minTemperature)
@@ -282,16 +284,16 @@ class PlantEditViewModel @Inject constructor(
                     minCO2 = state.minCO2.ifBlank { null }?.toDoubleOrNull(),
                     description = state.description.ifBlank { null },
                     tags = (
-                            state.tags.filter { tag ->
-                                !listOf(
-                                    PlantTags.BROADLEAF_PLANT.code,
-                                    PlantTags.FLOATING_PLANT.code,
-                                    PlantTags.FERN.code,
-                                    PlantTags.MOSS.code,
-                                    PlantTags.LONG_STEMMED_PLANT.code
-                                ).contains(tag)
-                            } + listOf(state.typeTag)
-                            ).ifEmpty { null },
+                        state.tags.filter { tag ->
+                            !listOf(
+                                PlantTags.BROADLEAF_PLANT.code,
+                                PlantTags.FLOATING_PLANT.code,
+                                PlantTags.FERN.code,
+                                PlantTags.MOSS.code,
+                                PlantTags.LONG_STEMMED_PLANT.code
+                            ).contains(tag)
+                        } + listOf(state.typeTag)
+                        ).ifEmpty { null },
                 )
             )
 
@@ -305,8 +307,8 @@ class PlantEditViewModel @Inject constructor(
 
             insert(state.plant)
             validationEventChannel.send(ValidationEvent.Success)
+            state = state.copy(isLoading = false)
         }
-        state = state.copy(isLoading = false)
     }
 
     sealed class ValidationEvent {

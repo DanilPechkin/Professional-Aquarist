@@ -40,6 +40,7 @@ enum class DwellerTags(val code: String) {
 
     PLANT_LOVER("Plant_lover"), // любит растения
     NEEDS_SHELTER("Needs_shelter"), // нуждается в укрытии
+    NEEDS_DRIFTWOOD("Needs_driftwood"), // нуждается в древесине
 
     BROADLEAF_PLANT("Broadleaf_plant_lover"), // любит широколистные растения
     LONG_STEMMED_PLANT("Long-stemmed_plant_lover"), // любит длинностебельные растения

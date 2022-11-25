@@ -132,8 +132,8 @@ fun PlantsList(
                     }
                 }
                 if (state.plants.any {
-                        it.tags?.contains(PlantTags.LONG_STEMMED_PLANT.code) == true
-                    }
+                    it.tags?.contains(PlantTags.LONG_STEMMED_PLANT.code) == true
+                }
                 ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         GridTitle(

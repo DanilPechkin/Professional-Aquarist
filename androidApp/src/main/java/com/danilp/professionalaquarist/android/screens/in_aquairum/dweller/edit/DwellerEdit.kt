@@ -1,7 +1,10 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.dweller.edit
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -324,7 +327,7 @@ fun DwellerEdit(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Row {
                 TextButton(
@@ -360,8 +363,8 @@ fun DwellerEdit(
 
             AnimatedVisibility(
                 visible = isTagsExpanded,
-                enter = expandVertically(),
-                exit = shrinkVertically()
+                enter = expandVertically(tween(durationMillis = 400)) + fadeIn(),
+                exit = shrinkVertically(tween(durationMillis = 400)) + fadeOut()
             ) {
                 Column {
 
@@ -371,7 +374,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Restaurant,
-                                contentDescription = stringResource(R.string.food_title)
+                                contentDescription = stringResource(R.string.food_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -411,7 +416,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Psychology,
-                                contentDescription = stringResource(R.string.behavior_title)
+                                contentDescription = stringResource(R.string.behavior_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -451,7 +458,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.Air,
-                                contentDescription = stringResource(R.string.current_title)
+                                contentDescription = stringResource(R.string.current_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -493,7 +502,9 @@ fun DwellerEdit(
                                 imageVector = Icons.Rounded.Tungsten,
                                 contentDescription = stringResource(
                                     R.string.required_illumination_label
-                                )
+                                ),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -532,7 +543,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.FamilyRestroom,
-                                contentDescription = stringResource(R.string.family_title)
+                                contentDescription = stringResource(R.string.family_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -571,7 +584,9 @@ fun DwellerEdit(
                         Row {
                             Icon(
                                 imageVector = Icons.Rounded.ChildFriendly,
-                                contentDescription = stringResource(R.string.childbirh_title)
+                                contentDescription = stringResource(R.string.childbirh_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -611,7 +626,9 @@ fun DwellerEdit(
                             Icon(
                                 imageVector = Icons.Rounded.AutoAwesome,
                                 contentDescription =
-                                stringResource(R.string.particular_qualities_title)
+                                stringResource(R.string.particular_qualities_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -653,7 +670,9 @@ fun DwellerEdit(
                             Icon(
                                 imageVector = Icons.Rounded.Checklist,
                                 contentDescription =
-                                stringResource(R.string.wishes_title)
+                                stringResource(R.string.wishes_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -671,7 +690,8 @@ fun DwellerEdit(
                         ) {
                             listOf(
                                 DwellerTags.PLANT_LOVER.code,
-                                DwellerTags.NEEDS_SHELTER.code
+                                DwellerTags.NEEDS_SHELTER.code,
+                                DwellerTags.NEEDS_DRIFTWOOD.code
                             ).forEach { tag ->
                                 SelectChip(
                                     selected = state.tags.contains(tag),
@@ -693,7 +713,9 @@ fun DwellerEdit(
                             Icon(
                                 imageVector = Icons.Rounded.Spa,
                                 contentDescription =
-                                stringResource(R.string.favorite_plants_title)
+                                stringResource(R.string.favorite_plants_title),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -725,15 +747,15 @@ fun DwellerEdit(
                             }
                         }
                     }
-
-                    Spacer(modifier = Modifier.height(16.dp))
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
             AnimatedVisibility(
                 visible = isAdvancedExpanded,
-                enter = expandVertically(),
-                exit = shrinkVertically()
+                enter = expandVertically(tween(durationMillis = 400)) + fadeIn(),
+                exit = shrinkVertically(tween(durationMillis = 400)) + fadeOut()
             ) {
                 Column {
 
@@ -861,11 +883,12 @@ fun DwellerEdit(
                         alkalinityMeasureCode = state.alkalinityMeasureCode
                     )
                 }
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
             Row(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(bottom = 16.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {

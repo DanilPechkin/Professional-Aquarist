@@ -32,7 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
-import com.danilp.professionalaquarist.android.screens.destinations.AquariumEditDestination
+import com.danilp.professionalaquarist.android.screens.destinations.AquariumCreateDestination
 import com.danilp.professionalaquarist.android.screens.destinations.MainAquariumScreenDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBarWithSearch
@@ -85,7 +85,7 @@ fun AquariumList(
             ExtendedFloatingActionButton(
                 onClick = {
                     navigator.navigate(
-                        AquariumEditDestination()
+                        AquariumCreateDestination()
                     )
                 },
                 icon = { Icon(Icons.Rounded.Add, stringResource(R.string.add_aquarium_fab)) },
@@ -115,7 +115,7 @@ fun AquariumList(
                         label = aquarium.name,
                         imageUrl = aquarium.imageUrl,
                         message = aquarium.minTemperature.toString() + " " +
-                                aquarium.maxTemperature.toString(),
+                            aquarium.maxTemperature.toString(),
                         modifier = Modifier
                             .animateItemPlacement()
                             .clickable {

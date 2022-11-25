@@ -1,7 +1,10 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.plant.edit
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -286,7 +289,7 @@ fun PlantEdit(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             TextButton(
                 onClick = { isAdvancedExpanded = !isAdvancedExpanded }
@@ -302,12 +305,12 @@ fun PlantEdit(
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             AnimatedVisibility(
                 visible = isAdvancedExpanded,
-                enter = expandVertically(),
-                exit = shrinkVertically()
+                enter = expandVertically(tween(durationMillis = 400)) + fadeIn(),
+                exit = shrinkVertically(tween(durationMillis = 400)) + fadeOut()
             ) {
                 Column {
 
@@ -319,7 +322,9 @@ fun PlantEdit(
                                 imageVector = Icons.Rounded.Tungsten,
                                 contentDescription = stringResource(
                                     R.string.required_illumination_label
-                                )
+                                ),
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
                             )
 
                             Text(
@@ -498,11 +503,13 @@ fun PlantEdit(
                         textFieldModifier = Modifier.fillMaxWidth()
                     )
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
             Row(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(bottom = 16.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {

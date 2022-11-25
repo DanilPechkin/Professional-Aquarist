@@ -70,33 +70,33 @@ class SettingsViewModel @Inject constructor(
                 ),
                 temperatureList = listOf(
                     context.getString(R.string.temperature_measure_celsius) +
-                            " (${context.getString(R.string.temperature_measure_celsius_short)})",
+                        " (${context.getString(R.string.temperature_measure_celsius_short)})",
                     context.getString(R.string.temperature_measure_fahrenheit) +
-                            " (${context.getString(R.string.temperature_measure_fahrenheit_short)})",
+                        " (${context.getString(R.string.temperature_measure_fahrenheit_short)})",
                     context.getString(R.string.temperature_measure_kelvin) +
-                            " (${context.getString(R.string.temperature_measure_kelvin_short)})"
+                        " (${context.getString(R.string.temperature_measure_kelvin_short)})"
                 ),
                 alkalinityList = listOf(
                     context.getString(R.string.alkalinity_measure_dkh) +
-                            " (${context.getString(R.string.alkalinity_measure_dkh_short)})",
+                        " (${context.getString(R.string.alkalinity_measure_dkh_short)})",
                     context.getString(R.string.alkalinity_measure_ppm) +
-                            " (${context.getString(R.string.alkalinity_measure_ppm_short)})",
+                        " (${context.getString(R.string.alkalinity_measure_ppm_short)})",
                     context.getString(R.string.alkalinity_measure_meql) +
-                            " (${context.getString(R.string.alkalinity_measure_meql_short)})",
+                        " (${context.getString(R.string.alkalinity_measure_meql_short)})",
                     context.getString(R.string.alkalinity_measure_mgl) +
-                            " (${context.getString(R.string.alkalinity_measure_mgl_short)})"
+                        " (${context.getString(R.string.alkalinity_measure_mgl_short)})"
                 ),
                 metricList = listOf(
                     context.getString(R.string.metric_measure_meters) +
-                            " (${context.getString(R.string.metric_measure_meters_short)})",
+                        " (${context.getString(R.string.metric_measure_meters_short)})",
                     context.getString(R.string.metric_measure_centimeters) +
-                            " (${context.getString(R.string.metric_measure_centimeters_short)})",
+                        " (${context.getString(R.string.metric_measure_centimeters_short)})",
                     context.getString(R.string.metric_measure_millimeters) +
-                            " (${context.getString(R.string.metric_measure_millimeters_short)})",
+                        " (${context.getString(R.string.metric_measure_millimeters_short)})",
                     context.getString(R.string.metric_measure_feet) +
-                            " (${context.getString(R.string.metric_measure_feet_short)})",
+                        " (${context.getString(R.string.metric_measure_feet_short)})",
                     context.getString(R.string.metric_measure_inches) +
-                            " (${context.getString(R.string.metric_measure_inches_short)})"
+                        " (${context.getString(R.string.metric_measure_inches_short)})"
                 )
             )
         }

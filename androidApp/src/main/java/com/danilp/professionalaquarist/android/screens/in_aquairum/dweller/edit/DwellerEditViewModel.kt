@@ -120,7 +120,8 @@ class DwellerEditViewModel @Inject constructor(
             }
 
             is DwellerEditEvent.DeleteButtonPressed -> {
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
+                    state = state.copy(isLoading = true)
                     if (state.dweller.id != null)
                         delete(state.dweller.id!!)
                     validationEventChannel.send(ValidationEvent.Success)
@@ -216,8 +217,10 @@ class DwellerEditViewModel @Inject constructor(
     }
 
     private fun submitData() {
-        state = state.copy(isLoading = true)
         viewModelScope.launch(Dispatchers.IO) {
+
+            state = state.copy(isLoading = true)
+
             val nameResult = validate.string(state.name)
             val amountResult = validate.integer(state.amount)
             val minTemperatureResult = validate.decimal(state.minTemperature)
@@ -280,17 +283,17 @@ class DwellerEditViewModel @Inject constructor(
                     maxKh = state.maxKh.ifBlank { null }?.toDouble(),
                     description = state.description.ifBlank { null },
                     tags = (
-                            state.tags.filter { tag ->
-                                !listOf(
-                                    DwellerTags.FISH.code,
-                                    DwellerTags.BIVALVE.code,
-                                    DwellerTags.CRAYFISH.code,
-                                    DwellerTags.SHRIMP.code,
-                                    DwellerTags.CRAB.code,
-                                    DwellerTags.SNAIL.code
-                                ).contains(tag)
-                            } + listOf(state.typeTag)
-                            ).ifEmpty { null },
+                        state.tags.filter { tag ->
+                            !listOf(
+                                DwellerTags.FISH.code,
+                                DwellerTags.BIVALVE.code,
+                                DwellerTags.CRAYFISH.code,
+                                DwellerTags.SHRIMP.code,
+                                DwellerTags.CRAB.code,
+                                DwellerTags.SNAIL.code
+                            ).contains(tag)
+                        } + listOf(state.typeTag)
+                        ).ifEmpty { null },
                 )
             )
 
@@ -305,8 +308,8 @@ class DwellerEditViewModel @Inject constructor(
 
             insert(state.dweller)
             validationEventChannel.send(ValidationEvent.Success)
+            state = state.copy(isLoading = false)
         }
-        state = state.copy(isLoading = false)
     }
 
     sealed class ValidationEvent {

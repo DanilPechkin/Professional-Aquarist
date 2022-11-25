@@ -963,7 +963,113 @@ fun SelectChip(
                     DwellerTags.PLANT_EATER.code ->
                         stringResource(R.string.plant_eater_label)
 
-                    else -> ""
+                    DwellerTags.NEEDS_DRIFTWOOD.code ->
+                        stringResource(R.string.needs_driftwood_label)
+
+                    else -> labelCode ?: ""
+                }
+            )
+        },
+        leadingIcon = {
+            AnimatedVisibility(
+                visible = selected,
+                enter = scaleIn()
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Done,
+                    contentDescription = stringResource(androidx.compose.ui.R.string.selected),
+                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                )
+            }
+        },
+        colors = if (isError) {
+            FilterChipDefaults.filterChipColors(
+                labelColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            FilterChipDefaults.filterChipColors()
+        },
+        border = if (isError) {
+            FilterChipDefaults.filterChipBorder(
+                borderColor = MaterialTheme.colorScheme.error
+            )
+        } else {
+            FilterChipDefaults.filterChipBorder()
+        },
+        modifier = modifier.animateContentSize(
+            animationSpec = tween(
+                durationMillis = 150,
+                easing = LinearEasing
+            )
+        )
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@Composable
+fun AquariumSelectChip(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    label: String? = null,
+    labelCode: String? = null,
+    isError: Boolean = false
+) {
+    FilterChip(
+        selected = selected,
+        onClick = onClick,
+        label = {
+            Text(
+                text = label ?: when (labelCode) {
+                    PlantTags.BROADLEAF_PLANT.code ->
+                        stringResource(R.string.broadleaf_title)
+
+                    PlantTags.LONG_STEMMED_PLANT.code ->
+                        stringResource(R.string.long_stemmed_title)
+
+                    PlantTags.FLOATING_PLANT.code ->
+                        stringResource(R.string.floating_plant_title)
+
+                    PlantTags.MOSS.code ->
+                        stringResource(R.string.moss_title)
+
+                    PlantTags.FERN.code ->
+                        stringResource(R.string.fern_title)
+
+                    PlantTags.BRIGHT_LIGHT.code ->
+                        stringResource(R.string.bright_light_label)
+
+                    PlantTags.LOW_LIGHT.code ->
+                        stringResource(R.string.low_light_label)
+
+                    DwellerTags.FAST_CURRENT.code ->
+                        stringResource(R.string.fast_current_label)
+
+                    DwellerTags.SLOW_CURRENT.code ->
+                        stringResource(R.string.slow_current_label)
+
+                    DwellerTags.MEDIUM_CURRENT.code ->
+                        stringResource(R.string.medium_current_label)
+
+                    DwellerTags.BRIGHT_LIGHT.code ->
+                        stringResource(R.string.bright_light_label)
+
+                    DwellerTags.LOW_LIGHT.code ->
+                        stringResource(R.string.low_light_label)
+
+                    DwellerTags.PLANT_LOVER.code ->
+                        stringResource(R.string.lot_of_plants_label)
+
+                    DwellerTags.NEEDS_SHELTER.code ->
+                        stringResource(R.string.shelter_availible_label)
+
+                    DwellerTags.VEIL_TAILED.code ->
+                        stringResource(R.string.favorable_for_veil_tailed_label)
+
+                    DwellerTags.NEEDS_DRIFTWOOD.code ->
+                        stringResource(R.string.driftwood_availible_label)
+
+                    else -> labelCode ?: ""
                 }
             )
         },

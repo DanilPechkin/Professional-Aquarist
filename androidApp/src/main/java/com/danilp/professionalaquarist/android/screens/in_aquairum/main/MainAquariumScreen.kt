@@ -1,5 +1,6 @@
 package com.danilp.professionalaquarist.android.screens.in_aquairum.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.navigation.nav_graphs.InAquariumNavGraph
+import com.danilp.professionalaquarist.android.screens.destinations.AquariumEditDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBar
 import com.ramcosta.composedestinations.annotation.Destination
@@ -96,9 +98,10 @@ fun MainAquariumScreen(
                 ) {
                     MainAquariumCard(
                         modifier = Modifier
-                            .padding(end = 16.dp),
+                            .padding(end = 16.dp)
+                            .clickable { navigator.navigate(AquariumEditDestination) },
                         icon = Icons.Rounded.Water,
-                        label = stringResource(R.string.water_label)
+                        label = stringResource(R.string.water_label),
                     )
 
                     MainAquariumCard(
