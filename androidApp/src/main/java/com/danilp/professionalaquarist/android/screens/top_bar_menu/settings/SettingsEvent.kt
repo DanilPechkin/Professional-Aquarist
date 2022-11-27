@@ -7,4 +7,5 @@ sealed interface SettingsEvent {
     data class MetricChanged(val metricCode: Int) : SettingsEvent
     data class AlkalinityChanged(val alkalinityCode: Int) : SettingsEvent
     data class TemperatureChanged(val temperatureCode: Int) : SettingsEvent
+    data class LanguageSelected(val language: Language) : SettingsEvent
 }

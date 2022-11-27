@@ -10,6 +10,7 @@ data class SettingsState(
     val temperatureMeasureCode: Int = TemperatureMeasure.Celsius.code,
     val alkalinityMeasureCode: Int = AlkalinityMeasure.DKH.code,
     val metricMeasureCode: Int = MetricMeasure.Meters.code,
+    val language: Language = Language.English,
     val capacityList: List<String> = listOf(),
     val temperatureList: List<String> = listOf(),
     val alkalinityList: List<String> = listOf(),

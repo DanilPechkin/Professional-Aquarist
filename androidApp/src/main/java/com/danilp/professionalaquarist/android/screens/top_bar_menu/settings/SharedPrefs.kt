@@ -6,5 +6,6 @@ enum class SharedPrefs(val key: String) {
     CapacityMeasure("capacity_measure"),
     MetricMeasure("metric_measure"),
     TemperatureMeasure("temperature_measure"),
-    CurrentAquarium("current_aquarium")
+    CurrentAquarium("current_aquarium"),
+    Language("language")
 }

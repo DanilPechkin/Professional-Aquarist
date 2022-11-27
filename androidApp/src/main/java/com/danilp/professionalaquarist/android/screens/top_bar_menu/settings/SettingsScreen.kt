@@ -34,6 +34,7 @@ import com.danilp.professionalaquarist.android.R
 import com.danilp.professionalaquarist.android.screens.destinations.AquariumListDestination
 import com.danilp.professionalaquarist.android.screens.destinations.SettingsScreenDestination
 import com.danilp.professionalaquarist.android.ui.AquariumTopBar
+import com.danilp.professionalaquarist.android.ui.DropDownLanguageSelector
 import com.danilp.professionalaquarist.android.ui.OutlinedDropDownMenuField
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -128,6 +129,15 @@ fun SettingsScreen(
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
+
+            DropDownLanguageSelector(
+                label = stringResource(R.string.language_label),
+                items = Language.values().toList().sortedBy { it.language },
+                selectedItem = state.language,
+                changeSelectedItem = { viewModel.onEvent(SettingsEvent.LanguageSelected(it)) }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedDropDownMenuField(
                 label = stringResource(R.string.capacity_label),

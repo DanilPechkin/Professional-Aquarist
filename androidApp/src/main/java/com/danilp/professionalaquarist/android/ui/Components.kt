@@ -9,6 +9,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -66,6 +67,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -73,6 +75,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.danilp.professionalaquarist.android.R
+import com.danilp.professionalaquarist.android.screens.top_bar_menu.settings.Language
 import com.danilp.professionalaquarist.domain.aquarium.ComfortTags
 import com.danilp.professionalaquarist.domain.dweller.tags.DwellerTags
 import com.danilp.professionalaquarist.domain.plant.tags.PlantTags
@@ -787,6 +790,86 @@ fun OutlinedDropDownMenuField(
                     text = { Text(text = label) },
                     onClick = {
                         changeSelectedItem(label)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropDownLanguageSelector(
+    label: String,
+    items: List<Language>,
+    selectedItem: Language,
+    changeSelectedItem: (Language) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    var textFieldSize by remember { mutableStateOf(Size.Zero) }
+
+    val icon = if (expanded)
+        Icons.Rounded.KeyboardArrowUp
+    else
+        Icons.Rounded.KeyboardArrowDown
+
+    Column(modifier = modifier) {
+
+        OutlinedTextField(
+            value = selectedItem.language,
+            onValueChange = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned { coordinates ->
+                    textFieldSize = coordinates.size.toSize()
+                },
+            maxLines = 1,
+            singleLine = true,
+            readOnly = true,
+            label = { Text(text = label) },
+            leadingIcon = {
+                Image(
+                    painter = painterResource(id = selectedItem.flag),
+                    contentDescription = selectedItem.language,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            },
+            trailingIcon = {
+                IconButton(
+                    onClick = { expanded = !expanded }
+                ) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = stringResource(R.string.expand_button_content_descr)
+                    )
+                }
+            }
+        )
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .width(
+                    with(LocalDensity.current) {
+                        textFieldSize.width.toDp()
+                    }
+                )
+        ) {
+            items.forEach { language ->
+                DropdownMenuItem(
+                    text = { Text(text = language.language) },
+                    leadingIcon = {
+                        Image(
+                            painter = painterResource(language.flag),
+                            contentDescription = language.language
+                        )
+                    },
+                    onClick = {
+                        changeSelectedItem(language)
                         expanded = false
                     }
                 )

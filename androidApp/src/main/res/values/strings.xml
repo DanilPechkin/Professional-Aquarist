@@ -277,4 +277,5 @@
     <string name="ideal_gh_title">Ideal gH</string>
     <string name="current_kh_title">Current kH</string>
     <string name="ideal_kh_title">Ideal kH</string>
+    <string name="language_label">Language</string>
 </resources>
