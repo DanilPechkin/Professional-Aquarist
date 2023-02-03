@@ -129,7 +129,7 @@ fun AquariumCreate(
             InfoFieldWithErrorAndIcon(
                 value = state.liters,
                 onValueChange = { viewModel.onEvent(AquariumCreateEvent.LitersChanged(it)) },
-                label = stringResource(R.string.capacity_label),
+                label = stringResource(R.string.capacity_title),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next

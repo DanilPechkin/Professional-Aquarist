@@ -23,9 +23,9 @@ enum class AquariumBottomBarDestination(
     val icon: ImageVector,
     @StringRes val label: Int
 ) {
-    Notes(NotesDestination, Icons.Rounded.FormatListBulleted, R.string.notes_icon),
-    Calculators(CalculatorsDestination, Icons.Rounded.Calculate, R.string.calculators_icon),
+    Notes(NotesDestination, Icons.Rounded.FormatListBulleted, R.string.notes_title),
+    Calculators(CalculatorsDestination, Icons.Rounded.Calculate, R.string.calculators_title),
     Main(MainAquariumScreenDestination, Icons.Rounded.Water, R.string.main_aquarium_icon),
-    Dwellers(DwellersListDestination, Icons.Rounded.SetMeal, R.string.dwellers_icon),
-    Plants(PlantsListDestination, Icons.Rounded.Spa, R.string.plants_icon)
+    Dwellers(DwellersListDestination, Icons.Rounded.SetMeal, R.string.dwellers_title),
+    Plants(PlantsListDestination, Icons.Rounded.Spa, R.string.plants_title)
 }

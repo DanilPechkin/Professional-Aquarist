@@ -94,7 +94,7 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                             tag == DwellerTags.FAST_CURRENT.code ||
                                     tag == DwellerTags.SLOW_CURRENT.code ||
                                     tag == DwellerTags.MEDIUM_CURRENT.code ||
-                                    tag == DwellerTags.VEIL_TAILED.code ||
+                                    tag == DwellerTags.NEEDS_SMOOTH_SURFACES.code ||
                                     tag == DwellerTags.BRIGHT_LIGHT.code ||
                                     tag == DwellerTags.LOW_LIGHT.code ||
                                     tag == DwellerTags.PLANT_LOVER.code ||
@@ -182,7 +182,7 @@ class SqlDelightAquariumDataSource(db: AquariumDatabase) : AquariumDataSource {
                         DwellerTags.FAST_CURRENT.code,
                         DwellerTags.SLOW_CURRENT.code,
                         DwellerTags.MEDIUM_CURRENT.code,
-                        DwellerTags.VEIL_TAILED.code,
+                        DwellerTags.NEEDS_SMOOTH_SURFACES.code,
                         DwellerTags.BRIGHT_LIGHT.code,
                         DwellerTags.LOW_LIGHT.code,
                         DwellerTags.PLANT_LOVER.code,

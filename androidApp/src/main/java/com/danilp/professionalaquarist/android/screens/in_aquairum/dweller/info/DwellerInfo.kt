@@ -258,10 +258,10 @@ fun DwellerInfo(
                     }
 
                     Text(
-                        text = "${stringResource(R.string.temperature_label)}: ${
-                        state.dweller.minTemperature ?: stringResource(id = R.string.unknown_label)
+                        text = "${stringResource(R.string.temperature_title)}: ${
+                            state.dweller.minTemperature ?: stringResource(id = R.string.unknown_label)
                         }-${
-                        state.dweller.maxTemperature ?: stringResource(id = R.string.unknown_label)
+                            state.dweller.maxTemperature ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 

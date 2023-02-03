@@ -94,8 +94,8 @@ class SettingsViewModel @Inject constructor(
                             " (${context.getString(R.string.temperature_measure_kelvin_short)})"
                 ),
                 alkalinityList = listOf(
-                    context.getString(R.string.alkalinity_measure_dkh) +
-                            " (${context.getString(R.string.alkalinity_measure_dkh_short)})",
+                    context.getString(R.string.alkalinity_measure_dh) +
+                            " (${context.getString(R.string.alkalinity_measure_dh_short)})",
                     context.getString(R.string.alkalinity_measure_ppm) +
                             " (${context.getString(R.string.alkalinity_measure_ppm_short)})",
                     context.getString(R.string.alkalinity_measure_meql) +

@@ -177,7 +177,7 @@ fun BowfrontCalculator(
             OutlinedTextField(
                 value = state.outputCapacity,
                 onValueChange = { },
-                label = { Text(text = stringResource(R.string.capacity_label)) },
+                label = { Text(text = stringResource(R.string.capacity_title)) },
                 readOnly = true,
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {

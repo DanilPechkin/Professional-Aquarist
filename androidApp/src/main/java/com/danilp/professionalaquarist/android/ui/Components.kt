@@ -5,10 +5,12 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -152,7 +154,7 @@ fun AquariumTopBar(
             ) {
                 Icon(
                     imageVector = navigationIcon,
-                    contentDescription = stringResource(R.string.content_description_back_arrow)
+                    contentDescription = stringResource(R.string.back_arrow_button)
                 )
             }
         },
@@ -178,7 +180,7 @@ fun AquariumTopBar(
                         text = {
                             Text(
                                 text = stringResource(
-                                    R.string.account_menu_item_content_description
+                                    R.string.account_title
                                 )
                             )
                         },
@@ -186,7 +188,7 @@ fun AquariumTopBar(
                             Icon(
                                 imageVector = Icons.Rounded.AccountCircle,
                                 contentDescription = stringResource(
-                                    R.string.account_menu_item_content_description
+                                    R.string.account_title
                                 )
                             )
                         }
@@ -196,7 +198,7 @@ fun AquariumTopBar(
                         text = {
                             Text(
                                 text = stringResource(
-                                    R.string.settings_menu_item_content_description
+                                    R.string.settings_title
                                 )
                             )
                         },
@@ -204,7 +206,7 @@ fun AquariumTopBar(
                             Icon(
                                 imageVector = Icons.Rounded.Settings,
                                 contentDescription = stringResource(
-                                    R.string.settings_menu_item_content_description
+                                    R.string.settings_title
                                 )
                             )
                         }
@@ -246,7 +248,7 @@ fun AquariumTopBarWithSearch(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ArrowBack,
-                    contentDescription = stringResource(R.string.content_description_back_arrow)
+                    contentDescription = stringResource(R.string.back_arrow_button)
                 )
             }
         },
@@ -291,7 +293,7 @@ fun AquariumTopBarWithSearch(
                         text = {
                             Text(
                                 text = stringResource(
-                                    R.string.account_menu_item_content_description
+                                    R.string.account_title
                                 )
                             )
                         },
@@ -299,7 +301,7 @@ fun AquariumTopBarWithSearch(
                             Icon(
                                 imageVector = Icons.Rounded.AccountCircle,
                                 contentDescription = stringResource(
-                                    R.string.account_menu_item_content_description
+                                    R.string.account_title
                                 )
                             )
                         }
@@ -309,7 +311,7 @@ fun AquariumTopBarWithSearch(
                         text = {
                             Text(
                                 text = stringResource(
-                                    R.string.settings_menu_item_content_description
+                                    R.string.settings_title
                                 )
                             )
                         },
@@ -317,7 +319,7 @@ fun AquariumTopBarWithSearch(
                             Icon(
                                 imageVector = Icons.Rounded.Settings,
                                 contentDescription = stringResource(
-                                    R.string.settings_menu_item_content_description
+                                    R.string.settings_title
                                 )
                             )
                         }
@@ -472,7 +474,7 @@ fun InfoFieldWithErrorAndIcon(
                     Text(
                         text = when (alkalinityMeasureCode) {
                             AlkalinityMeasure.DKH.code ->
-                                stringResource(R.string.alkalinity_measure_dkh_short)
+                                stringResource(R.string.alkalinity_measure_dh_short)
 
                             AlkalinityMeasure.MEQL.code ->
                                 stringResource(R.string.alkalinity_measure_meql_short)
@@ -1010,7 +1012,7 @@ fun SelectChip(
                     DwellerTags.TERRITORIAL.code ->
                         stringResource(R.string.territorial_label)
 
-                    DwellerTags.VEIL_TAILED.code ->
+                    DwellerTags.NEEDS_SMOOTH_SURFACES.code ->
                         stringResource(R.string.veil_tailed_label)
 
                     DwellerTags.LARGE.code ->
@@ -1056,7 +1058,8 @@ fun SelectChip(
         leadingIcon = {
             AnimatedVisibility(
                 visible = selected,
-                enter = scaleIn()
+                enter = expandIn() + scaleIn() + fadeIn(),
+                exit = shrinkOut() + scaleOut() + fadeOut()
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Done,
@@ -1079,12 +1082,7 @@ fun SelectChip(
         } else {
             FilterChipDefaults.filterChipBorder()
         },
-        modifier = modifier.animateContentSize(
-            animationSpec = tween(
-                durationMillis = 150,
-                easing = LinearEasing
-            )
-        )
+        modifier = modifier
     )
 }
 
@@ -1144,13 +1142,13 @@ fun AquariumSelectChip(
                         stringResource(R.string.lot_of_plants_label)
 
                     DwellerTags.NEEDS_SHELTER.code ->
-                        stringResource(R.string.shelter_availible_label)
+                        stringResource(R.string.shelter_available_label)
 
-                    DwellerTags.VEIL_TAILED.code ->
+                    DwellerTags.NEEDS_SMOOTH_SURFACES.code ->
                         stringResource(R.string.favorable_for_veil_tailed_label)
 
                     DwellerTags.NEEDS_DRIFTWOOD.code ->
-                        stringResource(R.string.driftwood_availible_label)
+                        stringResource(R.string.driftwood_available_label)
 
                     else -> labelCode ?: ""
                 }
@@ -1159,7 +1157,8 @@ fun AquariumSelectChip(
         leadingIcon = {
             AnimatedVisibility(
                 visible = selected,
-                enter = scaleIn()
+                enter = expandIn() + scaleIn() + fadeIn(),
+                exit = shrinkOut() + scaleOut() + fadeOut()
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Done,
@@ -1182,11 +1181,6 @@ fun AquariumSelectChip(
         } else {
             FilterChipDefaults.filterChipBorder()
         },
-        modifier = modifier.animateContentSize(
-            animationSpec = tween(
-                durationMillis = 150,
-                easing = LinearEasing
-            )
-        )
+        modifier = modifier
     )
 }

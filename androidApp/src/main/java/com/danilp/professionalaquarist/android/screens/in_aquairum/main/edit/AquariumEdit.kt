@@ -179,7 +179,7 @@ fun AquariumEdit(
             InfoFieldWithErrorAndIcon(
                 value = state.liters,
                 onValueChange = { viewModel.onEvent(AquariumEditEvent.LitersChanged(it)) },
-                label = stringResource(R.string.capacity_label),
+                label = stringResource(R.string.capacity_title),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
@@ -394,7 +394,7 @@ fun AquariumEdit(
                                 .padding(horizontal = 8.dp)
                         ) {
                             listOf(
-                                DwellerTags.VEIL_TAILED.code,
+                                DwellerTags.NEEDS_SMOOTH_SURFACES.code,
                                 DwellerTags.NEEDS_SHELTER.code,
                                 DwellerTags.NEEDS_DRIFTWOOD.code
                             ).forEach { tag ->
@@ -517,7 +517,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -539,7 +539,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -558,7 +558,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -591,7 +591,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -613,7 +613,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -632,7 +632,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -665,7 +665,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -687,7 +687,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)
@@ -706,7 +706,7 @@ fun AquariumEdit(
                                     } + " " +
                                     when (state.alkalinityMeasureCode) {
                                         AlkalinityMeasure.DKH.code ->
-                                            stringResource(R.string.alkalinity_measure_dkh_short)
+                                            stringResource(R.string.alkalinity_measure_dh_short)
 
                                         AlkalinityMeasure.MEQL.code ->
                                             stringResource(R.string.alkalinity_measure_meql_short)

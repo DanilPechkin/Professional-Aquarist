@@ -645,7 +645,7 @@ fun DwellerEdit(
                                 .padding(horizontal = 8.dp)
                         ) {
                             listOf(
-                                DwellerTags.VEIL_TAILED.code,
+                                DwellerTags.NEEDS_SMOOTH_SURFACES.code,
                                 DwellerTags.SHOAL.code,
                                 DwellerTags.CLEANER.code,
                                 DwellerTags.PLANT_EATER.code
@@ -764,7 +764,7 @@ fun DwellerEdit(
                         onValueChange = {
                             viewModel.onEvent(DwellerEditEvent.LitersChanged(it))
                         },
-                        label = stringResource(R.string.capacity_label),
+                        label = stringResource(R.string.capacity_title),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next
@@ -784,7 +784,7 @@ fun DwellerEdit(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     FromToInfoFields(
-                        label = stringResource(R.string.temperature_label),
+                        label = stringResource(R.string.temperature_title),
                         valueFrom = state.minTemperature,
                         valueTo = state.maxTemperature,
                         onValueFromChange = {

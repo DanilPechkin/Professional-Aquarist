@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="aquariums_top_bar_title">Aquariums</string>
     <string name="search_icon">Search</string>
     <string name="add_aquarium_fab">Add a new aquarium</string>
@@ -8,16 +8,10 @@
     <string name="should_be_integer_error">Should be integer</string>
     <string name="edit_aquarium_title">Edit aquarium</string>
     <string name="name_label">Name</string>
-    <string name="capacity_label">Capacity</string>
     <string name="delete_button">Delete</string>
     <string name="save_button">Save</string>
-    <string name="content_description_back_arrow">Navigate back</string>
     <string name="description_label">Description</string>
-    <string name="notes_icon">Notes</string>
-    <string name="calculators_icon">Calculators</string>
     <string name="main_aquarium_icon">Main</string>
-    <string name="dwellers_icon">Dwellers</string>
-    <string name="plants_icon">Plants</string>
     <string name="plants_title">Plants</string>
     <string name="back_arrow_button">Back</string>
     <string name="add_plant_button">Add new plant</string>
@@ -25,10 +19,9 @@
     <string name="edit_plant_title">Edit plant</string>
     <string name="min_label">Min</string>
     <string name="max_label">Max</string>
-    <string name="temperature_label">Temperature</string>
-    <string name="ph_label">pH</string>
-    <string name="gh_label">gH</string>
-    <string name="kh_label">kH</string>
+    <string name="ph_label" translatable="false">pH</string>
+    <string name="gh_label" translatable="false">gH</string>
+    <string name="kh_label" translatable="false">kH</string>
     <string name="min_co2_label">Min CO2</string>
     <string name="required_illumination_label">Required illumination</string>
     <string name="notes_title">Notes</string>
@@ -45,12 +38,10 @@
     <string name="wrong_number_of_sides_error">Wrong number of sides</string>
     <string name="unknown_error">Unknown error</string>
     <string name="expand_upbar_menu_content_description">Show menu</string>
-    <string name="account_menu_item_content_description">Account</string>
-    <string name="settings_menu_item_content_description">Settings</string>
     <string name="settings_title">Settings</string>
     <string name="account_title">Account</string>
     <string name="temperature_measure_celsius">Celsius</string>
-    <string name="alkalinity_measure_dkh">Degrees of carbonate hardness</string>
+    <string name="alkalinity_measure_dh">Degrees of hardness</string>
     <string name="capacity_measure_liters">Liters</string>
     <string name="capacity_measure_cubic_feet">Cubic feet</string>
     <string name="capacity_measure_us_cups">Us cups</string>
@@ -71,8 +62,7 @@
     <string name="metric_measure_feet">Feet</string>
     <string name="metric_measure_inches">Inches</string>
     <string name="expand_button_content_descr">Expand</string>
-    <string name="alkalinity_label">Alkalinity</string>
-    <string name="metric_label">Metric</string>
+    <string name="alkalinity_title">Alkalinity</string>
     <string name="set_default_button">Set default</string>
     <string name="save_settings_toast">Settings saved</string>
     <string name="sign_up_button">Sign up</string>
@@ -95,23 +85,22 @@
     <string name="capacity_measure_cubic_centimeters">Cubic centimeters</string>
     <string name="show_advanced_button">Show Advanced</string>
     <string name="genus_label">Genus</string>
-    <string name="k_label">K</string>
-    <string name="ca_label">Ca</string>
-    <string name="fe_label">Fe</string>
-    <string name="mg_label">Mg</string>
+    <string name="k_label" translatable="false">K</string>
+    <string name="ca_label" translatable="false">Ca</string>
+    <string name="fe_label" translatable="false">Fe</string>
+    <string name="mg_label" translatable="false">Mg</string>
     <string name="ammonia_label">Ammonia</string>
-    <string name="po4_label">PO4</string>
-    <string name="no3_label">NO3</string>
+    <string name="po4_label" translatable="false">PO4</string>
+    <string name="no3_label" translatable="false">NO3</string>
     <string name="temperature_title">Temperature</string>
     <string name="capacity_title">Capacity</string>
     <string name="metric_title">Metric</string>
-    <string name="alkalinity_title">Alkalinity</string>
     <string name="rectangle_title">Rectangle</string>
-    <string name="regularpolygon_title">RegularPolygon</string>
+    <string name="regularpolygon_title">Regular Polygon</string>
     <string name="cylinder_title">Cylinder</string>
-    <string name="halfcylinder_title">HalfCylinder</string>
+    <string name="halfcylinder_title">Half Cylinder</string>
     <string name="bowfront_title">Bowfront</string>
-    <string name="cornerbowfront_title">CornerBowfront</string>
+    <string name="cornerbowfront_title">Corner Bowfront</string>
     <string name="lshape_title">LShape</string>
     <string name="anglelshape_title">AngleLShape</string>
     <string name="ellipticalcylinder_title">EllipticalCylinder</string>
@@ -121,161 +110,161 @@
     <string name="flatbackhex_title">FlatBackHex</string>
     <string name="measure_label">Measure</string>
     <string name="convert_button">Convert</string>
-    <string name="input_alkalinity_label">Input alkalinity</string>
-    <string name="output_alkalinity_label">Output alkalinity</string>
-    <string name="input_temperature_label">Input temperature</string>
-    <string name="output_temperature_title">Output temperature</string>
-    <string name="input_metric_label">Input metric</string>
-    <string name="output_metric_label">Output metric</string>
-    <string name="input_capacity_label">Input capacity</string>
-    <string name="output_capacity_label">Output capacity</string>
-    <string name="conversion_title">Conversion</string>
-    <string name="height_label">Height</string>
-    <string name="width_label">Width</string>
-    <string name="length_label">Length</string>
-    <string name="calculate_button">Calculate</string>
-    <string name="diameter_label">Diameter</string>
-    <string name="full_width_label">Full Width</string>
-    <string name="full_length_label">Full length</string>
-    <string name="length_between_side_label">Length between</string>
-    <string name="width_between_side_label">Width between</string>
-    <string name="sides_label">Sides</string>
-    <string name="side1_label">Side 1</string>
-    <string name="side2_label">Side 2</string>
-    <string name="side3_label">Side 3</string>
-    <string name="aquarium_image">Aquarium image</string>
-    <string name="tips_label">Tips</string>
-    <string name="help_label">Help</string>
-    <string name="history_label">History</string>
-    <string name="water_label">Water</string>
-    <string name="fish_title">Fish</string>
-    <string name="shrimp_title">Shrimp</string>
-    <string name="crab_title">Crab</string>
-    <string name="crayfish_title">Crayfish</string>
-    <string name="snail_title">Snail</string>
-    <string name="bivalve_title">Bivalve</string>
-    <string name="broadleaf_title">Broadleaf</string>
-    <string name="long_stemmed_title">Long-stemmed</string>
-    <string name="floating_plant_title">Floating</string>
-    <string name="moss_title">Moss</string>
-    <string name="fern_title">Fern</string>
-    <string name="metric_measure_millimeters_short">mm</string>
-    <string name="metric_measure_centimeters_short">cm</string>
-    <string name="metric_measure_meters_short">m</string>
-    <string name="metric_measure_inches_short">in</string>
-    <string name="metric_measure_feet_short">ft</string>
-    <string name="temperature_measure_celsius_short">°C</string>
-    <string name="temperature_measure_fahrenheit_short">°F</string>
-    <string name="temperature_measure_kelvin_short">°K</string>
-    <string name="alkalinity_measure_dkh_short">dKH</string>
-    <string name="alkalinity_measure_ppm_short">ppm</string>
-    <string name="alkalinity_measure_meql_short">meq/l</string>
-    <string name="alkalinity_measure_mgl_short">mg/l</string>
-    <string name="save_changes">Save changes</string>
-    <string name="permanently_delete_title">Permanently delete?</string>
-    <string name="permanently_delete_plant_text">Deleting this plant will also remove it from all synced devices.</string>
-    <string name="cancel_button">Cancel</string>
-    <string name="permanently_delete_aquarium_text">Deleting this aquarium will also remove it and all it contents from all synced devices.</string>
-    <string name="permanently_delete_dweller_text">Deleting this dweller will also remove it from all synced devices.</string>
-    <string name="set_default_title">Set default?</string>
-    <string name="set_default_settings_text">All changes will be deleted.</string>
-    <string name="very_satisfied">Very satisfied</string>
-    <string name="satisfied">Satisfied</string>
-    <string name="dissatisfied">Dissatisfied</string>
-    <string name="very_dissatisfied">Very dissatisfied</string>
-    <string name="dweller_title">Dweller</string>
-    <string name="edit_button">Edit</string>
-    <string name="dweller_image">Dweller image</string>
-    <string name="status_label">Status</string>
-    <string name="cause_discomfort_label">Cause discomfort</string>
-    <string name="inappropriate_water_parameters">Inappropriate water parameters</string>
-    <string name="fish_are_crowded_in_the_aquarium">Fish are crowded in the aquarium</string>
-    <string name="this_fish_is_in_danger">This fish is in danger</string>
-    <string name="wishes_of_this_fish_are_not_fulfilled">The wishes of this fish are not fulfilled</string>
-    <string name="unfulfilled_wishes_label">Unfulfilled wishes</string>
-    <string name="neutral_label">Neutral</string>
-    <string name="needs_fast_current_label">Needs fast current</string>
-    <string name="needs_slow_current_label">Needs slow current</string>
-    <string name="needs_medium_current_label">Needs medium current</string>
-    <string name="needs_bright_light_label">Needs bright light</string>
-    <string name="needs_low_light_label">Needs low light</string>
-    <string name="needs_lot_of_plants_label">Needs a lot of plants</string>
-    <string name="needs_shelter_label">Needs shelter</string>
-    <string name="needs_broadleaf_plant_label">Needs broadleaf plants</string>
-    <string name="needs_long_stemmed_label">Needs long stemmed plants</string>
-    <string name="needs_floating_plant_label">Needs floating plants</string>
-    <string name="needs_moss_label">Needs moss</string>
-    <string name="show_more_button">Show more</string>
-    <string name="unknown_label">unknown</string>
-    <string name="occupied_volume_in_the_aquarium">Occupied volume in the aquarium</string>
-    <string name="plant_title">Plant</string>
-    <string name="plant_image">Plant image</string>
-    <string name="this_plant_is_in_danger">This plant is in danger</string>
-    <string name="wishes_of_this_plant_are_not_fulfilled">Wishes of this plant are not fulfilled</string>
-    <string name="not_enough_illumination">Not enough illumination</string>
-    <string name="needs_bright_light">Needs bright light</string>
-    <string name="needs_low_light">Needs low light</string>
-    <string name="co2_label">CO2</string>
-    <string name="plant_type_label">Plant type</string>
-    <string name="herbivorous_label">Herbivorous</string>
-    <string name="carnivorous_label">Carnivorous</string>
-    <string name="predator_label">Predator</string>
-    <string name="peaceful_label">Peaceful</string>
-    <string name="territorial_label">Territorial</string>
-    <string name="veil_tailed_label">Veil-tailed</string>
-    <string name="large_label">Large</string>
-    <string name="big_label">Big</string>
-    <string name="medium_label">Medium</string>
-    <string name="small_label">Small</string>
-    <string name="monogamous_label">Monogamous</string>
-    <string name="polygamous_label">Polygamous</string>
-    <string name="livebearer_label">Livebearer</string>
-    <string name="oviparous_label">Oviparous</string>
-    <string name="shoal_label">Shoaling</string>
-    <string name="cleaner_label">Cleaner</string>
-    <string name="plant_eater_label">Plant eater</string>
-    <string name="choose_one_label">Choose one</string>
-    <string name="preffered_light_label">Preffered light</string>
-    <string name="dweller_type_label">Dweller type</string>
-    <string name="food_title">Food</string>
-    <string name="omnivorous_label">Omnivorous</string>
-    <string name="diet_label">Diet</string>
-    <string name="behavior_title">Behavior</string>
-    <string name="show_tags_button">Show tags</string>
-    <string name="current_title">Current</string>
-    <string name="preffered_current_title">Preffered current</string>
-    <string name="size_title">Size</string>
-    <string name="family_title">Family</string>
-    <string name="childbirh_title">Childbirth</string>
-    <string name="particular_qualities_title">Particular qualities</string>
-    <string name="wishes_title">Wishes</string>
-    <string name="favorite_plants_title">Favorite plants</string>
-    <string name="create_aquarium_title">Create aquarium</string>
-    <string name="illumination_label">Illumination</string>
-    <string name="apply_for_aquarium_button">Apply for aquarium</string>
-    <string name="required_tags_title">Required tags</string>
-    <string name="current_tags_title">Current tags</string>
-    <string name="bright_light_label">Bright light</string>
-    <string name="low_light_label">Low light</string>
-    <string name="fast_current_label">Fast current</string>
-    <string name="slow_current_label">Slow current</string>
-    <string name="medium_current_label">Medium current</string>
-    <string name="lot_of_plants_label">Lot of plants</string>
-    <string name="shelter_availible_label">Shelter availible</string>
-    <string name="favorable_for_veil_tailed_label">Favorable for veil-tailed</string>
-    <string name="aquarium_current_title">Flow in the aquarium</string>
-    <string name="aquarium_lightning_label">Aquarium lightning</string>
-    <string name="aquarium_decor_title">Decor in aquarium</string>
-    <string name="needs_driftwood_label">Needs driftwood</string>
-    <string name="driftwood_availible_label">Driftwood availible</string>
-    <string name="show_stats_button">Show stats</string>
-    <string name="current_temperature_title">Current temperature</string>
-    <string name="ideal_temperature_title">Ideal temperature</string>
-    <string name="current_ph_title">Current ph</string>
-    <string name="ideal_ph_title">Ideal pH</string>
-    <string name="current_gh_title">Current gH</string>
-    <string name="ideal_gh_title">Ideal gH</string>
-    <string name="current_kh_title">Current kH</string>
-    <string name="ideal_kh_title">Ideal kH</string>
-    <string name="language_label">Language</string>
+    <string name="input_alkalinity_label" tools:ignore="MissingTranslation">Input alkalinity</string>
+    <string name="output_alkalinity_label" tools:ignore="MissingTranslation">Output alkalinity</string>
+    <string name="input_temperature_label" tools:ignore="MissingTranslation">Input temperature</string>
+    <string name="output_temperature_title" tools:ignore="MissingTranslation">Output temperature</string>
+    <string name="input_metric_label" tools:ignore="MissingTranslation">Input metric</string>
+    <string name="output_metric_label" tools:ignore="MissingTranslation">Output metric</string>
+    <string name="input_capacity_label" tools:ignore="MissingTranslation">Input capacity</string>
+    <string name="output_capacity_label" tools:ignore="MissingTranslation">Output capacity</string>
+    <string name="conversion_title" tools:ignore="MissingTranslation">Conversion</string>
+    <string name="height_label" tools:ignore="MissingTranslation">Height</string>
+    <string name="width_label" tools:ignore="MissingTranslation">Width</string>
+    <string name="length_label" tools:ignore="MissingTranslation">Length</string>
+    <string name="calculate_button" tools:ignore="MissingTranslation">Calculate</string>
+    <string name="diameter_label" tools:ignore="MissingTranslation">Diameter</string>
+    <string name="full_width_label" tools:ignore="MissingTranslation">Full Width</string>
+    <string name="full_length_label" tools:ignore="MissingTranslation">Full length</string>
+    <string name="length_between_side_label" tools:ignore="MissingTranslation">Length between</string>
+    <string name="width_between_side_label" tools:ignore="MissingTranslation">Width between</string>
+    <string name="sides_label" tools:ignore="MissingTranslation">Sides</string>
+    <string name="side1_label" tools:ignore="MissingTranslation">Side 1</string>
+    <string name="side2_label" tools:ignore="MissingTranslation">Side 2</string>
+    <string name="side3_label" tools:ignore="MissingTranslation">Side 3</string>
+    <string name="aquarium_image" tools:ignore="MissingTranslation">Aquarium image</string>
+    <string name="tips_label" tools:ignore="MissingTranslation">Tips</string>
+    <string name="help_label" tools:ignore="MissingTranslation">Help</string>
+    <string name="history_label" tools:ignore="MissingTranslation">History</string>
+    <string name="water_label" tools:ignore="MissingTranslation">Water</string>
+    <string name="fish_title" tools:ignore="MissingTranslation">Fish</string>
+    <string name="shrimp_title" tools:ignore="MissingTranslation">Shrimp</string>
+    <string name="crab_title" tools:ignore="MissingTranslation">Crab</string>
+    <string name="crayfish_title" tools:ignore="MissingTranslation">Crayfish</string>
+    <string name="snail_title" tools:ignore="MissingTranslation">Snail</string>
+    <string name="bivalve_title" tools:ignore="MissingTranslation">Bivalve</string>
+    <string name="broadleaf_title" tools:ignore="MissingTranslation">Broadleaf</string>
+    <string name="long_stemmed_title" tools:ignore="MissingTranslation">Long-stemmed</string>
+    <string name="floating_plant_title" tools:ignore="MissingTranslation">Floating</string>
+    <string name="moss_title" tools:ignore="MissingTranslation">Moss</string>
+    <string name="fern_title" tools:ignore="MissingTranslation">Fern</string>
+    <string name="metric_measure_millimeters_short" tools:ignore="MissingTranslation">mm</string>
+    <string name="metric_measure_centimeters_short" tools:ignore="MissingTranslation">cm</string>
+    <string name="metric_measure_meters_short" tools:ignore="MissingTranslation">m</string>
+    <string name="metric_measure_inches_short" tools:ignore="MissingTranslation">in</string>
+    <string name="metric_measure_feet_short" tools:ignore="MissingTranslation">ft</string>
+    <string name="temperature_measure_celsius_short" translatable="false" tools:ignore="MissingTranslation">°C</string>
+    <string name="temperature_measure_fahrenheit_short" translatable="false" tools:ignore="MissingTranslation">°F</string>
+    <string name="temperature_measure_kelvin_short" translatable="false" tools:ignore="MissingTranslation">°K</string>
+    <string name="alkalinity_measure_dh_short" translatable="false" tools:ignore="MissingTranslation">dH</string>
+    <string name="alkalinity_measure_ppm_short" translatable="false" tools:ignore="MissingTranslation">ppm</string>
+    <string name="alkalinity_measure_meql_short" tools:ignore="MissingTranslation">meq/l</string>
+    <string name="alkalinity_measure_mgl_short" tools:ignore="MissingTranslation">mg/l</string>
+    <string name="save_changes" tools:ignore="MissingTranslation">Save changes</string>
+    <string name="permanently_delete_title" tools:ignore="MissingTranslation">Permanently delete?</string>
+    <string name="permanently_delete_plant_text" tools:ignore="MissingTranslation">Deleting this plant will also remove it from all synced devices.</string>
+    <string name="cancel_button" tools:ignore="MissingTranslation">Cancel</string>
+    <string name="permanently_delete_aquarium_text" tools:ignore="MissingTranslation">Deleting this aquarium will also remove it and all it contents from all synced devices.</string>
+    <string name="permanently_delete_dweller_text" tools:ignore="MissingTranslation">Deleting this dweller will also remove it from all synced devices.</string>
+    <string name="set_default_title" tools:ignore="MissingTranslation">Set default?</string>
+    <string name="set_default_settings_text" tools:ignore="MissingTranslation">All changes will be deleted.</string>
+    <string name="very_satisfied" tools:ignore="MissingTranslation">Very satisfied</string>
+    <string name="satisfied" tools:ignore="MissingTranslation">Satisfied</string>
+    <string name="dissatisfied" tools:ignore="MissingTranslation">Dissatisfied</string>
+    <string name="very_dissatisfied" tools:ignore="MissingTranslation">Very dissatisfied</string>
+    <string name="dweller_title" tools:ignore="MissingTranslation">Dweller</string>
+    <string name="edit_button" tools:ignore="MissingTranslation">Edit</string>
+    <string name="dweller_image" tools:ignore="MissingTranslation">Dweller image</string>
+    <string name="status_label" tools:ignore="MissingTranslation">Status</string>
+    <string name="cause_discomfort_label" tools:ignore="MissingTranslation">Cause discomfort</string>
+    <string name="inappropriate_water_parameters" tools:ignore="MissingTranslation">Inappropriate water parameters</string>
+    <string name="fish_are_crowded_in_the_aquarium" tools:ignore="MissingTranslation">Fish are crowded in the aquarium</string>
+    <string name="this_fish_is_in_danger" tools:ignore="MissingTranslation">This fish is in danger</string>
+    <string name="wishes_of_this_fish_are_not_fulfilled" tools:ignore="MissingTranslation">The wishes of this fish are not fulfilled</string>
+    <string name="unfulfilled_wishes_label" tools:ignore="MissingTranslation">Unfulfilled wishes</string>
+    <string name="neutral_label" tools:ignore="MissingTranslation">Neutral</string>
+    <string name="needs_fast_current_label" tools:ignore="MissingTranslation">Needs fast current</string>
+    <string name="needs_slow_current_label" tools:ignore="MissingTranslation">Needs slow current</string>
+    <string name="needs_medium_current_label" tools:ignore="MissingTranslation">Needs medium current</string>
+    <string name="needs_bright_light_label" tools:ignore="MissingTranslation">Needs bright light</string>
+    <string name="needs_low_light_label" tools:ignore="MissingTranslation">Needs low light</string>
+    <string name="needs_lot_of_plants_label" tools:ignore="MissingTranslation">Needs a lot of plants</string>
+    <string name="needs_shelter_label" tools:ignore="MissingTranslation">Needs shelter</string>
+    <string name="needs_broadleaf_plant_label" tools:ignore="MissingTranslation">Needs broadleaf plants</string>
+    <string name="needs_long_stemmed_label" tools:ignore="MissingTranslation">Needs long stemmed plants</string>
+    <string name="needs_floating_plant_label" tools:ignore="MissingTranslation">Needs floating plants</string>
+    <string name="needs_moss_label" tools:ignore="MissingTranslation">Needs moss</string>
+    <string name="show_more_button" tools:ignore="MissingTranslation">Show more</string>
+    <string name="unknown_label" tools:ignore="MissingTranslation">unknown</string>
+    <string name="occupied_volume_in_the_aquarium" tools:ignore="MissingTranslation">Occupied volume in the aquarium</string>
+    <string name="plant_title" tools:ignore="MissingTranslation">Plant</string>
+    <string name="plant_image" tools:ignore="MissingTranslation">Plant image</string>
+    <string name="this_plant_is_in_danger" tools:ignore="MissingTranslation">This plant is in danger</string>
+    <string name="wishes_of_this_plant_are_not_fulfilled" tools:ignore="MissingTranslation">Wishes of this plant are not fulfilled</string>
+    <string name="not_enough_illumination" tools:ignore="MissingTranslation">Not enough illumination</string>
+    <string name="needs_bright_light" tools:ignore="MissingTranslation">Needs bright light</string>
+    <string name="needs_low_light" tools:ignore="MissingTranslation">Needs low light</string>
+    <string name="co2_label" tools:ignore="MissingTranslation">CO2</string>
+    <string name="plant_type_label" tools:ignore="MissingTranslation">Plant type</string>
+    <string name="herbivorous_label" tools:ignore="MissingTranslation">Herbivorous</string>
+    <string name="carnivorous_label" tools:ignore="MissingTranslation">Carnivorous</string>
+    <string name="predator_label" tools:ignore="MissingTranslation">Predator</string>
+    <string name="peaceful_label" tools:ignore="MissingTranslation">Peaceful</string>
+    <string name="territorial_label" tools:ignore="MissingTranslation">Territorial</string>
+    <string name="veil_tailed_label" tools:ignore="MissingTranslation">Veil-tailed</string>
+    <string name="large_label" tools:ignore="MissingTranslation">Large</string>
+    <string name="big_label" tools:ignore="MissingTranslation">Big</string>
+    <string name="medium_label" tools:ignore="MissingTranslation">Medium</string>
+    <string name="small_label" tools:ignore="MissingTranslation">Small</string>
+    <string name="monogamous_label" tools:ignore="MissingTranslation">Monogamous</string>
+    <string name="polygamous_label" tools:ignore="MissingTranslation">Polygamous</string>
+    <string name="livebearer_label" tools:ignore="MissingTranslation">Livebearer</string>
+    <string name="oviparous_label" tools:ignore="MissingTranslation">Oviparous</string>
+    <string name="shoal_label" tools:ignore="MissingTranslation">Shoaling</string>
+    <string name="cleaner_label" tools:ignore="MissingTranslation">Cleaner</string>
+    <string name="plant_eater_label" tools:ignore="MissingTranslation">Plant eater</string>
+    <string name="choose_one_label" tools:ignore="MissingTranslation">Choose one</string>
+    <string name="preffered_light_label" tools:ignore="MissingTranslation">Preffered light</string>
+    <string name="dweller_type_label" tools:ignore="MissingTranslation">Dweller type</string>
+    <string name="food_title" tools:ignore="MissingTranslation">Food</string>
+    <string name="omnivorous_label" tools:ignore="MissingTranslation">Omnivorous</string>
+    <string name="diet_label" tools:ignore="MissingTranslation">Diet</string>
+    <string name="behavior_title" tools:ignore="MissingTranslation">Behavior</string>
+    <string name="show_tags_button" tools:ignore="MissingTranslation">Show tags</string>
+    <string name="current_title" tools:ignore="MissingTranslation">Current</string>
+    <string name="preffered_current_title" tools:ignore="MissingTranslation">Preffered current</string>
+    <string name="size_title" tools:ignore="MissingTranslation">Size</string>
+    <string name="family_title" tools:ignore="MissingTranslation">Family</string>
+    <string name="childbirh_title" tools:ignore="MissingTranslation">Childbirth</string>
+    <string name="particular_qualities_title" tools:ignore="MissingTranslation">Particular qualities</string>
+    <string name="wishes_title" tools:ignore="MissingTranslation">Wishes</string>
+    <string name="favorite_plants_title" tools:ignore="MissingTranslation">Favorite plants</string>
+    <string name="create_aquarium_title" tools:ignore="MissingTranslation">Create aquarium</string>
+    <string name="illumination_label" tools:ignore="MissingTranslation">Illumination</string>
+    <string name="apply_for_aquarium_button" tools:ignore="MissingTranslation">Apply for aquarium</string>
+    <string name="required_tags_title" tools:ignore="MissingTranslation">Required tags</string>
+    <string name="current_tags_title" tools:ignore="MissingTranslation">Current tags</string>
+    <string name="bright_light_label" tools:ignore="MissingTranslation">Bright light</string>
+    <string name="low_light_label" tools:ignore="MissingTranslation">Low light</string>
+    <string name="fast_current_label" tools:ignore="MissingTranslation">Fast current</string>
+    <string name="slow_current_label" tools:ignore="MissingTranslation">Slow current</string>
+    <string name="medium_current_label" tools:ignore="MissingTranslation">Medium current</string>
+    <string name="lot_of_plants_label" tools:ignore="MissingTranslation">Lot of plants</string>
+    <string name="shelter_available_label" tools:ignore="MissingTranslation">Shelter available</string>
+    <string name="favorable_for_veil_tailed_label" tools:ignore="MissingTranslation">Favorable for veil-tailed</string>
+    <string name="aquarium_current_title" tools:ignore="MissingTranslation">Flow in the aquarium</string>
+    <string name="aquarium_lightning_label" tools:ignore="MissingTranslation">Aquarium lightning</string>
+    <string name="aquarium_decor_title" tools:ignore="MissingTranslation">Decor in aquarium</string>
+    <string name="needs_driftwood_label" tools:ignore="MissingTranslation">Needs driftwood</string>
+    <string name="driftwood_available_label" tools:ignore="MissingTranslation">Driftwood available</string>
+    <string name="show_stats_button" tools:ignore="MissingTranslation">Show stats</string>
+    <string name="current_temperature_title" tools:ignore="MissingTranslation">Current temperature</string>
+    <string name="ideal_temperature_title" tools:ignore="MissingTranslation">Ideal temperature</string>
+    <string name="current_ph_title" tools:ignore="MissingTranslation">Current ph</string>
+    <string name="ideal_ph_title" tools:ignore="MissingTranslation">Ideal pH</string>
+    <string name="current_gh_title" tools:ignore="MissingTranslation">Current gH</string>
+    <string name="ideal_gh_title" tools:ignore="MissingTranslation">Ideal gH</string>
+    <string name="current_kh_title" tools:ignore="MissingTranslation">Current kH</string>
+    <string name="ideal_kh_title" tools:ignore="MissingTranslation">Ideal kH</string>
+    <string name="language_label" tools:ignore="MissingTranslation">Language</string>
 </resources>

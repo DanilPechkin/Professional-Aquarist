@@ -212,10 +212,10 @@ fun PlantInfo(
                 Column {
 
                     Text(
-                        text = "${stringResource(R.string.temperature_label)}: ${
-                        state.plant.minTemperature ?: stringResource(id = R.string.unknown_label)
+                        text = "${stringResource(R.string.temperature_title)}: ${
+                            state.plant.minTemperature ?: stringResource(id = R.string.unknown_label)
                         }-${
-                        state.plant.maxTemperature ?: stringResource(id = R.string.unknown_label)
+                            state.plant.maxTemperature ?: stringResource(id = R.string.unknown_label)
                         }"
                     )
 

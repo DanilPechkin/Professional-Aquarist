@@ -8,7 +8,9 @@ enum class Language(
     val language: String,
     @DrawableRes val flag: Int
 ) {
-    English("en", "English", R.drawable.us),
+    English("en", "English", R.drawable.en_gb),
+    EnglishUK("en-gb", "English (United Kingdom)", R.drawable.en_gb),
+    EnglishUSA("en-us", "English (United States)", R.drawable.en_us),
     Chinese("zh", "中文", R.drawable.zh),
     German("de", "Deutsch", R.drawable.de),
     French("fr", "Français", R.drawable.fr),

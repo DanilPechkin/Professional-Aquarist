@@ -140,7 +140,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedDropDownMenuField(
-                label = stringResource(R.string.capacity_label),
+                label = stringResource(R.string.capacity_title),
                 items = state.capacityList,
                 selectedItem = state.capacityList[state.capacityMeasureCode],
                 changeSelectedItem = {
@@ -156,7 +156,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedDropDownMenuField(
-                label = stringResource(R.string.alkalinity_label),
+                label = stringResource(R.string.alkalinity_title),
                 items = state.alkalinityList,
                 selectedItem = state.alkalinityList[state.alkalinityMeasureCode],
                 changeSelectedItem = {
@@ -172,7 +172,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedDropDownMenuField(
-                label = stringResource(R.string.metric_label),
+                label = stringResource(R.string.metric_title),
                 items = state.metricList,
                 selectedItem = state.metricList[state.metricMeasureCode],
                 changeSelectedItem = {
@@ -188,7 +188,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedDropDownMenuField(
-                label = stringResource(R.string.temperature_label),
+                label = stringResource(R.string.temperature_title),
                 items = state.temperatureList,
                 selectedItem = state.temperatureList[state.temperatureMeasureCode],
                 changeSelectedItem = {

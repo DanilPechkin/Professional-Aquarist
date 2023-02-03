@@ -5,7 +5,7 @@ private object Versions {
     const val sqlDelight = "1.5.4"
     const val destinations = "1.7.27-beta"
     const val coroutines = "1.6.4"
-    const val compose = "1.4.0-alpha02"
+    const val compose = "1.4.0-alpha04"
     const val hilt = "2.44"
     const val hiltCompose = "1.0.0"
     const val composeAccompanist = "0.27.1"
@@ -45,7 +45,7 @@ object Deps {
     object Compose {
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"
         const val uiPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
-        const val material3 = "androidx.compose.material3:material3:1.1.0-alpha02"
+        const val material3 = "androidx.compose.material3:material3:1.1.0-alpha04"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha02"
         const val animation = "androidx.compose.animation:animation:${Versions.compose}"
         const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"

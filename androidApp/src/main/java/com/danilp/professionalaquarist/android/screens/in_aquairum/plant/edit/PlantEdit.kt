@@ -358,7 +358,7 @@ fun PlantEdit(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     FromToInfoFields(
-                        label = stringResource(R.string.temperature_label),
+                        label = stringResource(R.string.temperature_title),
                         valueFrom = state.minTemperature,
                         valueTo = state.maxTemperature,
                         onValueFromChange = {
